@@ -1,0 +1,26 @@
+<!DOCTYPE HTML>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <title>Player Directory</title>
+</head>
+
+<body>
+
+<div th:object="${player}">
+    <p>Name: <span th:text="*{firstName}"></span></p>
+    <p>Surname: <span th:text="*{lastName}"></span></p>
+    <p>Jersey: <span th:text="*{jerseyNumber}"></span></p>
+</div>
+
+<form action="#" th:action="@{/players/showPlayerStats}" method="POST">
+
+    <input type="hidden" name="playerId" th:value="${player.id}"/>
+    <button type="submit">Player Stats</button>
+
+</form>
+
+<a th:href="@{/players/list}">Back</a>
+
+</body>
+</html>

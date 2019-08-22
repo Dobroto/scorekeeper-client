@@ -1,8 +1,5 @@
 package com.junak.scorekeeper.client.model;
 
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-
-@JsonIgnoreProperties(ignoreUnknown = true)
 public class GamePitchingDetails {
     private int id;
 
@@ -176,5 +173,28 @@ public class GamePitchingDetails {
 
     public void setGame(Game game) {
         this.game = game;
+    }
+
+    @Override
+    public String toString() {
+        return "GamePitchingDetails{" +
+                "id=" + id +
+                ", wins=" + wins +
+                ", loses=" + loses +
+                ", earnedRuns=" + earnedRuns +
+                ", inningsPitched=" + inningsPitched +
+                ", earnedRunAverage=" + earnedRunAverage +
+                ", saves=" + saves +
+                ", saveOpportunities=" + saveOpportunities +
+                ", hits=" + hits +
+                ", runs=" + runs +
+                ", homeRuns=" + homeRuns +
+                ", basesOnBalls=" + basesOnBalls +
+                ", strikeOuts=" + strikeOuts +
+                ", average=" + average +
+                ", whips=" + whips +
+                ", player=" + player +
+                ", game=" + game +
+                '}';
     }
 }

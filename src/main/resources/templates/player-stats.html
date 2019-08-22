@@ -1,0 +1,151 @@
+<!DOCTYPE HTML>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <title>Player Info</title>
+</head>
+
+<body>
+<h3>Batting Statistics</h3>
+
+
+<table border="1">
+    <tbody>
+    <tr>
+        <td>G</td>
+        <td>PA</td>
+        <td>SH</td>
+        <td>BB</td>
+        <td>HBP</td>
+        <td>AB</td>
+        <td>R</td>
+        <td>H</td>
+        <td>2B</td>
+        <td>3B</td>
+        <td>HR</td>
+        <td>RBI</td>
+        <td>SO</td>
+        <td>SB</td>
+        <td>CS</td>
+        <td>SF</td>
+        <td>TB</td>
+        <td>AVG</td>
+        <td>OBP</td>
+        <td>SLG</td>
+        <td>OPS</td>
+    </tr>
+    <tr th:each="tempHittingDetails : ${playerHittingDetails}">
+
+        <td th:text="${tempHittingDetails.games}"/>
+        <td th:text="${tempHittingDetails.plateAppearances}"/>
+        <td th:text="${tempHittingDetails.sacrificeHits}"/>
+        <td th:text="${tempHittingDetails.baseForBalls}"/>
+        <td th:text="${tempHittingDetails.hitByPitches}"/>
+        <td th:text="${tempHittingDetails.atBat}"/>
+        <td th:text="${tempHittingDetails.runs}"/>
+        <td th:text="${tempHittingDetails.hits}"/>
+        <td th:text="${tempHittingDetails.doubleHit}"/>
+        <td th:text="${tempHittingDetails.tripleHit}"/>
+        <td th:text="${tempHittingDetails.homeRun}"/>
+        <td th:text="${tempHittingDetails.runBattedIn}"/>
+        <td th:text="${tempHittingDetails.strikeOut}"/>
+        <td th:text="${tempHittingDetails.stolenBase}"/>
+        <td th:text="${tempHittingDetails.caughtStealing}"/>
+        <td th:text="${tempHittingDetails.sacrificeFlies}"/>
+        <td th:text="${tempHittingDetails.totalBases}"/>
+        <td th:text="${tempHittingDetails.battingAverage}"/>
+        <td th:text="${tempHittingDetails.onBasePercentage}"/>
+        <td th:text="${tempHittingDetails.sluggingPercentage}"/>
+        <td th:text="${tempHittingDetails.onBaseSlugging}"/>
+
+    </tr>
+    </tbody>
+</table>
+
+<h3>Pitching Statistics</h3>
+
+<table border="1">
+    <tbody>
+    <tr>
+        <td>W</td>
+        <td>L</td>
+        <td>ER</td>
+        <td>IP</td>
+        <td>ERA</td>
+        <td>G</td>
+        <td>GS</td>
+        <td>SV</td>
+        <td>SVO</td>
+        <td>H</td>
+        <td>R</td>
+        <td>HR</td>
+        <td>BB</td>
+        <td>SO</td>
+        <td>AVG</td>
+        <td>WHIP</td>
+    </tr>
+    <tr th:each="tempPitchingDetails : ${playerPitchingDetails}">
+
+        <td th:text="${tempPitchingDetails.wins}"/>
+        <td th:text="${tempPitchingDetails.loses}"/>
+        <td th:text="${tempPitchingDetails.earnedRuns}"/>
+        <td th:text="${tempPitchingDetails.inningsPitched}"/>
+        <td th:text="${tempPitchingDetails.earnedRunAverage}"/>
+        <td th:text="${tempPitchingDetails.games}"/>
+        <td th:text="${tempPitchingDetails.gamesStarted}"/>
+        <td th:text="${tempPitchingDetails.saves}"/>
+        <td th:text="${tempPitchingDetails.saveOpportunities}"/>
+        <td th:text="${tempPitchingDetails.hits}"/>
+        <td th:text="${tempPitchingDetails.runs}"/>
+        <td th:text="${tempPitchingDetails.homeRuns}"/>
+        <td th:text="${tempPitchingDetails.basesOnBalls}"/>
+        <td th:text="${tempPitchingDetails.strikeOuts}"/>
+        <td th:text="${tempPitchingDetails.average}"/>
+        <td th:text="${tempPitchingDetails.whips}"/>
+    </tr>
+    </tbody>
+</table>
+
+<h3>Fielding Statistics</h3>
+
+<table border="1">
+    <tbody>
+    <tr>
+        <td>GS</td>
+        <td>G</td>
+        <td>INN</td>
+        <td>TC</td>
+        <td>PO</td>
+        <td>A</td>
+        <td>E</td>
+        <td>DP</td>
+        <td>FPCT</td>
+    </tr>
+    <tr th:each="tempFieldingDetails : ${playerFieldingDetails}">
+
+        <td th:text="${tempFieldingDetails.gamesStarted}"/>
+        <td th:text="${tempFieldingDetails.gamesPlayed}"/>
+        <td th:text="${tempFieldingDetails.innings}"/>
+        <td th:text="${tempFieldingDetails.totalChances}"/>
+        <td th:text="${tempFieldingDetails.putOut}"/>
+        <td th:text="${tempFieldingDetails.assists}"/>
+        <td th:text="${tempFieldingDetails.errors}"/>
+        <td th:text="${tempFieldingDetails.doublePlays}"/>
+        <td th:text="${tempFieldingDetails.averageOfErrorsPerTotalChances}"/>
+    </tr>
+    </tbody>
+</table>
+
+<div th:object="${team}">
+    <p>Team: <span th:text="${team.teamNameLong}" /></p>
+</div>
+
+<form action="#" th:action="@{/players/showFormForUpdatePlayer}" method="POST">
+
+    <input type="hidden" name="playerId" th:value="${player.id}"/>
+    <button type="submit">Back</button>
+
+</form>
+
+</body>
+</html>

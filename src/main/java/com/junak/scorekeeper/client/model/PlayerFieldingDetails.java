@@ -1,8 +1,5 @@
 package com.junak.scorekeeper.client.model;
 
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-
-@JsonIgnoreProperties(ignoreUnknown = true)
 public class PlayerFieldingDetails {
     private int id;
 
@@ -24,7 +21,7 @@ public class PlayerFieldingDetails {
 
     private Double averageOfErrorsPerTotalChances;
 
-    private Player player;
+    private int player;
 
     public PlayerFieldingDetails() {
 
@@ -110,11 +107,11 @@ public class PlayerFieldingDetails {
         this.averageOfErrorsPerTotalChances = averageOfErrorsPerTotalChances;
     }
 
-    public Player getPlayer() {
+    public int getPlayer() {
         return player;
     }
 
-    public void setPlayer(Player player) {
+    public void setPlayer(int player) {
         this.player = player;
     }
 }

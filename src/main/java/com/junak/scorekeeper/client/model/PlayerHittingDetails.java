@@ -1,8 +1,5 @@
 package com.junak.scorekeeper.client.model;
 
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-
-@JsonIgnoreProperties(ignoreUnknown = true)
 public class PlayerHittingDetails {
     private int id;
 
@@ -42,13 +39,13 @@ public class PlayerHittingDetails {
 
     private Double battingAverage;
 
-    private Double onBasePercantage;
+    private Double onBasePercentage;
 
     private Double sluggingPercentage;
 
     private Double onBaseSlugging;
 
-    private Player player;
+    private int player;
 
     public PlayerHittingDetails() {
 
@@ -206,12 +203,12 @@ public class PlayerHittingDetails {
         this.battingAverage = battingAverage;
     }
 
-    public Double getOnBasePercantage() {
-        return onBasePercantage;
+    public Double getOnBasePercentage() {
+        return onBasePercentage;
     }
 
-    public void setOnBasePercantage(Double onBasePercantage) {
-        this.onBasePercantage = onBasePercantage;
+    public void setOnBasePercentage(Double onBasePercentage) {
+        this.onBasePercentage = onBasePercentage;
     }
 
     public Double getSluggingPercentage() {
@@ -230,11 +227,11 @@ public class PlayerHittingDetails {
         this.onBaseSlugging = onBaseSlugging;
     }
 
-    public Player getPlayer() {
+    public int getPlayer() {
         return player;
     }
 
-    public void setPlayer(Player player) {
+    public void setPlayer(int player) {
         this.player = player;
     }
 }

@@ -1,0 +1,51 @@
+<!DOCTYPE HTML>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <title>Team Manager</title>
+</head>
+
+<body>
+
+<h3>Team Manager</h3>
+<hr>
+
+<a th:href="@{/teams/showFormForAddTeam}">
+    Create new team
+</a>
+
+<table border="1">
+    <tbody>
+    <tr th:each="tempTeam : ${teams}">
+
+        <td th:text="${tempTeam.teamNameLong}"/>
+
+        <td>
+
+            <form action="#" th:action="@{/teams/showFormForUpdateTeam}" method="POST">
+
+                <input type="hidden" name="teamId" th:value="${tempTeam.id}"/>
+                <button type="submit">Update</button>
+
+            </form>
+            <form action="#" th:action="@{/teams/delete}" method="POST">
+
+                <input type="hidden" name="teamId" th:value="${tempTeam.id}"/>
+                <button type="submit"
+                        onclick="if (!(confirm('Are you sure you want to delete this team?'))) return false">
+                    Delete
+                </button>
+
+            </form>
+        </td>
+    </tr>
+    </tbody>
+</table>
+
+<a th:href="@{/scorekeeper/homePage}">Back</a>
+
+</body>
+</html>
+
+
+

@@ -1,10 +1,7 @@
 package com.junak.scorekeeper.client.model;
 
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-
 import java.util.List;
 
-@JsonIgnoreProperties(ignoreUnknown = true)
 public class Player {
     private int id;
 
@@ -228,5 +225,33 @@ public class Player {
 
     public void setGamePitchingDetails(List<Integer> gamePitchingDetails) {
         this.gamePitchingDetails = gamePitchingDetails;
+    }
+
+    @Override
+    public String toString() {
+        return "Player{" +
+                "id=" + id +
+                ", firstName='" + firstName + '\'' +
+                ", lastName='" + lastName + '\'' +
+                ", jerseyNumber=" + jerseyNumber +
+                ", starter=" + starter +
+                ", defencePosition='" + defencePosition + '\'' +
+                ", offencePosition='" + offencePosition + '\'' +
+                ", battingOrder=" + battingOrder +
+                ", ballCount=" + ballCount +
+                ", strikeCount=" + strikeCount +
+                ", playerHittingDetails=" + playerHittingDetails +
+                ", playerPitchingDetails=" + playerPitchingDetails +
+                ", playerFieldingDetails=" + playerFieldingDetails +
+                ", team=" + team +
+                ", winPitcherGames=" + winPitcherGames +
+                ", losePitcherGames=" + losePitcherGames +
+                ", savePitcherGames=" + savePitcherGames +
+                ", blownSavePitcherGames=" + blownSavePitcherGames +
+                ", holdPitcherGames=" + holdPitcherGames +
+                ", gameHittingDetails=" + gameHittingDetails +
+                ", gameFieldingDetails=" + gameFieldingDetails +
+                ", gamePitchingDetails=" + gamePitchingDetails +
+                '}';
     }
 }

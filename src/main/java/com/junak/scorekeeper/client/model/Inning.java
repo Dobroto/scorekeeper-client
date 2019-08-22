@@ -1,8 +1,5 @@
 package com.junak.scorekeeper.client.model;
 
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-
-@JsonIgnoreProperties(ignoreUnknown = true)
 public class Inning {
     private int id;
 
@@ -66,6 +63,18 @@ public class Inning {
 
     public void setCurrentOuts(int currentOuts) {
         this.currentOuts = currentOuts;
+    }
+
+    @Override
+    public String toString() {
+        return "Inning{" +
+                "id=" + id +
+                ", game=" + game +
+                ", inningNumber=" + inningNumber +
+                ", visitorTeamRuns=" + visitorTeamRuns +
+                ", homeTeamRuns=" + homeTeamRuns +
+                ", currentOuts=" + currentOuts +
+                '}';
     }
 }
 

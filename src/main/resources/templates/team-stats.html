@@ -1,0 +1,159 @@
+<!DOCTYPE HTML>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <title th:text="${team.teamNameLong}"></title>
+</head>
+
+<body>
+<h3>Batting Statistics</h3>
+
+<table border="1">
+    <tbody>
+    <tr>
+        <td>#</td>
+        <td>Player</td>
+        <td>G</td>
+        <td>PA</td>
+        <td>SH</td>
+        <td>BB</td>
+        <td>HBP</td>
+        <td>AB</td>
+        <td>R</td>
+        <td>H</td>
+        <td>2B</td>
+        <td>3B</td>
+        <td>HR</td>
+        <td>RBI</td>
+        <td>SO</td>
+        <td>SB</td>
+        <td>CS</td>
+        <td>SF</td>
+        <td>TB</td>
+        <td>AVG</td>
+        <td>OBP</td>
+        <td>SLG</td>
+        <td>OPS</td>
+    </tr>
+
+    <tr th:each="tempHittingDetails : ${playerHittingDetailsMap}">
+
+        <td th:text="${tempHittingDetails.key.jerseyNumber}"/>
+        <td th:text="${tempHittingDetails.key.firstName} + ' ' + ${tempHittingDetails.key.lastName}"/>
+        <td th:text="${tempHittingDetails.value.games}"/>
+        <td th:text="${tempHittingDetails.value.plateAppearances}"/>
+        <td th:text="${tempHittingDetails.value.sacrificeHits}"/>
+        <td th:text="${tempHittingDetails.value.baseForBalls}"/>
+        <td th:text="${tempHittingDetails.value.hitByPitches}"/>
+        <td th:text="${tempHittingDetails.value.atBat}"/>
+        <td th:text="${tempHittingDetails.value.runs}"/>
+        <td th:text="${tempHittingDetails.value.hits}"/>
+        <td th:text="${tempHittingDetails.value.doubleHit}"/>
+        <td th:text="${tempHittingDetails.value.tripleHit}"/>
+        <td th:text="${tempHittingDetails.value.homeRun}"/>
+        <td th:text="${tempHittingDetails.value.runBattedIn}"/>
+        <td th:text="${tempHittingDetails.value.strikeOut}"/>
+        <td th:text="${tempHittingDetails.value.stolenBase}"/>
+        <td th:text="${tempHittingDetails.value.caughtStealing}"/>
+        <td th:text="${tempHittingDetails.value.sacrificeFlies}"/>
+        <td th:text="${tempHittingDetails.value.totalBases}"/>
+        <td th:text="${tempHittingDetails.value.battingAverage}"/>
+        <td th:text="${tempHittingDetails.value.onBasePercentage}"/>
+        <td th:text="${tempHittingDetails.value.sluggingPercentage}"/>
+        <td th:text="${tempHittingDetails.value.onBaseSlugging}"/>
+
+    </tr>
+    </tbody>
+</table>
+
+<h3>Pitching Statistics</h3>
+
+<table border="1">
+    <tbody>
+    <tr>
+        <td>#</td>
+        <td>Player</td>
+        <td>W</td>
+        <td>L</td>
+        <td>ER</td>
+        <td>IP</td>
+        <td>ERA</td>
+        <td>G</td>
+        <td>GS</td>
+        <td>SV</td>
+        <td>SVO</td>
+        <td>H</td>
+        <td>R</td>
+        <td>HR</td>
+        <td>BB</td>
+        <td>SO</td>
+        <td>AVG</td>
+        <td>WHIP</td>
+    </tr>
+    <tr th:each="tempPitchingDetails : ${playerPitchingDetailsMap}">
+
+        <td th:text="${tempPitchingDetails.key.jerseyNumber}"/>
+        <td th:text="${tempPitchingDetails.key.firstName} + ' ' + ${tempPitchingDetails.key.lastName}"/>
+        <td th:text="${tempPitchingDetails.value.wins}"/>
+        <td th:text="${tempPitchingDetails.value.loses}"/>
+        <td th:text="${tempPitchingDetails.value.earnedRuns}"/>
+        <td th:text="${tempPitchingDetails.value.inningsPitched}"/>
+        <td th:text="${tempPitchingDetails.value.earnedRunAverage}"/>
+        <td th:text="${tempPitchingDetails.value.games}"/>
+        <td th:text="${tempPitchingDetails.value.gamesStarted}"/>
+        <td th:text="${tempPitchingDetails.value.saves}"/>
+        <td th:text="${tempPitchingDetails.value.saveOpportunities}"/>
+        <td th:text="${tempPitchingDetails.value.hits}"/>
+        <td th:text="${tempPitchingDetails.value.runs}"/>
+        <td th:text="${tempPitchingDetails.value.homeRuns}"/>
+        <td th:text="${tempPitchingDetails.value.basesOnBalls}"/>
+        <td th:text="${tempPitchingDetails.value.strikeOuts}"/>
+        <td th:text="${tempPitchingDetails.value.average}"/>
+        <td th:text="${tempPitchingDetails.value.whips}"/>
+    </tr>
+    </tbody>
+</table>
+
+<h3>Fielding Statistics</h3>
+
+<table border="1">
+    <tbody>
+    <tr>
+        <td>#</td>
+        <td>Player</td>
+        <td>GS</td>
+        <td>G</td>
+        <td>INN</td>
+        <td>TC</td>
+        <td>PO</td>
+        <td>A</td>
+        <td>E</td>
+        <td>DP</td>
+        <td>FPCT</td>
+    </tr>
+    <tr th:each="tempFieldingDetails : ${playerFieldingDetailsMap}">
+
+        <td th:text="${tempFieldingDetails.key.jerseyNumber}"/>
+        <td th:text="${tempFieldingDetails.key.firstName} + ' ' + ${tempFieldingDetails.key.lastName}"/>
+        <td th:text="${tempFieldingDetails.value.gamesStarted}"/>
+        <td th:text="${tempFieldingDetails.value.gamesPlayed}"/>
+        <td th:text="${tempFieldingDetails.value.innings}"/>
+        <td th:text="${tempFieldingDetails.value.totalChances}"/>
+        <td th:text="${tempFieldingDetails.value.putOut}"/>
+        <td th:text="${tempFieldingDetails.value.assists}"/>
+        <td th:text="${tempFieldingDetails.value.errors}"/>
+        <td th:text="${tempFieldingDetails.value.doublePlays}"/>
+        <td th:text="${tempFieldingDetails.value.averageOfErrorsPerTotalChances}"/>
+    </tr>
+    </tbody>
+</table>
+
+<form action="#" th:action="@{/teams/showFormForUpdateTeam}" method="POST">
+
+    <input type="hidden" name="teamId" th:value="${team.id}"/>
+    <button type="submit">Back</button>
+
+</form>
+
+</body>
+</html>

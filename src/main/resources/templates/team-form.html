@@ -1,0 +1,44 @@
+<!DOCTYPE HTML>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <title>Team Info</title>
+</head>
+
+<body>
+
+
+<form action="#" th:action="@{/teams/save}"
+      th:object="${team}" method="POST">
+
+    <!-- Add hidden form field to handle update -->
+    <input type="hidden" th:field="*{id}" />
+
+    <input type="text" th:field="*{teamNameLong}"
+           placeholder="Team name">
+
+    <input type="text" th:field="*{teamNameShort}"
+           placeholder="Short name">
+
+    <button type="submit">Save</button>
+
+</form>
+
+<form action="#" th:action="@{/teams/showRoster}" method="POST" th:unless="${team.id == 0}">
+
+    <input type="hidden" name="teamId" th:value="${team.id}"/>
+    <button type="submit">Roster</button>
+
+</form>
+
+<form action="#" th:action="@{/teams/showTeamStats}" method="POST" th:unless="${team.id == 0}">
+
+    <input type="hidden" name="teamId" th:value="${team.id}"/>
+    <button type="submit">Team Stats</button>
+
+</form>
+
+<a th:href="@{/teams/list}">Back</a>
+
+</body>
+</html>

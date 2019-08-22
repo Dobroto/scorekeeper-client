@@ -11,7 +11,7 @@ public interface PlayerService {
 
     Player findById(int id);
 
-    Player save(Player player);
+    void save(Player player);
 
     void deleteById(int id);
 }

@@ -1,11 +1,8 @@
 package com.junak.scorekeeper.client.model;
 
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-
 import java.util.Date;
 import java.util.List;
 
-@JsonIgnoreProperties(ignoreUnknown = true)
 public class Game {
 
     private int id;
@@ -170,5 +167,27 @@ public class Game {
 
     public void setInnings(List<Inning> innings) {
         this.innings = innings;
+    }
+
+    @Override
+    public String toString() {
+        return "Game{" +
+                "id=" + id +
+                ", startTimeOfGame=" + startTimeOfGame +
+                ", endTimeOfGame=" + endTimeOfGame +
+                ", homeTeam=" + homeTeam +
+                ", visitorTeam=" + visitorTeam +
+                ", finalResult=" + finalResult +
+                ", gameHittingDetails=" + gameHittingDetails +
+                ", gamePitchingDetails=" + gamePitchingDetails +
+                ", gameFieldingDetails=" + gameFieldingDetails +
+                ", winPitcher=" + winPitcher +
+                ", losePitcher=" + losePitcher +
+                ", savePitcher=" + savePitcher +
+                ", blownSavePitcher=" + blownSavePitcher +
+                ", holdPitcher=" + holdPitcher +
+                ", lastCommand='" + lastCommand + '\'' +
+                ", innings=" + innings +
+                '}';
     }
 }

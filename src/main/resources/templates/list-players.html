@@ -1,0 +1,52 @@
+<!DOCTYPE HTML>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <title>Player Manager</title>
+</head>
+
+<body>
+
+<h3>Player Manager</h3>
+<hr>
+
+<a th:href="@{/players/showFormForAddPlayer}">
+    Create new player
+</a>
+
+<table border="1">
+    <tbody>
+    <tr th:each="tempPlayer : ${players}">
+
+        <td th:text="${tempPlayer.firstName}"/>
+        <td th:text="${tempPlayer.lastName}"/>
+
+        <td>
+
+            <form action="#" th:action="@{/players/showFormForUpdatePlayer}" method="POST">
+
+                <input type="hidden" name="playerId" th:value="${tempPlayer.id}"/>
+                <button type="submit">Update</button>
+
+            </form>
+            <form action="#" th:action="@{/players/delete}" method="POST">
+
+                <input type="hidden" name="playerId" th:value="${tempPlayer.id}"/>
+                <button type="submit"
+                        onclick="if (!(confirm('Are you sure you want to delete this player?'))) return false">
+                    Delete
+                </button>
+
+            </form>
+        </td>
+    </tr>
+    </tbody>
+</table>
+
+<a th:href="@{/scorekeeper/homePage}">Back</a>
+
+</body>
+</html>
+
+
+
