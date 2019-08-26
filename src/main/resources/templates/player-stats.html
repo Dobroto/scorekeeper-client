@@ -143,6 +143,7 @@
 <form action="#" th:action="@{/players/showFormForUpdatePlayer}" method="POST">
 
     <input type="hidden" name="playerId" th:value="${player.id}"/>
+    <input type="hidden" name="teamId" th:value="${teamId}"/>
     <button type="submit">Back</button>
 
 </form>

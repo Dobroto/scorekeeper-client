@@ -77,14 +77,16 @@ public class PlayerController {
     }
 
     @PostMapping("/showFormForUpdatePlayer")
-    public String showFormForUpdatePlayer(@RequestParam("playerId") int theId,
-                                    Model theModel) {
+    public String showFormForUpdatePlayer(@RequestParam("playerId") int playerId,
+                                          @RequestParam("teamId") int teamId,
+                                          Model theModel) {
 
         // get the player from the service
-        Player thePlayer = playerService.findById(theId);
+        Player thePlayer = playerService.findById(playerId);
 
         // set player as a model attribute to pre-populate the form
         theModel.addAttribute("player", thePlayer);
+        theModel.addAttribute("teamId", teamId);
 
         // send over to our form
         return "player-form";
@@ -110,7 +112,7 @@ public class PlayerController {
     }
 
     @PostMapping("/showPlayerStats")
-    public String showPlayerStats(@RequestParam("playerId") int theId, Model theModel) {
+    public String showPlayerStats(@RequestParam("playerId") int theId, @RequestParam("teamId") int teamId, Model theModel) {
 
         Player thePlayer = playerService.findById(theId);
 
@@ -127,6 +129,7 @@ public class PlayerController {
 
         theModel.addAttribute("player", thePlayer);
         theModel.addAttribute("team", team);
+        theModel.addAttribute("teamId", teamId);
         theModel.addAttribute("playerHittingDetails", playerHittingDetails);
         theModel.addAttribute("playerPitchingDetails", playerPitchingDetails);
         theModel.addAttribute("playerFieldingDetails", playerFieldingDetails);
