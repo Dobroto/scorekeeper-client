@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.util.*;
 
@@ -65,7 +66,7 @@ public class TeamController {
     }
 
     @PostMapping("/save")
-    public String saveTeam(@ModelAttribute("player") Team theTeam) {
+    public String saveTeam(@ModelAttribute("team") Team theTeam) {
 
         // save the team
         teamService.save(theTeam);
@@ -77,7 +78,7 @@ public class TeamController {
     @PostMapping("/delete")
     public String deleteTeam(@RequestParam("teamId") int theId) {
 
-        // delete the customer
+        // delete the team
         teamService.deleteById(theId);
 
         return "redirect:/teams/list";
@@ -108,7 +109,7 @@ public class TeamController {
         return "team-stats";
     }
 
-    @PostMapping("/showRoster")
+    @RequestMapping(value="/showRoster", method = { RequestMethod.POST, RequestMethod.GET })
     public String showRoster(@RequestParam("teamId") int theId, Model theModel) {
 
         Team theTeam = teamService.findById(theId);
@@ -118,5 +119,17 @@ public class TeamController {
         theModel.addAttribute("team", theTeam);
 
         return "team-roster";
+    }
+
+    @PostMapping("/removeFromTeam")
+    public String removeFromTeam(@RequestParam("playerId") int playerId,
+                                 @RequestParam("teamId") int teamId, RedirectAttributes redirectAttributes) {
+
+        Player player = playerService.findById(playerId);
+        player.setTeam(-1);
+        playerService.save(player);
+
+        redirectAttributes.addAttribute("teamId", teamId);
+        return "redirect:/teams/showRoster";
     }
 }

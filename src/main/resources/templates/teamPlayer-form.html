@@ -1,0 +1,77 @@
+<!DOCTYPE HTML>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <title>Player Info</title>
+</head>
+
+<body>
+
+<form action="#" th:action="@{/players/save}"
+      th:object="${player}" method="POST">
+    <!-- Add hidden form field to handle update -->
+    <input type="hidden" th:field="*{id}"/>
+
+    <table border="1">
+        <tbody>
+        <tr>
+            <td>First Name</td>
+            <td><input type="text" th:field="*{firstName}"></td>
+        </tr>
+        <tr>
+            <td>Last Name</td>
+            <td><input type="text" th:field="*{lastName}"></td>
+        </tr>
+        <tr>
+            <td>Jersey Number</td>
+            <td><input type="text" th:field="*{jerseyNumber}"></td>
+        </tr>
+        <tr>
+            <td>Starter</td>
+            <td><input type="checkbox" th:field="*{starter}"/></td>
+        </tr>
+        <tr>
+            <td>Position</td>
+            <td>
+                <select th:field="*{defencePosition}">
+                    <option th:each="defencePosition : ${defendingPositions}"
+                            th:value="${defencePosition}"
+                            th:text="${defencePosition}">
+                    </option>
+                </select>
+            </td>
+        </tr>
+
+        <input type="hidden" name="isTeamPlayer" th:value="${true}"/>
+        <input type="hidden" name="teamId" th:value="${teamId}"/>
+
+        <tr>
+            <td>
+                <button type="submit">Save</button>
+            </td>
+        </tr>
+
+        </tbody>
+    </table>
+</form>
+
+
+<form action="#" th:action="@{/players/showPlayerStats}" method="POST" th:unless="${player.id == 0}">
+
+    <input type="hidden" name="playerId" th:value="${player.id}"/>
+    <input type="hidden" name="teamId" th:value="${teamId}"/>
+    <input type="hidden" name="isTeamPlayer" th:value="${true}"/>
+    <button type="submit">Player Stats</button>
+
+</form>
+
+<form action="#" th:action="@{/teams/showRoster}" method="POST" th:unless="${teamId == 0}">
+
+    <input type="hidden" name="teamId" th:value="${teamId}"/>
+    <button type="submit">Back</button>
+
+</form>
+<a th:href="@{/players/list}" th:unless="${teamId != 0}">Back</a>
+
+</body>
+</html>

@@ -17,10 +17,24 @@
 
                 <input type="hidden" name="playerId" th:value="${tempPlayer.id}"/>
                 <input type="hidden" name="teamId" th:value="${team.id}"/>
+                <input type="hidden" name="isTeamPlayer" th:value="${true}"/>
                 <button type="submit">Update</button>
 
             </form>
         </td>
+        <td>
+            <form action="#" th:action="@{/teams/removeFromTeam}" method="POST">
+
+                <input type="hidden" name="playerId" th:value="${tempPlayer.id}"/>
+                <input type="hidden" name="teamId" th:value="${team.id}"/>
+                <button type="submit"
+                        onclick="if (!(confirm('Are you sure you want to remove this player from this team?'))) return false">
+                    Remove
+                </button>
+
+            </form>
+        </td>
+
     </tr>
     </tbody>
 </table>

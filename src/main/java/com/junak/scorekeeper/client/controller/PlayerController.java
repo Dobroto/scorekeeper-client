@@ -1,11 +1,13 @@
 package com.junak.scorekeeper.client.controller;
 
+import com.junak.scorekeeper.client.Constants;
 import com.junak.scorekeeper.client.model.*;
 import com.junak.scorekeeper.client.service.interfaces.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.util.List;
 
@@ -72,6 +74,7 @@ public class PlayerController {
         Player thePlayer = new Player();
 
         theModel.addAttribute("player", thePlayer);
+        theModel.addAttribute("teamId", 0);
 
         return "player-form";
     }
@@ -79,6 +82,7 @@ public class PlayerController {
     @PostMapping("/showFormForUpdatePlayer")
     public String showFormForUpdatePlayer(@RequestParam("playerId") int playerId,
                                           @RequestParam("teamId") int teamId,
+                                          @RequestParam("isTeamPlayer") boolean isTeamPlayer,
                                           Model theModel) {
 
         // get the player from the service
@@ -87,32 +91,47 @@ public class PlayerController {
         // set player as a model attribute to pre-populate the form
         theModel.addAttribute("player", thePlayer);
         theModel.addAttribute("teamId", teamId);
+        theModel.addAttribute("defendingPositions", Constants.defendingPositions);
 
         // send over to our form
+        if(isTeamPlayer) {
+            return "teamPlayer-form";
+        }
         return "player-form";
     }
 
+
     @PostMapping("/save")
-    public String savePlayer(@ModelAttribute("player") Player thePlayer) {
+    public String savePlayer(@ModelAttribute("player") Player thePlayer,
+                             @RequestParam("isTeamPlayer") boolean isTeamPlayer,
+                             @RequestParam("teamId") int teamId, RedirectAttributes redirectAttributes) {
 
         // save the player
         playerService.save(thePlayer);
 
         // use a redirect to prevent duplicate submissions
+        if (isTeamPlayer) {
+            redirectAttributes.addAttribute("teamId", teamId);
+            return "redirect:/teams/showRoster";
+        }
+
         return "redirect:/players/list";
     }
 
     @PostMapping("/delete")
     public String deletePlayer(@RequestParam("playerId") int theId) {
 
-        // delete the customer
+        // delete the player
         playerService.deleteById(theId);
 
         return "redirect:/players/list";
     }
 
     @PostMapping("/showPlayerStats")
-    public String showPlayerStats(@RequestParam("playerId") int theId, @RequestParam("teamId") int teamId, Model theModel) {
+    public String showPlayerStats(@RequestParam("playerId") int theId,
+                                  @RequestParam("teamId") int teamId,
+                                  @RequestParam("isTeamPlayer") boolean isTeamPlayer,
+                                  Model theModel) {
 
         Player thePlayer = playerService.findById(theId);
 
@@ -133,6 +152,7 @@ public class PlayerController {
         theModel.addAttribute("playerHittingDetails", playerHittingDetails);
         theModel.addAttribute("playerPitchingDetails", playerPitchingDetails);
         theModel.addAttribute("playerFieldingDetails", playerFieldingDetails);
+        theModel.addAttribute("isTeamPlayer", isTeamPlayer);
 
         return "player-stats";
     }

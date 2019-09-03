@@ -7,12 +7,11 @@
 
 <body>
 
-
 <form action="#" th:action="@{/players/save}"
       th:object="${player}" method="POST">
 
     <!-- Add hidden form field to handle update -->
-    <input type="hidden" th:field="*{id}" />
+    <input type="hidden" th:field="*{id}"/>
 
     <input type="text" th:field="*{firstName}"
            placeholder="First name">
@@ -28,6 +27,7 @@
 
     <input type="hidden" name="playerId" th:value="${player.id}"/>
     <input type="hidden" name="teamId" th:value="${teamId}"/>
+    <input type="hidden" name="isTeamPlayer" th:value="${false}"/>
     <button type="submit">Player Stats</button>
 
 </form>
