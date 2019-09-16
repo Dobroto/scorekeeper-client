@@ -3,7 +3,7 @@ package com.junak.scorekeeper.client.model;
 public class Inning {
     private int id;
 
-    private Game game;
+    private int game;
 
     private int inningNumber;
 
@@ -25,11 +25,11 @@ public class Inning {
         this.id = id;
     }
 
-    public Game getGame() {
+    public int getGame() {
         return game;
     }
 
-    public void setGame(Game game) {
+    public void setGame(int game) {
         this.game = game;
     }
 

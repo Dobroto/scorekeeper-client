@@ -27,7 +27,7 @@ public class GameServiceRestClientImpl implements GameService {
                                             @Value("${scorekeeper.rest.url}") String theUrl) {
         restTemplate = builder.build();
         scorekeeperRestUrl = theUrl;
-        gameRestUrl = scorekeeperRestUrl + "/game";
+        gameRestUrl = scorekeeperRestUrl + "/games";
         logger.info("Loaded property: scorekeeper.rest.url=" + gameRestUrl);
     }
 

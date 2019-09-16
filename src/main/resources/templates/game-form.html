@@ -1,0 +1,32 @@
+<!DOCTYPE HTML>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <title>New Game</title>
+</head>
+
+<body>
+
+<form action="#" th:action="@{/games/showTeamList}" method="POST">
+    <input type="hidden" name="isVisitor" th:value="${true}"/>
+    <button type="submit" th:text="${visitorName != null} ? ${'Visitor: ' + visitorName} : 'Visitor'"></button>
+</form>
+
+<form action="#" th:action="@{/games/showTeamList}" method="POST">
+    <input type="hidden" name="isVisitor" th:value="${false}"/>
+    <button type="submit" th:text="${homeName != null} ? ${'Home: ' + homeName} : 'Home'"></button>
+</form>
+
+<!--TODO: scheduled date-->
+
+<form action="#" th:action="@{/games/addNewGame}" method="POST" th:if="${game.homeTeam != 0} and ${game.visitorTeam != 0}">
+
+    <input type="hidden" name="game" th:value="${game}"/>
+    <button type="submit">Done</button>
+
+</form>
+
+<a th:href="@{/games/list}">Back</a>
+
+</body>
+</html>

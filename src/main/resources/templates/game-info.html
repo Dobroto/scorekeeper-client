@@ -1,0 +1,125 @@
+<!DOCTYPE HTML>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <title>Game Info</title>
+</head>
+
+<body>
+
+<!---->
+
+<h3 th:text="|${#dates.format(gameWrapper.scheduledTime, 'dd/MM/yyyy HH:mm')} ${gameWrapper.visitorTeam.teamNameLong} at ${gameWrapper.homeTeam.teamNameLong}|"></h3>
+<hr>
+
+<table border="1">
+    <thead>
+    <tr>
+        <td></td>
+        <td>1</td>
+        <td>2</td>
+        <td>3</td>
+        <td>4</td>
+        <td>5</td>
+        <td>6</td>
+        <td>7</td>
+        <td>8</td>
+        <td>9</td>
+        <td>R</td>
+        <td>H</td>
+        <td>E</td>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+        <td th:text="${gameWrapper.visitorTeam.teamNameLong}"></td>
+        <td th:text="${gameWrapper.innings != null and #lists.size(gameWrapper.innings) > 0 and gameWrapper.innings[0] != null} ? ${gameWrapper.innings[0].visitorTeamRuns} : ''"></td>
+        <td th:text="${gameWrapper.innings != null and #lists.size(gameWrapper.innings) > 1 and gameWrapper.innings[1] != null} ? ${gameWrapper.innings[1].visitorTeamRuns} : ''"></td>
+        <td th:text="${gameWrapper.innings != null and #lists.size(gameWrapper.innings) > 2 and gameWrapper.innings[2] != null} ? ${gameWrapper.innings[2].visitorTeamRuns} : ''"></td>
+        <td th:text="${gameWrapper.innings != null and #lists.size(gameWrapper.innings) > 3 and gameWrapper.innings[3] != null} ? ${gameWrapper.innings[3].visitorTeamRuns} : ''"></td>
+        <td th:text="${gameWrapper.innings != null and #lists.size(gameWrapper.innings) > 4 and gameWrapper.innings[4] != null} ? ${gameWrapper.innings[4].visitorTeamRuns} : ''"></td>
+        <td th:text="${gameWrapper.innings != null and #lists.size(gameWrapper.innings) > 5 and gameWrapper.innings[5] != null} ? ${gameWrapper.innings[5].visitorTeamRuns} : ''"></td>
+        <td th:text="${gameWrapper.innings != null and #lists.size(gameWrapper.innings) > 6 and gameWrapper.innings[6] != null} ? ${gameWrapper.innings[6].visitorTeamRuns} : ''"></td>
+        <td th:text="${gameWrapper.innings != null and #lists.size(gameWrapper.innings) > 7 and gameWrapper.innings[7] != null} ? ${gameWrapper.innings[7].visitorTeamRuns} : ''"></td>
+        <td th:text="${gameWrapper.innings != null and #lists.size(gameWrapper.innings) > 8 and gameWrapper.innings[8] != null} ? ${gameWrapper.innings[8].visitorTeamRuns} : ''"></td>
+        <td th:text="${gameWrapper.finalResult.visitorTeamScore}"></td>
+        <td th:text="${gameWrapper.finalResult.visitorTeamHits}"></td>
+        <td th:text="${gameWrapper.finalResult.visitorTeamErrors}"></td>
+    </tr>
+    <tr>
+        <td th:text="${gameWrapper.homeTeam.teamNameLong}"></td>
+        <td th:text="${gameWrapper.innings != null and #lists.size(gameWrapper.innings) > 0 and gameWrapper.innings[0] != null} ? ${gameWrapper.innings[0].homeTeamRuns} : ''"></td>
+        <td th:text="${gameWrapper.innings != null and #lists.size(gameWrapper.innings) > 1 and gameWrapper.innings[1] != null} ? ${gameWrapper.innings[1].homeTeamRuns} : ''"></td>
+        <td th:text="${gameWrapper.innings != null and #lists.size(gameWrapper.innings) > 2 and gameWrapper.innings[2] != null} ? ${gameWrapper.innings[2].homeTeamRuns} : ''"></td>
+        <td th:text="${gameWrapper.innings != null and #lists.size(gameWrapper.innings) > 3 and gameWrapper.innings[3] != null} ? ${gameWrapper.innings[3].homeTeamRuns} : ''"></td>
+        <td th:text="${gameWrapper.innings != null and #lists.size(gameWrapper.innings) > 4 and gameWrapper.innings[4] != null} ? ${gameWrapper.innings[4].homeTeamRuns} : ''"></td>
+        <td th:text="${gameWrapper.innings != null and #lists.size(gameWrapper.innings) > 5 and gameWrapper.innings[5] != null} ? ${gameWrapper.innings[5].homeTeamRuns} : ''"></td>
+        <td th:text="${gameWrapper.innings != null and #lists.size(gameWrapper.innings) > 6 and gameWrapper.innings[6] != null} ? ${gameWrapper.innings[6].homeTeamRuns} : ''"></td>
+        <td th:text="${gameWrapper.innings != null and #lists.size(gameWrapper.innings) > 7 and gameWrapper.innings[7] != null} ? ${gameWrapper.innings[7].homeTeamRuns} : ''"></td>
+        <td th:text="${gameWrapper.innings != null and #lists.size(gameWrapper.innings) > 8 and gameWrapper.innings[8] != null} ? ${gameWrapper.innings[8].homeTeamRuns} : ''"></td>
+        <td th:text="${gameWrapper.finalResult.homeTeamScore}"></td>
+        <td th:text="${gameWrapper.finalResult.homeTeamHits}"></td>
+        <td th:text="${gameWrapper.finalResult.homeTeamErrors}"></td>
+    </tr>
+    </tbody>
+</table>
+
+<h3 th:text="${gameWrapper.visitorTeam.teamNameLong}"></h3>
+
+<form action="#" th:action="@{/games/showGameHittingDetails}" method="POST">
+
+    <input type="hidden" name="teamId" th:value="${gameWrapper.visitorTeam.id}"/>
+    <input type="hidden" name="gameId" th:value="${gameWrapper.id}"/>
+    <button type="submit">Team Batting</button>
+
+</form>
+
+<form action="#" th:action="@{/games/showGamePitchingDetails}" method="POST">
+
+    <input type="hidden" name="teamId" th:value="${gameWrapper.visitorTeam.id}"/>
+    <input type="hidden" name="gameId" th:value="${gameWrapper.id}"/>
+    <button type="submit">Team Pitching</button>
+
+</form>
+
+<form action="#" th:action="@{/games/showGameFieldingDetails}" method="POST">
+
+    <input type="hidden" name="teamId" th:value="${gameWrapper.visitorTeam.id}"/>
+    <input type="hidden" name="gameId" th:value="${gameWrapper.id}"/>
+    <button type="submit">Team Fielding</button>
+
+</form>
+
+<h3 th:text="${gameWrapper.homeTeam.teamNameLong}"></h3>
+
+<form action="#" th:action="@{/games/showGameHittingDetails}" method="POST">
+
+    <input type="hidden" name="teamId" th:value="${gameWrapper.homeTeam.id}"/>
+    <input type="hidden" name="gameId" th:value="${gameWrapper.id}"/>
+    <button type="submit">Team Batting</button>
+
+</form>
+
+<form action="#" th:action="@{/games/showGamePitchingDetails}" method="POST">
+
+    <input type="hidden" name="teamId" th:value="${gameWrapper.homeTeam.id}"/>
+    <input type="hidden" name="gameId" th:value="${gameWrapper.id}"/>
+    <button type="submit">Team Pitching</button>
+
+</form>
+
+<form action="#" th:action="@{/games/showGameFieldingDetails}" method="POST">
+
+    <input type="hidden" name="teamId" th:value="${gameWrapper.homeTeam.id}"/>
+    <input type="hidden" name="gameId" th:value="${gameWrapper.id}"/>
+    <button type="submit">Team Fielding</button>
+
+</form>
+
+<a th:href="@{/games/list}">Back</a>
+
+</body>
+</html>
+
+
+

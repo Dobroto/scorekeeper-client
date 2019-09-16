@@ -94,12 +94,11 @@ public class PlayerController {
         theModel.addAttribute("defendingPositions", Constants.defendingPositions);
 
         // send over to our form
-        if(isTeamPlayer) {
+        if (isTeamPlayer) {
             return "teamPlayer-form";
         }
         return "player-form";
     }
-
 
     @PostMapping("/save")
     public String savePlayer(@ModelAttribute("player") Player thePlayer,

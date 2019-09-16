@@ -109,7 +109,7 @@ public class TeamController {
         return "team-stats";
     }
 
-    @RequestMapping(value="/showRoster", method = { RequestMethod.POST, RequestMethod.GET })
+    @RequestMapping(value = "/showRoster", method = {RequestMethod.POST, RequestMethod.GET})
     public String showRoster(@RequestParam("teamId") int theId, Model theModel) {
 
         Team theTeam = teamService.findById(theId);

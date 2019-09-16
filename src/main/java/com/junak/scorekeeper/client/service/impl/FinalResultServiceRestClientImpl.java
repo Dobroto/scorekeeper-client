@@ -27,7 +27,7 @@ public class FinalResultServiceRestClientImpl implements FinalResultService {
                                             @Value("${scorekeeper.rest.url}") String theUrl) {
         restTemplate = builder.build();
         scorekeeperRestUrl = theUrl;
-        finalResultRestUrl = scorekeeperRestUrl + "/finalResult";
+        finalResultRestUrl = scorekeeperRestUrl + "/finalResults";
         logger.info("Loaded property: scorekeeper.rest.url=" + finalResultRestUrl);
     }
 

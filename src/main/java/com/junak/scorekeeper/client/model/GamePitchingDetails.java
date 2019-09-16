@@ -31,9 +31,9 @@ public class GamePitchingDetails {
 
     private double whips;
 
-    private Player player;
+    private int player;
 
-    private Game game;
+    private int game;
 
     public GamePitchingDetails() {
 
@@ -159,19 +159,19 @@ public class GamePitchingDetails {
         this.whips = whips;
     }
 
-    public Player getPlayer() {
+    public int getPlayer() {
         return player;
     }
 
-    public void setPlayer(Player player) {
+    public void setPlayer(int player) {
         this.player = player;
     }
 
-    public Game getGame() {
+    public int getGame() {
         return game;
     }
 
-    public void setGame(Game game) {
+    public void setGame(int game) {
         this.game = game;
     }
 

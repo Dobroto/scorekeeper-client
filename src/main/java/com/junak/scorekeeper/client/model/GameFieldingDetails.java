@@ -15,11 +15,11 @@ public class GameFieldingDetails {
 
     private int doublePlays;
 
-    private Double averageOfErrorsPerTotalChances;
+    private double averageOfErrorsPerTotalChances;
 
-    private Player player;
+    private int player;
 
-    private Game game;
+    private int game;
 
     public GameFieldingDetails() {
 
@@ -81,27 +81,27 @@ public class GameFieldingDetails {
         this.doublePlays = doublePlays;
     }
 
-    public Double getAverageOfErrorsPerTotalChances() {
+    public double getAverageOfErrorsPerTotalChances() {
         return averageOfErrorsPerTotalChances;
     }
 
-    public void setAverageOfErrorsPerTotalChances(Double averageOfErrorsPerTotalChances) {
+    public void setAverageOfErrorsPerTotalChances(double averageOfErrorsPerTotalChances) {
         this.averageOfErrorsPerTotalChances = averageOfErrorsPerTotalChances;
     }
 
-    public Player getPlayer() {
+    public int getPlayer() {
         return player;
     }
 
-    public void setPlayer(Player player) {
+    public void setPlayer(int player) {
         this.player = player;
     }
 
-    public Game getGame() {
+    public int getGame() {
         return game;
     }
 
-    public void setGame(Game game) {
+    public void setGame(int game) {
         this.game = game;
     }
 

@@ -1,0 +1,62 @@
+<!DOCTYPE HTML>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <title th:text="${team.teamNameLong}"></title>
+</head>
+
+<body>
+<h3>Pitching Statistics</h3>
+
+<table border="1">
+    <thead>
+    <tr>
+        <th>#</th>
+        <th>Player</th>
+        <th>W</th>
+        <th>L</th>
+        <th>ER</th>
+        <th>IP</th>
+        <th>ERA</th>
+        <th>SV</th>
+        <th>SVO</th>
+        <th>H</th>
+        <th>R</th>
+        <th>HR</th>
+        <th>BB</th>
+        <th>SO</th>
+        <th>AVG</th>
+        <th>WHIP</th>
+    </tr>
+    </thead>
+    <tbody>
+
+    <tr th:each="tempPitchingDetails : ${gamePitchingDetailsMap}">
+
+        <td th:text="${tempPitchingDetails.key.jerseyNumber}"/>
+        <td th:text="${tempPitchingDetails.key.firstName} + ' ' + ${tempPitchingDetails.key.lastName}"/>
+        <td th:text="${tempPitchingDetails.value.wins}"/>
+        <td th:text="${tempPitchingDetails.value.loses}"/>
+        <td th:text="${tempPitchingDetails.value.earnedRuns}"/>
+        <td th:text="${tempPitchingDetails.value.inningsPitched}"/>
+        <td th:text="${tempPitchingDetails.value.earnedRunAverage}"/>
+        <td th:text="${tempPitchingDetails.value.saves}"/>
+        <td th:text="${tempPitchingDetails.value.saveOpportunities}"/>
+        <td th:text="${tempPitchingDetails.value.hits}"/>
+        <td th:text="${tempPitchingDetails.value.runs}"/>
+        <td th:text="${tempPitchingDetails.value.homeRuns}"/>
+        <td th:text="${tempPitchingDetails.value.basesOnBalls}"/>
+        <td th:text="${tempPitchingDetails.value.strikeOuts}"/>
+        <td th:text="${tempPitchingDetails.value.average}"/>
+        <td th:text="${tempPitchingDetails.value.whips}"/>
+    </tr>
+    </tbody>
+</table>
+
+<form action="#" th:action="@{/games/showGameInfo}" method="POST">
+    <input type="hidden" name="gameId" th:value="${gameId}"/>
+    <button type="submit">Back</button>
+</form>
+
+</body>
+</html>

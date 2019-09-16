@@ -13,4 +13,8 @@ public interface InningService {
     void save(Inning inning);
 
     void deleteById(int id);
+
+    List<Inning> getInningsList(Game game);
+
+    Inning getCurrentInning(Game game);
 }

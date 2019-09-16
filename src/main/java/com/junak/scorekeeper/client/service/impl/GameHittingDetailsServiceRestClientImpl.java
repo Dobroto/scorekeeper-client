@@ -1,6 +1,8 @@
 package com.junak.scorekeeper.client.service.impl;
 
+import com.junak.scorekeeper.client.model.Game;
 import com.junak.scorekeeper.client.model.GameHittingDetails;
+import com.junak.scorekeeper.client.model.Player;
 import com.junak.scorekeeper.client.service.interfaces.GameHittingDetailsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -88,5 +90,38 @@ public class GameHittingDetailsServiceRestClientImpl implements GameHittingDetai
         restTemplate.delete(gameHittingDetailsRestUrl + "/" + id);
 
         logger.info("in deleteGameHittingDetails(): deleted gameHittingDetails id=" + id);
+    }
+
+    @Override
+    public List<GameHittingDetails> getGameHittingDetailsList(Game game) {
+        String gameHittingDetailsListRestUrl = gameHittingDetailsRestUrl + "/game/" + game.getId();
+        logger.info("in getGameHittingDetailsList(): Calling REST API " + gameHittingDetailsListRestUrl);
+
+        // make REST call
+        ResponseEntity<List<GameHittingDetails>> responseEntity =
+                restTemplate.exchange(gameHittingDetailsListRestUrl, HttpMethod.GET, null,
+                        new ParameterizedTypeReference<List<GameHittingDetails>>() {});
+
+        // get the list of gameHittingDetailss from response
+        List<GameHittingDetails> gameHittingDetails = responseEntity.getBody();
+
+        logger.info("in findAllGameHittingDetails(): gameHittingDetails" + gameHittingDetails);
+
+        return gameHittingDetails;
+    }
+
+    @Override
+    public GameHittingDetails getGameHittingDetails(Player player, Game game) {
+        String gameHittingDetailsPlayerGameRestUrl = gameHittingDetailsRestUrl + "/game/" + game.getId() + "/player/"
+                + player.getId();
+        logger.info("in getGameHittingDetails(): Calling REST API " + gameHittingDetailsPlayerGameRestUrl);
+
+        // make REST call
+        GameHittingDetails theGameHittingDetails =
+                restTemplate.getForObject(gameHittingDetailsPlayerGameRestUrl, GameHittingDetails.class);
+
+        logger.info("in getGameHittingDetails(): theGameHittingDetails=" + theGameHittingDetails);
+
+        return theGameHittingDetails;
     }
 }

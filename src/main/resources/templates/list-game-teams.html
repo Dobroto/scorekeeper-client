@@ -1,0 +1,32 @@
+<!DOCTYPE HTML>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <title>New Game</title>
+</head>
+
+<body>
+
+<table border="1">
+    <tbody>
+    <tr th:each="tempTeam : ${teams}">
+
+        <td th:text="${tempTeam.teamNameLong}"/>
+        <td>
+            <form action="#" th:action="@{/games/team/choose}" method="POST">
+                <input type="hidden" name="teamId" th:value="${tempTeam.id}"/>
+                <input type="hidden" name="isVisitor" th:value="${isVisitor}"/>
+                <button type="submit">Choose</button>
+            </form>
+        </td>
+    </tr>
+    </tbody>
+</table>
+
+<form action="#" th:action="@{/games/showFormForAddGame}" method="GET">
+    <input type="hidden" name="game" th:value="${game}"/>
+    <button type="submit">Back</button>
+</form>
+
+</body>
+</html>

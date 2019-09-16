@@ -9,32 +9,34 @@
 <h3>Batting Statistics</h3>
 
 <table border="1">
-    <tbody>
+    <thead>
     <tr>
-        <td>#</td>
-        <td>Player</td>
-        <td>G</td>
-        <td>PA</td>
-        <td>SH</td>
-        <td>BB</td>
-        <td>HBP</td>
-        <td>AB</td>
-        <td>R</td>
-        <td>H</td>
-        <td>2B</td>
-        <td>3B</td>
-        <td>HR</td>
-        <td>RBI</td>
-        <td>SO</td>
-        <td>SB</td>
-        <td>CS</td>
-        <td>SF</td>
-        <td>TB</td>
-        <td>AVG</td>
-        <td>OBP</td>
-        <td>SLG</td>
-        <td>OPS</td>
+        <th>#</th>
+        <th>Player</th>
+        <th>G</th>
+        <th>PA</th>
+        <th>SH</th>
+        <th>BB</th>
+        <th>HBP</th>
+        <th>AB</th>
+        <th>R</th>
+        <th>H</th>
+        <th>2B</th>
+        <th>3B</th>
+        <th>HR</th>
+        <th>RBI</th>
+        <th>SO</th>
+        <th>SB</th>
+        <th>CS</th>
+        <th>SF</th>
+        <th>TB</th>
+        <th>AVG</th>
+        <th>OBP</th>
+        <th>SLG</th>
+        <th>OPS</th>
     </tr>
+    </thead>
+    <tbody>
 
     <tr th:each="tempHittingDetails : ${playerHittingDetailsMap}">
 
@@ -69,27 +71,30 @@
 <h3>Pitching Statistics</h3>
 
 <table border="1">
-    <tbody>
+    <thead>
     <tr>
-        <td>#</td>
-        <td>Player</td>
-        <td>W</td>
-        <td>L</td>
-        <td>ER</td>
-        <td>IP</td>
-        <td>ERA</td>
-        <td>G</td>
-        <td>GS</td>
-        <td>SV</td>
-        <td>SVO</td>
-        <td>H</td>
-        <td>R</td>
-        <td>HR</td>
-        <td>BB</td>
-        <td>SO</td>
-        <td>AVG</td>
-        <td>WHIP</td>
+        <th>#</th>
+        <th>Player</th>
+        <th>W</th>
+        <th>L</th>
+        <th>ER</th>
+        <th>IP</th>
+        <th>ERA</th>
+        <th>G</th>
+        <th>GS</th>
+        <th>SV</th>
+        <th>SVO</th>
+        <th>H</th>
+        <th>R</th>
+        <th>HR</th>
+        <th>BB</th>
+        <th>SO</th>
+        <th>AVG</th>
+        <th>WHIP</th>
     </tr>
+    </thead>
+    <tbody>
+
     <tr th:each="tempPitchingDetails : ${playerPitchingDetailsMap}">
 
         <td th:text="${tempPitchingDetails.key.jerseyNumber}"/>
@@ -117,20 +122,23 @@
 <h3>Fielding Statistics</h3>
 
 <table border="1">
-    <tbody>
+    <thead>
     <tr>
-        <td>#</td>
-        <td>Player</td>
-        <td>GS</td>
-        <td>G</td>
-        <td>INN</td>
-        <td>TC</td>
-        <td>PO</td>
-        <td>A</td>
-        <td>E</td>
-        <td>DP</td>
-        <td>FPCT</td>
+        <th>#</th>
+        <th>Player</th>
+        <th>GS</th>
+        <th>G</th>
+        <th>INN</th>
+        <th>TC</th>
+        <th>PO</th>
+        <th>A</th>
+        <th>E</th>
+        <th>DP</th>
+        <th>FPCT</th>
     </tr>
+    </thead>
+    <tbody>
+
     <tr th:each="tempFieldingDetails : ${playerFieldingDetailsMap}">
 
         <td th:text="${tempFieldingDetails.key.jerseyNumber}"/>

@@ -1,0 +1,49 @@
+<!DOCTYPE HTML>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <title th:text="${team.teamNameLong}"></title>
+</head>
+
+<body>
+<h3>Fielding Statistics</h3>
+
+<table border="1">
+    <thead>
+    <tr>
+        <th>#</th>
+        <th>Player</th>
+        <th>INN</th>
+        <th>TC</th>
+        <th>PO</th>
+        <th>A</th>
+        <th>E</th>
+        <th>DP</th>
+        <th>FPCT</th>
+    </tr>
+    </thead>
+    <tbody>
+
+    <tr th:each="tempFieldingDetails : ${playerFieldingDetailsMap}">
+
+        <td th:text="${tempFieldingDetails.key.jerseyNumber}"/>
+        <td th:text="${tempFieldingDetails.key.firstName} + ' ' + ${tempFieldingDetails.key.lastName}"/>
+        <td th:text="${tempFieldingDetails.value.innings}"/>
+        <td th:text="${tempFieldingDetails.value.totalChances}"/>
+        <td th:text="${tempFieldingDetails.value.putOut}"/>
+        <td th:text="${tempFieldingDetails.value.assists}"/>
+        <td th:text="${tempFieldingDetails.value.errors}"/>
+        <td th:text="${tempFieldingDetails.value.doublePlays}"/>
+        <td th:text="${tempFieldingDetails.value.averageOfErrorsPerTotalChances}"/>
+    </tr>
+    </tbody>
+</table>
+
+
+<form action="#" th:action="@{/games/showGameInfo}" method="POST">
+    <input type="hidden" name="gameId" th:value="${gameId}"/>
+    <button type="submit">Back</button>
+</form>
+
+</body>
+</html>

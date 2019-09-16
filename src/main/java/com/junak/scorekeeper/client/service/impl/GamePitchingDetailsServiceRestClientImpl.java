@@ -1,6 +1,8 @@
 package com.junak.scorekeeper.client.service.impl;
 
+import com.junak.scorekeeper.client.model.Game;
 import com.junak.scorekeeper.client.model.GamePitchingDetails;
+import com.junak.scorekeeper.client.model.Player;
 import com.junak.scorekeeper.client.service.interfaces.GamePitchingDetailsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -33,7 +35,7 @@ public class GamePitchingDetailsServiceRestClientImpl implements GamePitchingDet
 
     @Override
     public List<GamePitchingDetails> findAll() {
-        logger.info("in findAllGamePitchingDetailss(): Calling REST API " + gamePitchingDetailsRestUrl);
+        logger.info("in findAllGamePitchingDetails(): Calling REST API " + gamePitchingDetailsRestUrl);
 
         // make REST call
         ResponseEntity<List<GamePitchingDetails>> responseEntity =
@@ -88,5 +90,20 @@ public class GamePitchingDetailsServiceRestClientImpl implements GamePitchingDet
         restTemplate.delete(gamePitchingDetailsRestUrl + "/" + id);
 
         logger.info("in deleteGamePitchingDetails(): deleted gamePitchingDetails id=" + id);
+    }
+
+    @Override
+    public GamePitchingDetails getGamePitchingDetails(Player player, Game game) {
+        String gamePitchingDetailsPlayerGameRestUrl = gamePitchingDetailsRestUrl + "/game/" + game.getId() + "/player/"
+                + player.getId();
+        logger.info("in getGamePitchingDetails(): Calling REST API " + gamePitchingDetailsPlayerGameRestUrl);
+
+        // make REST call
+        GamePitchingDetails theGamePitchingDetails =
+                restTemplate.getForObject(gamePitchingDetailsPlayerGameRestUrl, GamePitchingDetails.class);
+
+        logger.info("in getGamePitchingDetails(): theGamePitchingDetails=" + theGamePitchingDetails);
+
+        return theGamePitchingDetails;
     }
 }

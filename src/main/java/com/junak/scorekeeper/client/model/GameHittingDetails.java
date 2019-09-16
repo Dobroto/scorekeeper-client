@@ -3,7 +3,7 @@ package com.junak.scorekeeper.client.model;
 public class GameHittingDetails {
     private int id;
 
-    private int plateAppearences;
+    private int plateAppearances;
 
     private int sacrificeHits;
 
@@ -37,15 +37,15 @@ public class GameHittingDetails {
 
     private Double battingAverage;
 
-    private Double onBasePercantage;
+    private Double onBasePercentage;
 
     private Double sluggingPercentage;
 
     private Double onBaseSlugging;
 
-    private Player player;
+    private int player;
 
-    private Game game;
+    private int game;
 
     public GameHittingDetails(){
 
@@ -59,12 +59,12 @@ public class GameHittingDetails {
         this.id = id;
     }
 
-    public int getPlateAppearences() {
-        return plateAppearences;
+    public int getPlateAppearances() {
+        return plateAppearances;
     }
 
-    public void setPlateAppearences(int plateAppearences) {
-        this.plateAppearences = plateAppearences;
+    public void setPlateAppearances(int plateAppearances) {
+        this.plateAppearances = plateAppearances;
     }
 
     public int getSacrificeHits() {
@@ -195,12 +195,12 @@ public class GameHittingDetails {
         this.battingAverage = battingAverage;
     }
 
-    public Double getOnBasePercantage() {
-        return onBasePercantage;
+    public Double getOnBasePercentage() {
+        return onBasePercentage;
     }
 
-    public void setOnBasePercantage(Double onBasePercantage) {
-        this.onBasePercantage = onBasePercantage;
+    public void setOnBasePercentage(Double onBasePercentage) {
+        this.onBasePercentage = onBasePercentage;
     }
 
     public Double getSluggingPercentage() {
@@ -219,19 +219,19 @@ public class GameHittingDetails {
         this.onBaseSlugging = onBaseSlugging;
     }
 
-    public Player getPlayer() {
+    public int getPlayer() {
         return player;
     }
 
-    public void setPlayer(Player player) {
+    public void setPlayer(int player) {
         this.player = player;
     }
 
-    public Game getGame() {
+    public int getGame() {
         return game;
     }
 
-    public void setGame(Game game) {
+    public void setGame(int game) {
         this.game = game;
     }
 
@@ -239,7 +239,7 @@ public class GameHittingDetails {
     public String toString() {
         return "GameHittingDetails{" +
                 "id=" + id +
-                ", plateAppearences=" + plateAppearences +
+                ", plateAppearences=" + plateAppearances +
                 ", sacrificeHits=" + sacrificeHits +
                 ", baseForBalls=" + baseForBalls +
                 ", hitByPitches=" + hitByPitches +
@@ -256,7 +256,7 @@ public class GameHittingDetails {
                 ", sacrificeFlies=" + sacrificeFlies +
                 ", totalBases=" + totalBases +
                 ", battingAverage=" + battingAverage +
-                ", onBasePercantage=" + onBasePercantage +
+                ", onBasePercantage=" + onBasePercentage +
                 ", sluggingPercentage=" + sluggingPercentage +
                 ", onBaseSlugging=" + onBaseSlugging +
                 ", player=" + player +

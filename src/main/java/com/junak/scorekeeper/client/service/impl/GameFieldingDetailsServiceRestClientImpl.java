@@ -91,4 +91,19 @@ public class GameFieldingDetailsServiceRestClientImpl implements GameFieldingDet
 
         logger.info("in deleteFinalResult(): deleted gameFieldingDetails id=" + id);
     }
+
+    @Override
+    public GameFieldingDetails getGameFieldingDetails(Player player, Game game) {
+        String gameFieldingDetailsPlayerGameRestUrl = gameFieldingDetailsRestUrl + "/game/" + game.getId() + "/player/"
+                + player.getId();
+        logger.info("in getGameFieldingDetails(): Calling REST API " + gameFieldingDetailsPlayerGameRestUrl);
+
+        // make REST call
+        GameFieldingDetails theGameFieldingDetails =
+                restTemplate.getForObject(gameFieldingDetailsPlayerGameRestUrl, GameFieldingDetails.class);
+
+        logger.info("in getGameFieldingDetails(): theGameFieldingDetails=" + theGameFieldingDetails);
+
+        return theGameFieldingDetails;
+    }
 }

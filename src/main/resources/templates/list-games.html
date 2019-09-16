@@ -1,0 +1,48 @@
+<!DOCTYPE HTML>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <title>Game Manager</title>
+</head>
+
+<body>
+
+<h3>Game Manager</h3>
+<hr>
+
+<a th:href="@{/games/showFormForAddGame}">
+    Add
+</a>
+
+<div th:each="gameWrapper : ${gameWrappers}">
+    <table border="1">
+        <tbody>
+        <tr>
+            <td th:text="${gameWrapper.scheduledTime != null} ? ${'Scheduled: ' + gameWrapper.scheduledTime} : 'Scheduled:'"/>
+        </tr>
+        <tr>
+            <td th:text="${gameWrapper.visitorTeam.teamNameLong}"/>
+            <td th:text="${gameWrapper?.finalResult?.visitorTeamScore}"/>
+            <td rowspan="2" th:text="${gameWrapper?.currentInning?.inningNumber}"/>
+            <td>
+                <form action="#" th:action="@{/games/showGameInfo}" method="POST">
+                    <input type="hidden" name="gameId" th:value="${gameWrapper.id}"/>
+                    <button type="submit">Enter game</button>
+                </form>
+            </td>
+        </tr>
+        <tr>
+            <td th:text="${gameWrapper.homeTeam.teamNameLong}"/>
+            <td th:text="${gameWrapper?.finalResult?.homeTeamScore}"/>
+        </tr>
+        </tbody>
+    </table>
+</div>
+
+<a th:href="@{/scorekeeper/homePage}">Back</a>
+
+</body>
+</html>
+
+
+

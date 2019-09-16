@@ -7,7 +7,15 @@ public class FinalResult {
 
     private int homeTeamScore;
 
-    private Game game;
+    private int visitorTeamHits;
+
+    private int homeTeamHits;
+
+    private int visitorTeamErrors;
+
+    private int homeTeamErrors;
+
+    private int game;
 
     public FinalResult() {
 
@@ -37,11 +45,43 @@ public class FinalResult {
         this.homeTeamScore = homeTeamScore;
     }
 
-    public Game getGame() {
+    public int getVisitorTeamHits() {
+        return visitorTeamHits;
+    }
+
+    public void setVisitorTeamHits(int visitorTeamHits) {
+        this.visitorTeamHits = visitorTeamHits;
+    }
+
+    public int getHomeTeamHits() {
+        return homeTeamHits;
+    }
+
+    public void setHomeTeamHits(int homeTeamHits) {
+        this.homeTeamHits = homeTeamHits;
+    }
+
+    public int getVisitorTeamErrors() {
+        return visitorTeamErrors;
+    }
+
+    public void setVisitorTeamErrors(int visitorTeamErrors) {
+        this.visitorTeamErrors = visitorTeamErrors;
+    }
+
+    public int getHomeTeamErrors() {
+        return homeTeamErrors;
+    }
+
+    public void setHomeTeamErrors(int homeTeamErrors) {
+        this.homeTeamErrors = homeTeamErrors;
+    }
+
+    public int getGame() {
         return game;
     }
 
-    public void setGame(Game game) {
+    public void setGame(int game) {
         this.game = game;
     }
 

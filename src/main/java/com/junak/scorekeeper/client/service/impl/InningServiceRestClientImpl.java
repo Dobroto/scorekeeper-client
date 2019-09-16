@@ -1,5 +1,6 @@
 package com.junak.scorekeeper.client.service.impl;
 
+import com.junak.scorekeeper.client.model.Game;
 import com.junak.scorekeeper.client.model.Inning;
 import com.junak.scorekeeper.client.service.interfaces.InningService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,7 +28,7 @@ public class InningServiceRestClientImpl implements InningService {
                                             @Value("${scorekeeper.rest.url}") String theUrl) {
         restTemplate = builder.build();
         scorekeeperRestUrl = theUrl;
-        inningRestUrl = scorekeeperRestUrl + "/inning";
+        inningRestUrl = scorekeeperRestUrl + "/innings";
         logger.info("Loaded property: scorekeeper.rest.url=" + inningRestUrl);
     }
 
@@ -88,5 +89,38 @@ public class InningServiceRestClientImpl implements InningService {
         restTemplate.delete(inningRestUrl + "/" + id);
 
         logger.info("in deleteInning(): deleted inning id=" + id);
+    }
+
+    @Override
+    public List<Inning> getInningsList(Game game) {
+        String getInningsListUrl = inningRestUrl + "/game/list/" + game.getId();
+
+        logger.info("in getInningsList(): Calling REST API " + getInningsListUrl);
+
+        // make REST call
+        ResponseEntity<List<Inning>> responseEntity =
+                restTemplate.exchange(getInningsListUrl, HttpMethod.GET, null,
+                        new ParameterizedTypeReference<List<Inning>>() {});
+
+        // get the list of innings from response
+        List<Inning> innings = responseEntity.getBody();
+
+        logger.info("in getInningsList(): innings" + innings);
+
+        return innings;
+    }
+
+    @Override
+    public Inning getCurrentInning(Game game) {
+        String getCurrentInningUrl = inningRestUrl + "/game/" + game.getId();
+        logger.info("in getCurrentInning(): Calling REST API " + getCurrentInningUrl);
+
+        // make REST call
+        Inning theInning =
+                restTemplate.getForObject(getCurrentInningUrl, Inning.class);
+
+        logger.info("in getCurrentInning(): theInning=" + theInning);
+
+        return theInning;
     }
 }

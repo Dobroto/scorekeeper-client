@@ -7,35 +7,35 @@ public class Game {
 
     private int id;
 
+    private Date scheduledTime;
+
     private Date startTimeOfGame;
 
     private Date endTimeOfGame;
 
-    private Team homeTeam;
+    private int homeTeam;
 
-    private Team visitorTeam;
+    private int visitorTeam;
 
-    private FinalResult finalResult;
+    private int finalResult;
 
-    private List<GameHittingDetails> gameHittingDetails;
+    private List<Integer> gameHittingDetails;
 
-    private List<GamePitchingDetails> gamePitchingDetails;
+    private List<Integer> gamePitchingDetails;
 
-    private List<GameFieldingDetails> gameFieldingDetails;
+    private List<Integer> gameFieldingDetails;
 
-    private Player winPitcher;
+    private int winPitcher;
 
-    private Player losePitcher;
+    private int losePitcher;
 
-    private Player savePitcher;
+    private int savePitcher;
 
-    private Player blownSavePitcher;
+    private int blownSavePitcher;
 
-    private Player holdPitcher;
+    private int holdPitcher;
 
-    private String lastCommand;
-
-    private List<Inning> innings;
+    private List<Integer> innings;
 
     public Game() {
 
@@ -47,6 +47,14 @@ public class Game {
 
     public void setId(int id) {
         this.id = id;
+    }
+
+    public Date getScheduledTime() {
+        return scheduledTime;
+    }
+
+    public void setScheduledTime(Date scheduledTime) {
+        this.scheduledTime = scheduledTime;
     }
 
     public Date getStartTimeOfGame() {
@@ -65,107 +73,99 @@ public class Game {
         this.endTimeOfGame = endTimeOfGame;
     }
 
-    public Team getHomeTeam() {
+    public int getHomeTeam() {
         return homeTeam;
     }
 
-    public void setHomeTeam(Team homeTeam) {
+    public void setHomeTeam(int homeTeam) {
         this.homeTeam = homeTeam;
     }
 
-    public Team getVisitorTeam() {
+    public int getVisitorTeam() {
         return visitorTeam;
     }
 
-    public void setVisitorTeam(Team visitorTeam) {
+    public void setVisitorTeam(int visitorTeam) {
         this.visitorTeam = visitorTeam;
     }
 
-    public FinalResult getFinalResult() {
+    public int getFinalResult() {
         return finalResult;
     }
 
-    public void setFinalResult(FinalResult finalResult) {
+    public void setFinalResult(int finalResult) {
         this.finalResult = finalResult;
     }
 
-    public List<GameHittingDetails> getGameHittingDetails() {
+    public List<Integer> getGameHittingDetails() {
         return gameHittingDetails;
     }
 
-    public void setGameHittingDetails(List<GameHittingDetails> gameHittingDetails) {
+    public void setGameHittingDetails(List<Integer> gameHittingDetails) {
         this.gameHittingDetails = gameHittingDetails;
     }
 
-    public List<GamePitchingDetails> getGamePitchingDetails() {
+    public List<Integer> getGamePitchingDetails() {
         return gamePitchingDetails;
     }
 
-    public void setGamePitchingDetails(List<GamePitchingDetails> gamePitchingDetails) {
+    public void setGamePitchingDetails(List<Integer> gamePitchingDetails) {
         this.gamePitchingDetails = gamePitchingDetails;
     }
 
-    public List<GameFieldingDetails> getGameFieldingDetails() {
+    public List<Integer> getGameFieldingDetails() {
         return gameFieldingDetails;
     }
 
-    public void setGameFieldingDetails(List<GameFieldingDetails> gameFieldingDetails) {
+    public void setGameFieldingDetails(List<Integer> gameFieldingDetails) {
         this.gameFieldingDetails = gameFieldingDetails;
     }
 
-    public Player getWinPitcher() {
+    public int getWinPitcher() {
         return winPitcher;
     }
 
-    public void setWinPitcher(Player winPitcher) {
+    public void setWinPitcher(int winPitcher) {
         this.winPitcher = winPitcher;
     }
 
-    public Player getLosePitcher() {
+    public int getLosePitcher() {
         return losePitcher;
     }
 
-    public void setLosePitcher(Player losePitcher) {
+    public void setLosePitcher(int losePitcher) {
         this.losePitcher = losePitcher;
     }
 
-    public Player getSavePitcher() {
+    public int getSavePitcher() {
         return savePitcher;
     }
 
-    public void setSavePitcher(Player savePitcher) {
+    public void setSavePitcher(int savePitcher) {
         this.savePitcher = savePitcher;
     }
 
-    public Player getBlownSavePitcher() {
+    public int getBlownSavePitcher() {
         return blownSavePitcher;
     }
 
-    public void setBlownSavePitcher(Player blownSavePitcher) {
+    public void setBlownSavePitcher(int blownSavePitcher) {
         this.blownSavePitcher = blownSavePitcher;
     }
 
-    public Player getHoldPitcher() {
+    public int getHoldPitcher() {
         return holdPitcher;
     }
 
-    public void setHoldPitcher(Player holdPitcher) {
+    public void setHoldPitcher(int holdPitcher) {
         this.holdPitcher = holdPitcher;
     }
 
-    public String getLastCommand() {
-        return lastCommand;
-    }
-
-    public void setLastCommand(String lastCommand) {
-        this.lastCommand = lastCommand;
-    }
-
-    public List<Inning> getInnings() {
+    public List<Integer> getInnings() {
         return innings;
     }
 
-    public void setInnings(List<Inning> innings) {
+    public void setInnings(List<Integer> innings) {
         this.innings = innings;
     }
 
@@ -186,7 +186,6 @@ public class Game {
                 ", savePitcher=" + savePitcher +
                 ", blownSavePitcher=" + blownSavePitcher +
                 ", holdPitcher=" + holdPitcher +
-                ", lastCommand='" + lastCommand + '\'' +
                 ", innings=" + innings +
                 '}';
     }
