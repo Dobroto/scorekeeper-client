@@ -111,10 +111,12 @@ public class GameController {
         return "redirect:/games/list";
     }
 
-    @PostMapping("/showGameInfo")
-    public String showGameInfo(@RequestParam("gameId") int gameId, Model theModel) {
+    @RequestMapping(value = "/showGameInfo", method = {RequestMethod.POST, RequestMethod.GET})
+    public String showGameInfo(@RequestParam("gameId") int gameId,
+                               Model theModel) {
 
         Game game = gameService.findById(gameId);
+
         GameWrapper gameWrapper = wrapGame(game);
 
         theModel.addAttribute("gameWrapper", gameWrapper);
@@ -145,8 +147,8 @@ public class GameController {
 
     @PostMapping("/showGamePitchingDetails")
     public String showGamePitchingDetails(@RequestParam("gameId") int gameId,
-                                         @RequestParam("teamId") int teamId,
-                                         Model theModel) {
+                                          @RequestParam("teamId") int teamId,
+                                          Model theModel) {
         Game game = gameService.findById(gameId);
         List<Player> teamPlayers = playerService.findAllTeamPlayers(teamId);
         Team team = teamService.findById(teamId);
@@ -166,8 +168,8 @@ public class GameController {
 
     @PostMapping("/showGameFieldingDetails")
     public String showGameFieldingDetails(@RequestParam("gameId") int gameId,
-                                         @RequestParam("teamId") int teamId,
-                                         Model theModel) {
+                                          @RequestParam("teamId") int teamId,
+                                          Model theModel) {
         Game game = gameService.findById(gameId);
         List<Player> teamPlayers = playerService.findAllTeamPlayers(teamId);
         Team team = teamService.findById(teamId);
@@ -183,6 +185,144 @@ public class GameController {
         theModel.addAttribute("gameFieldingDetailsMap", gameFieldingDetailsMap);
 
         return "game-fielding";
+    }
+
+    @PostMapping("/showWinPitcher")
+    public String showWinPitcher(@RequestParam("gameId") int gameId,
+                                 Model theModel) {
+        Game game = gameService.findById(gameId);
+        FinalResult finalResult = finalResultService.findById(game.getFinalResult());
+        Team winningTeam;
+        if (finalResult.getHomeTeamScore() >= finalResult.getVisitorTeamScore()) {
+            winningTeam = teamService.findById(game.getHomeTeam());
+        } else {
+            winningTeam = teamService.findById(game.getVisitorTeam());
+        }
+
+        List<Player> players = playerService.findAllTeamPlayers(winningTeam.getId());
+        List<Player> pitchers = new ArrayList<>();
+        for (Player player : players) {
+            if (player.isWasPitcher()) {
+                pitchers.add(player);
+            }
+        }
+
+        theModel.addAttribute("pitchers", pitchers);
+        theModel.addAttribute("game", game);
+
+        return "game-win-pitcher";
+    }
+
+    @PostMapping("/showLosePitcher")
+    public String showLosePitcher(@RequestParam("gameId") int gameId,
+                                  Model theModel) {
+        Game game = gameService.findById(gameId);
+        FinalResult finalResult = finalResultService.findById(game.getFinalResult());
+        Team losingTeam;
+        if (finalResult.getHomeTeamScore() >= finalResult.getVisitorTeamScore()) {
+            losingTeam = teamService.findById(game.getVisitorTeam());
+        } else {
+            losingTeam = teamService.findById(game.getHomeTeam());
+        }
+
+        List<Player> players = playerService.findAllTeamPlayers(losingTeam.getId());
+        List<Player> pitchers = new ArrayList<>();
+        for (Player player : players) {
+            if (player.isWasPitcher()) {
+                pitchers.add(player);
+            }
+        }
+
+        theModel.addAttribute("pitchers", pitchers);
+        theModel.addAttribute("game", game);
+
+        return "game-lose-pitcher";
+    }
+
+    @PostMapping("/showSavePitcher")
+    public String showSavePitcher(@RequestParam("gameId") int gameId,
+                                  Model theModel) {
+        Game game = gameService.findById(gameId);
+        FinalResult finalResult = finalResultService.findById(game.getFinalResult());
+        Team winningTeam;
+        if (finalResult.getHomeTeamScore() >= finalResult.getVisitorTeamScore()) {
+            winningTeam = teamService.findById(game.getHomeTeam());
+        } else {
+            winningTeam = teamService.findById(game.getVisitorTeam());
+        }
+
+        List<Player> players = playerService.findAllTeamPlayers(winningTeam.getId());
+        List<Player> pitchers = new ArrayList<>();
+        for (Player player : players) {
+            if (player.isWasPitcher()) {
+                pitchers.add(player);
+            }
+        }
+
+        theModel.addAttribute("pitchers", pitchers);
+        theModel.addAttribute("game", game);
+
+        return "game-save-pitcher";
+    }
+
+    @PostMapping("/showBlownSavePitcher")
+    public String showBlownSavePitcher(@RequestParam("gameId") int gameId,
+                                       Model theModel) {
+        Game game = gameService.findById(gameId);
+        Team homeTeam = teamService.findById(game.getHomeTeam());
+        Team visitorTeam = teamService.findById(game.getVisitorTeam());
+
+        List<Player> homeTeamPlayers = playerService.findAllTeamPlayers(homeTeam.getId());
+        List<Player> visitorTeamPlayers = playerService.findAllTeamPlayers(visitorTeam.getId());
+        List<Player> players = new ArrayList<>(homeTeamPlayers);
+        players.addAll(visitorTeamPlayers);
+
+        List<Player> pitchers = new ArrayList<>();
+        for (Player player : players) {
+            if (player.isWasPitcher()) {
+                pitchers.add(player);
+            }
+        }
+
+        theModel.addAttribute("pitchers", pitchers);
+        theModel.addAttribute("game", game);
+
+        return "game-blown-save-pitcher";
+    }
+
+    @PostMapping("/showHoldPitcher")
+    public String showHoldPitcher(@RequestParam("gameId") int gameId,
+                                  Model theModel) {
+        Game game = gameService.findById(gameId);
+        Team homeTeam = teamService.findById(game.getHomeTeam());
+        Team visitorTeam = teamService.findById(game.getVisitorTeam());
+
+        List<Player> homeTeamPlayers = playerService.findAllTeamPlayers(homeTeam.getId());
+        List<Player> visitorTeamPlayers = playerService.findAllTeamPlayers(visitorTeam.getId());
+        List<Player> players = new ArrayList<>(homeTeamPlayers);
+        players.addAll(visitorTeamPlayers);
+
+        List<Player> pitchers = new ArrayList<>();
+        for (Player player : players) {
+            if (player.isWasPitcher()) {
+                pitchers.add(player);
+            }
+        }
+
+        theModel.addAttribute("pitchers", pitchers);
+        theModel.addAttribute("game", game);
+
+        return "game-hold-pitcher";
+    }
+
+    @PostMapping("/pitcher/save")
+    public String savePitcher(@ModelAttribute("game") Game game, RedirectAttributes redirectAttributes) {
+
+        // save the player
+        gameService.save(game);
+
+        redirectAttributes.addAttribute("gameId", game.getId());
+        return "redirect:/games/showGameInfo";
     }
 
     private GameWrapper wrapGame(Game game) {
@@ -205,9 +345,25 @@ public class GameController {
         if (currentInning != null) {
             gameWrapper.setCurrentInning(currentInning);
         }
-        if((game.getInnings() != null) && (game.getInnings().size() > 0)) {
+        if ((game.getInnings() != null) && (game.getInnings().size() > 0)) {
             gameWrapper.setInnings(inningService.getInningsList(game));
         }
+        if (game.getWinPitcher() != 0) {
+            gameWrapper.setWinPitcher(playerService.findById(game.getWinPitcher()));
+        }
+        if (game.getLosePitcher() != 0) {
+            gameWrapper.setLosePitcher(playerService.findById(game.getLosePitcher()));
+        }
+        if (game.getSavePitcher() != 0) {
+            gameWrapper.setSavePitcher(playerService.findById(game.getSavePitcher()));
+        }
+        if (game.getBlownSavePitcher() != 0) {
+            gameWrapper.setBlownSavePitcher(playerService.findById(game.getBlownSavePitcher()));
+        }
+        if (game.getHoldPitcher() != 0) {
+            gameWrapper.setHoldPitcher(playerService.findById(game.getHoldPitcher()));
+        }
+
         return gameWrapper;
     }
 

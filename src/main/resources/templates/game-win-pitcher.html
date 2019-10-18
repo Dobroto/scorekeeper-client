@@ -1,0 +1,28 @@
+<!DOCTYPE HTML>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+</head>
+
+<body>
+<h3>Select the pitcher who gets the win</h3>
+
+<form action="#" th:action="@{/games/pitcher/save}"
+      th:object="${game}" method="POST">
+
+    <select th:field="*{winPitcher}">
+        <option th:each="pitcher : ${pitchers}" th:value="${pitcher.id}"
+                th:text="${pitcher.firstName} + ' ' + ${pitcher.lastName}">
+        </option>
+    </select>
+
+    <button type="submit">Save</button>
+</form>
+
+<form action="#" th:action="@{/games/showGameInfo}" method="POST">
+    <input type="hidden" name="gameId" th:value="${game.id}"/>
+    <button type="submit">Back</button>
+</form>
+
+</body>
+</html>

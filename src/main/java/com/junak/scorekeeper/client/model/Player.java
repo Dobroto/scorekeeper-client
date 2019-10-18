@@ -23,6 +23,8 @@ public class Player {
 
     private int strikeCount;
 
+    private boolean wasPitcher;
+
     private int playerHittingDetails;
 
     private int playerPitchingDetails;
@@ -131,6 +133,14 @@ public class Player {
         this.strikeCount = strikeCount;
     }
 
+    public boolean isWasPitcher() {
+        return wasPitcher;
+    }
+
+    public void setWasPitcher(boolean wasPitcher) {
+        this.wasPitcher = wasPitcher;
+    }
+
     public int getPlayerHittingDetails() {
         return playerHittingDetails;
     }
@@ -225,33 +235,5 @@ public class Player {
 
     public void setGamePitchingDetails(List<Integer> gamePitchingDetails) {
         this.gamePitchingDetails = gamePitchingDetails;
-    }
-
-    @Override
-    public String toString() {
-        return "Player{" +
-                "id=" + id +
-                ", firstName='" + firstName + '\'' +
-                ", lastName='" + lastName + '\'' +
-                ", jerseyNumber=" + jerseyNumber +
-                ", starter=" + starter +
-                ", defencePosition='" + defencePosition + '\'' +
-                ", offencePosition='" + offencePosition + '\'' +
-                ", battingOrder=" + battingOrder +
-                ", ballCount=" + ballCount +
-                ", strikeCount=" + strikeCount +
-                ", playerHittingDetails=" + playerHittingDetails +
-                ", playerPitchingDetails=" + playerPitchingDetails +
-                ", playerFieldingDetails=" + playerFieldingDetails +
-                ", team=" + team +
-                ", winPitcherGames=" + winPitcherGames +
-                ", losePitcherGames=" + losePitcherGames +
-                ", savePitcherGames=" + savePitcherGames +
-                ", blownSavePitcherGames=" + blownSavePitcherGames +
-                ", holdPitcherGames=" + holdPitcherGames +
-                ", gameHittingDetails=" + gameHittingDetails +
-                ", gameFieldingDetails=" + gameFieldingDetails +
-                ", gamePitchingDetails=" + gamePitchingDetails +
-                '}';
     }
 }
