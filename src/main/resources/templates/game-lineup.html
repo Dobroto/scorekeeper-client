@@ -7,13 +7,6 @@
 
 <body>
 
-<form action="#" th:action="@{/players/list}" method="POST">
-
-    <input type="hidden" name="teamId" th:value="${team.id}"/>
-    <input type="hidden" name="isTeamPlayer" th:value="${true}"/>
-    <button type="submit">Add player to team</button>
-
-</form>
 <table border="1">
     <tbody>
     <tr th:each="tempPlayer : ${players}">

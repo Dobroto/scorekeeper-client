@@ -18,6 +18,8 @@
 
     <input type="text" th:field="*{lastName}"
            placeholder="Last name">
+    <input type="hidden" name="isTeamPlayer" th:value="${false}"/>
+    <input type="hidden" name="teamId" th:value="${teamId}"/>
 
     <button type="submit">Save</button>
 
@@ -32,13 +34,21 @@
 
 </form>
 
-<form action="#" th:action="@{/teams/showRoster}" method="POST" th:unless="${teamId == 0}">
+<form action="#" th:action="@{/players/list}" method="POST" th:unless="${teamId == 0}">
 
+    <input type="hidden" name="isTeamPlayer" th:value="${true}"/>
     <input type="hidden" name="teamId" th:value="${teamId}"/>
     <button type="submit">Back</button>
 
 </form>
-<a th:href="@{/players/list}" th:unless="${teamId != 0}">Back</a>
+
+<form action="#" th:action="@{/players/list}" method="POST" th:unless="${teamId != 0}">
+
+    <input type="hidden" name="isTeamPlayer" th:value="${false}"/>
+    <input type="hidden" name="teamId" th:value="${teamId}"/>
+    <button type="submit">Back</button>
+
+</form>
 
 </body>
 </html>

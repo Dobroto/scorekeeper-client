@@ -1,5 +1,6 @@
 package com.junak.scorekeeper.client.controller;
 
+import com.junak.scorekeeper.client.Constants;
 import com.junak.scorekeeper.client.model.*;
 import com.junak.scorekeeper.client.model.wrapper.GameWrapper;
 import com.junak.scorekeeper.client.service.interfaces.*;
@@ -323,6 +324,191 @@ public class GameController {
 
         redirectAttributes.addAttribute("gameId", game.getId());
         return "redirect:/games/showGameInfo";
+    }
+
+    @PostMapping("/scoreGame")
+    public String scoreGame(@RequestParam("gameId") int gameId,
+                            @RequestParam("homeTeamId") int homeTeamId,
+                            @RequestParam("visitorTeamId") int visitorTeamId,
+                            Model theModel) {
+//        Game game = gameService.findById(gameId);
+//        List<Player> visitorTeamPlayers = playerService.findAllTeamPlayers(visitorTeamId);
+//        Team visitorTeam = teamService.findById(visitorTeamId);
+//        List<Player> homeTeamPlayers = playerService.findAllTeamPlayers(homeTeamId);
+//        Team homeTeam = teamService.findById(homeTeamId);
+//
+//        theModel.addAttribute("gameId", gameId);
+//        theModel.addAttribute("visitorTeam", visitorTeam);
+//        theModel.addAttribute("homeTeam", homeTeam);
+//        theModel.addAttribute("visitorTeamPlayers", visitorTeamPlayers);
+//        theModel.addAttribute("homeTeamPlayers", homeTeamPlayers);
+
+        Game game = gameService.findById(gameId);
+
+        GameWrapper gameWrapper = wrapGame(game);
+
+        Team attackingTeam = gameWrapper.getVisitorTeam().getAttacking() ?
+                gameWrapper.getVisitorTeam() : gameWrapper.getHomeTeam();
+
+        Team defendingTeam = gameWrapper.getVisitorTeam().getAttacking() ?
+                gameWrapper.getHomeTeam() : gameWrapper.getVisitorTeam();
+
+        List<Player> attackingTeamPlayers = playerService.findAllTeamPlayers(attackingTeam.getId());
+        List<Player> defendingTeamPlayers = playerService.findAllTeamPlayers(defendingTeam.getId());
+
+        Player currentBatter = getCurrentBatter(attackingTeamPlayers);
+        Player currentFirstBaseOffence = getCurrentFirstBaseOffence(attackingTeamPlayers);
+        Player currentSecondBaseOffence = getCurrentSecondBaseOffence(attackingTeamPlayers);
+        Player currentThirdBaseOffence = getCurrentThirdBaseOffence(attackingTeamPlayers);
+        Player currentPitcher = getCurrentPitcher(defendingTeamPlayers);
+        Player currentCatcher = getCurrentCatcher(defendingTeamPlayers);
+        Player currentFirstBaseDefence = getCurrentFirstBaseDefence(defendingTeamPlayers);
+        Player currentSecondBaseDefence = getCurrentSecondBaseDefence(defendingTeamPlayers);
+        Player currentShortStop = getCurrentShortStop(defendingTeamPlayers);
+        Player currentThirdBaseDefence = getThirdBaseDefence(defendingTeamPlayers);
+        Player currentRightField = getRightField(defendingTeamPlayers);
+        Player currentCenterField = getCenterField(defendingTeamPlayers);
+        Player currentLeftField = getLeftField(defendingTeamPlayers);
+
+        theModel.addAttribute("gameWrapper", gameWrapper);
+        theModel.addAttribute("batter", currentBatter);
+        theModel.addAttribute("currentFirstBaseOffence", currentFirstBaseOffence);
+        theModel.addAttribute("currentSecondBaseOffence", currentSecondBaseOffence);
+        theModel.addAttribute("currentThirdBaseOffence", currentThirdBaseOffence);
+        theModel.addAttribute("currentPitcher", currentPitcher);
+        theModel.addAttribute("currentCatcher", currentCatcher);
+        theModel.addAttribute("currentFirstBaseDefence", currentFirstBaseDefence);
+        theModel.addAttribute("currentSecondBaseDefence", currentSecondBaseDefence);
+        theModel.addAttribute("currentShortStop", currentShortStop);
+        theModel.addAttribute("currentThirdBaseDefence", currentThirdBaseDefence);
+        theModel.addAttribute("currentRightField", currentRightField);
+        theModel.addAttribute("currentCenterField", currentCenterField);
+        theModel.addAttribute("currentLeftField", currentLeftField);
+
+        return "game-score";
+    }
+
+    private Player getCurrentBatter(List<Player> players) {
+        for (Player player : players) {
+            if (player.getOffencePosition() != null && player.getOffencePosition().equals(Constants.batter)){
+                return player;
+            }
+        }
+        return null;
+    }
+
+    private Player getCurrentFirstBaseOffence(List<Player> players) {
+        for (Player player : players) {
+            if (player.getOffencePosition() != null && player.getOffencePosition().equals(Constants.runnerFirstBase)){
+                return player;
+            }
+        }
+        return null;
+    }
+
+    private Player getCurrentSecondBaseOffence(List<Player> players) {
+        for (Player player : players) {
+            if (player.getOffencePosition() != null && player.getOffencePosition().equals(Constants.runnerSecondBase)){
+                return player;
+            }
+        }
+        return null;
+    }
+
+    private Player getCurrentThirdBaseOffence(List<Player> players) {
+        for (Player player : players) {
+            if (player.getOffencePosition() != null && player.getOffencePosition().equals(Constants.runnerThirdBase)){
+                return player;
+            }
+        }
+        return null;
+    }
+
+    private Player getCurrentPitcher(List<Player> players) {
+        for (Player player : players) {
+            if (player.getDefencePosition() != null && player.getDefencePosition().equals(Constants.pitcher)){
+                return player;
+            }
+        }
+        return null;
+    }
+
+    private Player getCurrentCatcher(List<Player> players) {
+        for (Player player : players) {
+            if (player.getDefencePosition() != null && player.getDefencePosition().equals(Constants.catcher)){
+                return player;
+            }
+        }
+        return null;
+    }
+
+    private Player getCurrentFirstBaseDefence(List<Player> players) {
+        for (Player player : players) {
+            if (player.getDefencePosition() != null && player.getDefencePosition().equals(Constants.defenderFirstBase)){
+                return player;
+            }
+        }
+        return null;
+    }
+
+    private Player getCurrentSecondBaseDefence(List<Player> players) {
+        for (Player player : players) {
+            if (player.getDefencePosition() != null && player.getDefencePosition().equals(Constants.defenderSecondBase)){
+                return player;
+            }
+        }
+        return null;
+    }
+
+    private Player getCurrentShortStop(List<Player> players) {
+        for (Player player : players) {
+            if (player.getDefencePosition() != null && player.getDefencePosition().equals(Constants.shortStop)){
+                return player;
+            }
+        }
+        return null;
+    }
+
+    private Player getThirdBaseDefence(List<Player> players) {
+        for (Player player : players) {
+            if (player.getDefencePosition() != null && player.getDefencePosition().equals(Constants.defenderThirdBase)){
+                return player;
+            }
+        }
+        return null;
+    }
+
+    private Player getRightField(List<Player> players) {
+        for (Player player : players) {
+            if (player.getDefencePosition() != null && player.getDefencePosition().equals(Constants.rightField)){
+                return player;
+            }
+        }
+        return null;
+    }
+
+    private Player getCenterField(List<Player> players) {
+        for (Player player : players) {
+            if (player.getDefencePosition() != null && player.getDefencePosition().equals(Constants.centerField)){
+                return player;
+            }
+        }
+        return null;
+    }
+
+    private Player getLeftField(List<Player> players) {
+        for (Player player : players) {
+            if (player.getDefencePosition() != null && player.getDefencePosition().equals(Constants.leftField)){
+                return player;
+            }
+        }
+        return null;
+    }
+
+    @PostMapping("/lineup")
+    public String showLineup(@RequestParam("gameId") int gameId,
+                            Model theModel) {
+        return null;
     }
 
     private GameWrapper wrapGame(Game game) {

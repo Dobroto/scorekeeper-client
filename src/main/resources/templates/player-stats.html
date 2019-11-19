@@ -136,7 +136,7 @@
     </tbody>
 </table>
 
-<div th:object="${team}">
+<div th:object="${team}" th:if="${team != null}">
     <p>Team: <span th:text="${team.teamNameLong}" /></p>
 </div>
 

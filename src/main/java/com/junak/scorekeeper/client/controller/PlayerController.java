@@ -31,20 +31,25 @@ public class PlayerController {
     @Autowired
     TeamService teamService;
 
-    @GetMapping("/list")
-    public String listAllPlayers(Model theModel) {
+    @RequestMapping(value = "/list", method = {RequestMethod.POST, RequestMethod.GET})
+    public String listAllPlayers(@RequestParam("teamId") int teamId,
+                                 @RequestParam("isTeamPlayer") boolean isTeamPlayer,
+                                 Model theModel) {
 
         // get players from the service
         List<Player> thePlayers = playerService.findAll();
 
         // add the players to the model
         theModel.addAttribute("players", thePlayers);
+        theModel.addAttribute("teamId", teamId);
+        theModel.addAttribute("isTeamPlayer", isTeamPlayer);
 
         return "list-players";
     }
 
     @GetMapping("/team")
-    public String listAllTeamPlayers(@RequestParam("teamId") int teamId, Model theModel) {
+    public String listAllTeamPlayers(@RequestParam("teamId") int teamId,
+                                     Model theModel) {
 
         // get players from the service
         List<Player> thePlayers = playerService.findAllTeamPlayers(teamId);
@@ -67,14 +72,15 @@ public class PlayerController {
         return "get-player";
     }
 
-    @GetMapping("/showFormForAddPlayer")
-    public String showFormForAddPlayer(Model theModel) {
+    @PostMapping("/showFormForAddPlayer")
+    public String showFormForAddPlayer(@RequestParam("teamId") int teamId,
+                                       Model theModel) {
 
         // create model attribute to bind form data
         Player thePlayer = new Player();
 
         theModel.addAttribute("player", thePlayer);
-        theModel.addAttribute("teamId", 0);
+        theModel.addAttribute("teamId", teamId);
 
         return "player-form";
     }
@@ -107,10 +113,11 @@ public class PlayerController {
 
         // save the player
         playerService.save(thePlayer);
+        redirectAttributes.addAttribute("teamId", teamId);
+        redirectAttributes.addAttribute("isTeamPlayer", isTeamPlayer);
 
         // use a redirect to prevent duplicate submissions
         if (isTeamPlayer) {
-            redirectAttributes.addAttribute("teamId", teamId);
             return "redirect:/teams/showRoster";
         }
 
@@ -118,10 +125,15 @@ public class PlayerController {
     }
 
     @PostMapping("/delete")
-    public String deletePlayer(@RequestParam("playerId") int theId) {
-
+    public String deletePlayer(@RequestParam("playerId") int theId,
+                               @RequestParam("teamId") int teamId,
+                               @RequestParam("isTeamPlayer") boolean isTeamPlayer,
+                               RedirectAttributes redirectAttributes) {
         // delete the player
         playerService.deleteById(theId);
+
+        redirectAttributes.addAttribute("teamId", teamId);
+        redirectAttributes.addAttribute("isTeamPlayer", isTeamPlayer);
 
         return "redirect:/players/list";
     }
@@ -143,7 +155,10 @@ public class PlayerController {
         PlayerFieldingDetails playerFieldingDetails =
                 playerFieldingDetailsService.findById(thePlayer.getPlayerFieldingDetails());
 
-        Team team = teamService.findById(thePlayer.getTeam());
+        Team team = new Team();
+        if (thePlayer.getTeam() != 0) {
+            team = teamService.findById(thePlayer.getTeam());
+        }
 
         theModel.addAttribute("player", thePlayer);
         theModel.addAttribute("team", team);

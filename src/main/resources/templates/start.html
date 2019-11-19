@@ -13,9 +13,13 @@
 
 <br>
 
-<a th:href="@{/players/list}">
-    Player Manager
-</a>
+<form action="#" th:action="@{/players/list}" method="POST">
+
+    <input type="hidden" name="teamId" th:value="0"/>
+    <input type="hidden" name="isTeamPlayer" th:value="${false}"/>
+    <button type="submit">Player Manager</button>
+
+</form>
 
 <br>
 

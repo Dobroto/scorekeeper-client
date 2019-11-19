@@ -10,10 +10,12 @@
 <h3>Player Manager</h3>
 <hr>
 
-<a th:href="@{/players/showFormForAddPlayer}">
-    Create new player
-</a>
+<form action="#" th:action="@{/players/showFormForAddPlayer}" method="POST">
 
+    <input type="hidden" name="teamId" th:value="${teamId}"/>
+    <button type="submit">Create new player</button>
+
+</form>
 <table border="1">
     <tbody>
     <tr th:each="tempPlayer : ${players}">
@@ -26,14 +28,16 @@
             <form action="#" th:action="@{/players/showFormForUpdatePlayer}" method="POST">
 
                 <input type="hidden" name="playerId" th:value="${tempPlayer.id}"/>
-                <input type="hidden" name="teamId" th:value="0"/>
-                <input type="hidden" name="isTeamPlayer" th:value="${false}"/>
+                <input type="hidden" name="teamId" th:value="${teamId}"/>
+                <input type="hidden" name="isTeamPlayer" th:value="${isTeamPlayer}"/>
                 <button type="submit">Update</button>
 
             </form>
             <form action="#" th:action="@{/players/delete}" method="POST">
 
                 <input type="hidden" name="playerId" th:value="${tempPlayer.id}"/>
+                <input type="hidden" name="teamId" th:value="${teamId}"/>
+                <input type="hidden" name="isTeamPlayer" th:value="${isTeamPlayer}"/>
                 <button type="submit"
                         onclick="if (!(confirm('Are you sure you want to delete this player?'))) return false">
                     Delete
@@ -45,7 +49,13 @@
     </tbody>
 </table>
 
-<a th:href="@{/scorekeeper/homePage}">Back</a>
+<form action="#" th:action="@{/teams/showRoster}" method="POST" th:unless="${teamId == 0}">
+
+    <input type="hidden" name="teamId" th:value="${teamId}"/>
+    <button type="submit">Back</button>
+
+</form>
+<a th:href="@{/scorekeeper/homePage}" th:unless="${teamId != 0}">Back</a>
 
 </body>
 </html>
