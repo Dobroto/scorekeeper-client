@@ -77,8 +77,8 @@ public class GameController {
     }
 
     @PostMapping("/showTeamList")
-    public String showTeamList(@ModelAttribute("game") Game game,
-                               @RequestParam("isVisitor") boolean isVisitor, Model theModel) {
+    public String showTeamList(@RequestParam("isVisitor") boolean isVisitor,
+                               @ModelAttribute("game") Game game, Model theModel) {
         List<Team> teams = teamService.findAll();
 
         theModel.addAttribute("game", game);
@@ -89,9 +89,9 @@ public class GameController {
     }
 
     @PostMapping("/team/choose")
-    public String chooseTeam(@ModelAttribute("game") Game game,
-                             @RequestParam("teamId") int teamId,
+    public String chooseTeam(@RequestParam("teamId") int teamId,
                              @RequestParam("isVisitor") boolean isVisitor,
+                             @ModelAttribute("game") Game game,
                              RedirectAttributes redirectAttributes) {
 
         if (isVisitor) {
@@ -105,9 +105,16 @@ public class GameController {
 
     }
 
-    @PostMapping("/addNewGame")
-    public String addNewGame(@ModelAttribute("game") Game game) {
-        gameService.save(game);
+    @PostMapping("/createNewGame")
+    public String createNewGame(@ModelAttribute("game") Game game) {
+        gameService.createNewGame(game.getHomeTeam(), game.getVisitorTeam());
+
+        return "redirect:/games/list";
+    }
+
+    @PostMapping("/deleteGame")
+    public String deleteGame(@RequestParam("gameId") int gameId) {
+        gameService.deleteGame(gameId);
 
         return "redirect:/games/list";
     }
@@ -136,7 +143,10 @@ public class GameController {
         Map<Player, GameHittingDetails> gameHittingDetailsMap = new LinkedHashMap<>();
 
         for (Player player : teamPlayers) {
-            gameHittingDetailsMap.put(player, gameHittingDetailsService.getGameHittingDetails(player, game));
+            GameHittingDetails gameHittingDetails = gameHittingDetailsService.getGameHittingDetails(player, game);
+            if (gameHittingDetails.getId() != 0) {
+                gameHittingDetailsMap.put(player, gameHittingDetails);
+            }
         }
 
         theModel.addAttribute("gameId", gameId);
@@ -157,7 +167,10 @@ public class GameController {
         Map<Player, GamePitchingDetails> gamePitchingDetailsMap = new LinkedHashMap<>();
 
         for (Player player : teamPlayers) {
-            gamePitchingDetailsMap.put(player, gamePitchingDetailsService.getGamePitchingDetails(player, game));
+            GamePitchingDetails gamePitchingDetails = gamePitchingDetailsService.getGamePitchingDetails(player, game);
+            if (gamePitchingDetails.getId() != 0) {
+                gamePitchingDetailsMap.put(player, gamePitchingDetails);
+            }
         }
 
         theModel.addAttribute("gameId", gameId);
@@ -178,7 +191,10 @@ public class GameController {
         Map<Player, GameFieldingDetails> gameFieldingDetailsMap = new LinkedHashMap<>();
 
         for (Player player : teamPlayers) {
-            gameFieldingDetailsMap.put(player, gameFieldingDetailsService.getGameFieldingDetails(player, game));
+            GameFieldingDetails gameFieldingDetails = gameFieldingDetailsService.getGameFieldingDetails(player, game);
+            if (gameFieldingDetails.getId() != 0) {
+                gameFieldingDetailsMap.put(player, gameFieldingDetails);
+            }
         }
 
         theModel.addAttribute("gameId", gameId);
@@ -326,22 +342,9 @@ public class GameController {
         return "redirect:/games/showGameInfo";
     }
 
-    @PostMapping("/scoreGame")
+    @RequestMapping(value = "/scoreGame", method = {RequestMethod.POST, RequestMethod.GET})
     public String scoreGame(@RequestParam("gameId") int gameId,
-                            @RequestParam("homeTeamId") int homeTeamId,
-                            @RequestParam("visitorTeamId") int visitorTeamId,
                             Model theModel) {
-//        Game game = gameService.findById(gameId);
-//        List<Player> visitorTeamPlayers = playerService.findAllTeamPlayers(visitorTeamId);
-//        Team visitorTeam = teamService.findById(visitorTeamId);
-//        List<Player> homeTeamPlayers = playerService.findAllTeamPlayers(homeTeamId);
-//        Team homeTeam = teamService.findById(homeTeamId);
-//
-//        theModel.addAttribute("gameId", gameId);
-//        theModel.addAttribute("visitorTeam", visitorTeam);
-//        theModel.addAttribute("homeTeam", homeTeam);
-//        theModel.addAttribute("visitorTeamPlayers", visitorTeamPlayers);
-//        theModel.addAttribute("homeTeamPlayers", homeTeamPlayers);
 
         Game game = gameService.findById(gameId);
 
@@ -372,25 +375,477 @@ public class GameController {
 
         theModel.addAttribute("gameWrapper", gameWrapper);
         theModel.addAttribute("batter", currentBatter);
-        theModel.addAttribute("currentFirstBaseOffence", currentFirstBaseOffence);
-        theModel.addAttribute("currentSecondBaseOffence", currentSecondBaseOffence);
-        theModel.addAttribute("currentThirdBaseOffence", currentThirdBaseOffence);
-        theModel.addAttribute("currentPitcher", currentPitcher);
-        theModel.addAttribute("currentCatcher", currentCatcher);
-        theModel.addAttribute("currentFirstBaseDefence", currentFirstBaseDefence);
-        theModel.addAttribute("currentSecondBaseDefence", currentSecondBaseDefence);
-        theModel.addAttribute("currentShortStop", currentShortStop);
-        theModel.addAttribute("currentThirdBaseDefence", currentThirdBaseDefence);
-        theModel.addAttribute("currentRightField", currentRightField);
-        theModel.addAttribute("currentCenterField", currentCenterField);
-        theModel.addAttribute("currentLeftField", currentLeftField);
+        theModel.addAttribute("firstBaseOffence", currentFirstBaseOffence);
+        theModel.addAttribute("secondBaseOffence", currentSecondBaseOffence);
+        theModel.addAttribute("thirdBaseOffence", currentThirdBaseOffence);
+        theModel.addAttribute("pitcher", currentPitcher);
+        theModel.addAttribute("catcher", currentCatcher);
+        theModel.addAttribute("firstBaseDefence", currentFirstBaseDefence);
+        theModel.addAttribute("secondBaseDefence", currentSecondBaseDefence);
+        theModel.addAttribute("shortStop", currentShortStop);
+        theModel.addAttribute("thirdBaseDefence", currentThirdBaseDefence);
+        theModel.addAttribute("rightField", currentRightField);
+        theModel.addAttribute("centerField", currentCenterField);
+        theModel.addAttribute("leftField", currentLeftField);
 
         return "game-score";
     }
 
+    @GetMapping("/lineup")
+    public String lineup(@RequestParam("teamId") int teamId,
+                         @RequestParam("gameId") int gameId,
+                         Model theModel) {
+        Team theTeam = teamService.findById(teamId);
+        List<Player> teamPlayers = playerService.findAllTeamPlayers(teamId);
+        boolean isLineup = true;
+
+        theModel.addAttribute("players", teamPlayers);
+        theModel.addAttribute("team", theTeam);
+        theModel.addAttribute("isLineup", isLineup);
+        theModel.addAttribute("gameId", gameId);
+
+        return "team-roster";
+    }
+
+    @PostMapping("/play")
+    public String startGame(@RequestParam("gameId") int gameId,
+                            RedirectAttributes redirectAttributes) {
+        gameService.startGame(gameId);
+
+        redirectAttributes.addAttribute("gameId", gameId);
+        return "redirect:/games/scoreGame";
+
+    }
+
+    @PostMapping("/ball")
+    public String ball(@RequestParam("gameId") int gameId,
+                       @RequestParam("pitcherId") int pitcherId,
+                       @RequestParam("batterId") int batterId,
+                       RedirectAttributes redirectAttributes) {
+        gameService.ball(gameId, pitcherId, batterId);
+
+        redirectAttributes.addAttribute("gameId", gameId);
+        return "redirect:/games/scoreGame";
+    }
+
+    @PostMapping("/strike")
+    public String strike(@RequestParam("gameId") int gameId,
+                         @RequestParam("pitcherId") int pitcherId,
+                         @RequestParam("batterId") int batterId,
+                         @RequestParam("strikeCount") int strikeCount,
+                         Model theModel,
+                         RedirectAttributes redirectAttributes) {
+        if (strikeCount >= 2) {
+            theModel.addAttribute("gameId", gameId);
+            theModel.addAttribute("pitcherId", pitcherId);
+            theModel.addAttribute("batterId", batterId);
+
+            return "game-strikeout";
+        } else {
+            gameService.strike(pitcherId, batterId);
+
+            redirectAttributes.addAttribute("gameId", gameId);
+            return "redirect:/games/scoreGame";
+        }
+    }
+
+    @PostMapping("/strikeoutLooking")
+    public String strikeoutLooking(@RequestParam("gameId") int gameId,
+                                   @RequestParam("pitcherId") int pitcherId,
+                                   @RequestParam("batterId") int batterId,
+                                   RedirectAttributes redirectAttributes) {
+        gameService.strikeoutLooking(gameId, pitcherId, batterId);
+
+        redirectAttributes.addAttribute("gameId", gameId);
+        return "redirect:/games/scoreGame";
+    }
+
+    @PostMapping("/strikeoutSwinging")
+    public String strikeoutSwinging(@RequestParam("gameId") int gameId,
+                                    @RequestParam("pitcherId") int pitcherId,
+                                    @RequestParam("batterId") int batterId,
+                                    RedirectAttributes redirectAttributes) {
+        gameService.strikeoutSwinging(gameId, pitcherId, batterId);
+
+        redirectAttributes.addAttribute("gameId", gameId);
+        return "redirect:/games/scoreGame";
+    }
+
+    @PostMapping("/caughtFoulTip")
+    public String caughtFoulTip(@RequestParam("gameId") int gameId,
+                                @RequestParam("pitcherId") int pitcherId,
+                                @RequestParam("batterId") int batterId,
+                                RedirectAttributes redirectAttributes) {
+        gameService.caughtFoulTip(gameId, pitcherId, batterId);
+
+        redirectAttributes.addAttribute("gameId", gameId);
+        return "redirect:/games/scoreGame";
+    }
+
+    @PostMapping("/buntFoul")
+    public String buntFoul(@RequestParam("gameId") int gameId,
+                           @RequestParam("pitcherId") int pitcherId,
+                           @RequestParam("batterId") int batterId,
+                           RedirectAttributes redirectAttributes) {
+        gameService.buntFoul(gameId, pitcherId, batterId);
+
+        redirectAttributes.addAttribute("gameId", gameId);
+        return "redirect:/games/scoreGame";
+    }
+
+    @PostMapping("/foul")
+    public String foul(@RequestParam("gameId") int gameId,
+                       @RequestParam("batterId") int batterId,
+                       RedirectAttributes redirectAttributes) {
+        gameService.foul(gameId, batterId);
+
+        redirectAttributes.addAttribute("gameId", gameId);
+        return "redirect:/games/scoreGame";
+    }
+
+    @PostMapping("/inPlay")
+    public String inPlay(@RequestParam("gameId") int gameId,
+                         @RequestParam("pitcherId") int pitcherId,
+                         @RequestParam("batterId") int batterId,
+                         @RequestParam("firstBaseOffenceId") int firstBaseOffenceId,
+                         @RequestParam("secondBaseOffenceId") int secondBaseOffenceId,
+                         @RequestParam("thirdBaseOffenceId") int thirdBaseOffenceId,
+                         Model theModel) {
+        theModel.addAttribute("gameId", gameId);
+        theModel.addAttribute("pitcherId", pitcherId);
+        theModel.addAttribute("batterId", batterId);
+        theModel.addAttribute("firstBaseOffenceId", firstBaseOffenceId);
+        theModel.addAttribute("secondBaseOffenceId", secondBaseOffenceId);
+        theModel.addAttribute("thirdBaseOffenceId", thirdBaseOffenceId);
+
+        return "game-in-play";
+    }
+
+    @PostMapping("/walk")
+    public String walk(@RequestParam("gameId") int gameId,
+                       @RequestParam("pitcherId") int pitcherId,
+                       @RequestParam("batterId") int batterId,
+                       RedirectAttributes redirectAttributes) {
+        gameService.walk(gameId, pitcherId, batterId);
+
+        redirectAttributes.addAttribute("gameId", gameId);
+        return "redirect:/games/scoreGame";
+    }
+
+    @PostMapping("/intentionalWalk")
+    public String intentionalWalk(@RequestParam("gameId") int gameId,
+                                  @RequestParam("pitcherId") int pitcherId,
+                                  @RequestParam("batterId") int batterId,
+                                  RedirectAttributes redirectAttributes) {
+        gameService.intentionalWalk(gameId, pitcherId, batterId);
+
+        redirectAttributes.addAttribute("gameId", gameId);
+        return "redirect:/games/scoreGame";
+    }
+
+    @PostMapping("/caughtStealing")
+    public String caughtStealing(@RequestParam("gameId") int gameId,
+                                 @RequestParam("pitcherId") int pitcherId,
+                                 @RequestParam("batterId") int batterId,
+                                 @RequestParam("runnerId") int runnerId,
+                                 @RequestParam("basemanId") int basemanId,
+                                 Model theModel) {
+        if(basemanId == 0) {
+            return "game-out-map";
+        }
+        return null;
+    }
+
+    @GetMapping("/whatHappened")
+    public String whatHappenedWithPlayer(@RequestParam("gameId") int gameId,
+                                         @RequestParam("pitcherId") int pitcherId,
+                                         @RequestParam("batterId") int batterId,
+                                         @RequestParam("firstBaseOffenceId") int firstBaseOffenceId,
+                                         @RequestParam("secondBaseOffenceId") int secondBaseOffenceId,
+                                         @RequestParam("thirdBaseOffenceId") int thirdBaseOffenceId,
+                                         Model theModel) {
+        theModel.addAttribute("gameId", gameId);
+        theModel.addAttribute("pitcherId", pitcherId);
+        theModel.addAttribute("batterId", batterId);
+        if (thirdBaseOffenceId != 0) {
+            Player thirdBaseOffence = playerService.findById(thirdBaseOffenceId);
+            theModel.addAttribute("baseNumber", "third base");
+            theModel.addAttribute("runner", thirdBaseOffence);
+            return "game-what-happened";
+        }
+        if (secondBaseOffenceId != 0) {
+            Player secondBaseOffence = playerService.findById(secondBaseOffenceId);
+            theModel.addAttribute("baseNumber", "first base");
+            theModel.addAttribute("runner", secondBaseOffence);
+            return "game-what-happened";
+        }
+        if (firstBaseOffenceId != 0) {
+            Player firstBaseOffence = playerService.findById(firstBaseOffenceId);
+            theModel.addAttribute("baseNumber", "first base");
+            theModel.addAttribute("runner", firstBaseOffence);
+            return "game-what-happened";
+        }
+        return null;
+    }
+
+    @PostMapping("/hitSingle")
+    public String hitSingle(@RequestParam("gameId") int gameId,
+                            @RequestParam("pitcherId") int pitcherId,
+                            @RequestParam("batterId") int batterId,
+                            @RequestParam("firstBaseOffenceId") int firstBaseOffenceId,
+                            @RequestParam("secondBaseOffenceId") int secondBaseOffenceId,
+                            @RequestParam("thirdBaseOffenceId") int thirdBaseOffenceId,
+                            RedirectAttributes redirectAttributes) {
+
+        if ((firstBaseOffenceId != 0) || (secondBaseOffenceId != 0) || (thirdBaseOffenceId != 0)) {
+            redirectAttributes.addAttribute("gameId", gameId);
+            redirectAttributes.addAttribute("pitcherId", pitcherId);
+            redirectAttributes.addAttribute("batterId", batterId);
+            redirectAttributes.addAttribute("firstBaseOffenceId", firstBaseOffenceId);
+            redirectAttributes.addAttribute("secondBaseOffenceId", secondBaseOffenceId);
+            redirectAttributes.addAttribute("thirdBaseOffenceId", thirdBaseOffenceId);
+            return "redirect:/games/whatHappened";
+        }
+        gameService.hitSingle(gameId, pitcherId, batterId);
+
+        redirectAttributes.addAttribute("gameId", gameId);
+        return "redirect:/games/scoreGame";
+    }
+
+    @PostMapping("/hitDouble")
+    public String hitDouble(@RequestParam("gameId") int gameId,
+                            @RequestParam("pitcherId") int pitcherId,
+                            @RequestParam("batterId") int batterId,
+                            RedirectAttributes redirectAttributes) {
+        gameService.hitDouble(gameId, pitcherId, batterId);
+
+        redirectAttributes.addAttribute("gameId", gameId);
+        return "redirect:/games/scoreGame";
+    }
+
+    @PostMapping("/hitTriple")
+    public String hitTriple(@RequestParam("gameId") int gameId,
+                            @RequestParam("pitcherId") int pitcherId,
+                            @RequestParam("batterId") int batterId,
+                            RedirectAttributes redirectAttributes) {
+        gameService.hitTriple(gameId, pitcherId, batterId);
+
+        redirectAttributes.addAttribute("gameId", gameId);
+        return "redirect:/games/scoreGame";
+    }
+
+    @PostMapping("/homeRun")
+    public String homeRun(@RequestParam("gameId") int gameId,
+                          @RequestParam("pitcherId") int pitcherId,
+                          @RequestParam("batterId") int batterId,
+                          RedirectAttributes redirectAttributes) {
+        gameService.homeRun(gameId, pitcherId, batterId);
+
+        redirectAttributes.addAttribute("gameId", gameId);
+        return "redirect:/games/scoreGame";
+    }
+
+    @PostMapping("/inParkHomeRun")
+    public String inParkHomeRun(@RequestParam("gameId") int gameId,
+                                @RequestParam("pitcherId") int pitcherId,
+                                @RequestParam("batterId") int batterId,
+                                RedirectAttributes redirectAttributes) {
+        gameService.inParkHomeRun(gameId, pitcherId, batterId);
+
+        redirectAttributes.addAttribute("gameId", gameId);
+        return "redirect:/games/scoreGame";
+    }
+
+    @PostMapping("/buntSafe")
+    public String buntSafe(@RequestParam("gameId") int gameId,
+                           @RequestParam("pitcherId") int pitcherId,
+                           @RequestParam("batterId") int batterId,
+                           RedirectAttributes redirectAttributes) {
+        gameService.buntSafe(gameId, pitcherId, batterId);
+
+        redirectAttributes.addAttribute("gameId", gameId);
+        return "redirect:/games/scoreGame";
+    }
+
+    @PostMapping("/error")
+    public String error(@RequestParam("gameId") int gameId,
+                        @RequestParam("pitcherId") int pitcherId,
+                        @RequestParam("batterId") int batterId,
+                        RedirectAttributes redirectAttributes) {
+        gameService.error(gameId, pitcherId, batterId);
+
+        redirectAttributes.addAttribute("gameId", gameId);
+        return "redirect:/games/scoreGame";
+    }
+
+    @PostMapping("/hitByPitch")
+    public String hitByPitch(@RequestParam("gameId") int gameId,
+                             @RequestParam("pitcherId") int pitcherId,
+                             @RequestParam("batterId") int batterId,
+                             RedirectAttributes redirectAttributes) {
+        gameService.hitByPitch(gameId, pitcherId, batterId);
+
+        redirectAttributes.addAttribute("gameId", gameId);
+        return "redirect:/games/scoreGame";
+    }
+
+    @PostMapping("/safe/dropped3rdStrike")
+    public String dropped3rdStrikeSafe(@RequestParam("gameId") int gameId,
+                                       @RequestParam("pitcherId") int pitcherId,
+                                       @RequestParam("batterId") int batterId,
+                                       RedirectAttributes redirectAttributes) {
+        gameService.dropped3rdStrikeSafe(gameId, pitcherId, batterId);
+
+        redirectAttributes.addAttribute("gameId", gameId);
+        return "redirect:/games/scoreGame";
+    }
+
+    @PostMapping("/wildPitch3rdStrike")
+    public String wildPitch3rdStrike(@RequestParam("gameId") int gameId,
+                                     @RequestParam("pitcherId") int pitcherId,
+                                     @RequestParam("batterId") int batterId,
+                                     RedirectAttributes redirectAttributes) {
+        gameService.wildPitch3rdStrike(gameId, pitcherId, batterId);
+
+        redirectAttributes.addAttribute("gameId", gameId);
+        return "redirect:/games/scoreGame";
+    }
+
+    @PostMapping("/fieldersChoice")
+    public String fieldersChoice(@RequestParam("gameId") int gameId,
+                                 @RequestParam("pitcherId") int pitcherId,
+                                 @RequestParam("batterId") int batterId,
+                                 RedirectAttributes redirectAttributes) {
+        gameService.fieldersChoice(gameId, pitcherId, batterId);
+
+        redirectAttributes.addAttribute("gameId", gameId);
+        return "redirect:/games/scoreGame";
+    }
+
+    @PostMapping("/groundOut")
+    public String groundOut(@RequestParam("gameId") int gameId,
+                            @RequestParam("pitcherId") int pitcherId,
+                            @RequestParam("batterId") int batterId,
+                            RedirectAttributes redirectAttributes) {
+        gameService.groundOut(gameId, pitcherId, batterId);
+
+        redirectAttributes.addAttribute("gameId", gameId);
+        return "redirect:/games/scoreGame";
+    }
+
+    @PostMapping("/lineDrive")
+    public String lineDrive(@RequestParam("gameId") int gameId,
+                            @RequestParam("pitcherId") int pitcherId,
+                            @RequestParam("batterId") int batterId,
+                            RedirectAttributes redirectAttributes) {
+        gameService.lineDrive(gameId, pitcherId, batterId);
+
+        redirectAttributes.addAttribute("gameId", gameId);
+        return "redirect:/games/scoreGame";
+    }
+
+    @PostMapping("/flyOut")
+    public String flyOut(@RequestParam("gameId") int gameId,
+                         @RequestParam("pitcherId") int pitcherId,
+                         @RequestParam("batterId") int batterId,
+                         RedirectAttributes redirectAttributes) {
+        gameService.flyOut(gameId, pitcherId, batterId);
+
+        redirectAttributes.addAttribute("gameId", gameId);
+        return "redirect:/games/scoreGame";
+    }
+
+    @PostMapping("/buntOut")
+    public String buntOut(@RequestParam("gameId") int gameId,
+                          @RequestParam("pitcherId") int pitcherId,
+                          @RequestParam("batterId") int batterId,
+                          RedirectAttributes redirectAttributes) {
+        gameService.buntOut(gameId, pitcherId, batterId);
+
+        redirectAttributes.addAttribute("gameId", gameId);
+        return "redirect:/games/scoreGame";
+    }
+
+    @PostMapping("/sacrificeFly")
+    public String sacrificeFly(@RequestParam("gameId") int gameId,
+                               @RequestParam("pitcherId") int pitcherId,
+                               @RequestParam("batterId") int batterId,
+                               RedirectAttributes redirectAttributes) {
+        gameService.sacrificeFly(gameId, pitcherId, batterId);
+
+        redirectAttributes.addAttribute("gameId", gameId);
+        return "redirect:/games/scoreGame";
+    }
+
+    @PostMapping("/sacrificeBunt")
+    public String sacrificeBunt(@RequestParam("gameId") int gameId,
+                                @RequestParam("pitcherId") int pitcherId,
+                                @RequestParam("batterId") int batterId,
+                                RedirectAttributes redirectAttributes) {
+        gameService.sacrificeBunt(gameId, pitcherId, batterId);
+
+        redirectAttributes.addAttribute("gameId", gameId);
+        return "redirect:/games/scoreGame";
+    }
+
+    @PostMapping("/infieldFly")
+    public String infieldFly(@RequestParam("gameId") int gameId,
+                             @RequestParam("pitcherId") int pitcherId,
+                             @RequestParam("batterId") int batterId,
+                             RedirectAttributes redirectAttributes) {
+        gameService.infieldFly(gameId, pitcherId, batterId);
+
+        redirectAttributes.addAttribute("gameId", gameId);
+        return "redirect:/games/scoreGame";
+    }
+
+    @PostMapping("/hitByBall")
+    public String hitByBall(@RequestParam("gameId") int gameId,
+                            @RequestParam("pitcherId") int pitcherId,
+                            @RequestParam("batterId") int batterId,
+                            RedirectAttributes redirectAttributes) {
+        gameService.hitByBall(gameId, pitcherId, batterId);
+
+        redirectAttributes.addAttribute("gameId", gameId);
+        return "redirect:/games/scoreGame";
+    }
+
+    @PostMapping("/out/dropped3rdStrike")
+    public String dropped3rdStrikeOut(@RequestParam("gameId") int gameId,
+                                      @RequestParam("pitcherId") int pitcherId,
+                                      @RequestParam("batterId") int batterId,
+                                      RedirectAttributes redirectAttributes) {
+        gameService.dropped3rdStrikeOut(gameId, pitcherId, batterId);
+
+        redirectAttributes.addAttribute("gameId", gameId);
+        return "redirect:/games/scoreGame";
+    }
+
+    @PostMapping("/runnerInterference")
+    public String runnerInterference(@RequestParam("gameId") int gameId,
+                                     @RequestParam("pitcherId") int pitcherId,
+                                     @RequestParam("batterId") int batterId,
+                                     RedirectAttributes redirectAttributes) {
+        gameService.runnerInterference(gameId, pitcherId, batterId);
+
+        redirectAttributes.addAttribute("gameId", gameId);
+        return "redirect:/games/scoreGame";
+    }
+
+    @PostMapping("/offensiveInterference")
+    public String offensiveInterference(@RequestParam("gameId") int gameId,
+                                        @RequestParam("pitcherId") int pitcherId,
+                                        @RequestParam("batterId") int batterId,
+                                        RedirectAttributes redirectAttributes) {
+        gameService.offensiveInterference(gameId, pitcherId, batterId);
+
+        redirectAttributes.addAttribute("gameId", gameId);
+        return "redirect:/games/scoreGame";
+    }
+
     private Player getCurrentBatter(List<Player> players) {
         for (Player player : players) {
-            if (player.getOffencePosition() != null && player.getOffencePosition().equals(Constants.batter)){
+            if (player.getOffencePosition() != null && player.getOffencePosition().equalsIgnoreCase(Constants.batter)) {
                 return player;
             }
         }
@@ -399,7 +854,7 @@ public class GameController {
 
     private Player getCurrentFirstBaseOffence(List<Player> players) {
         for (Player player : players) {
-            if (player.getOffencePosition() != null && player.getOffencePosition().equals(Constants.runnerFirstBase)){
+            if (player.getOffencePosition() != null && player.getOffencePosition().equalsIgnoreCase(Constants.runnerFirstBase)) {
                 return player;
             }
         }
@@ -408,7 +863,7 @@ public class GameController {
 
     private Player getCurrentSecondBaseOffence(List<Player> players) {
         for (Player player : players) {
-            if (player.getOffencePosition() != null && player.getOffencePosition().equals(Constants.runnerSecondBase)){
+            if (player.getOffencePosition() != null && player.getOffencePosition().equalsIgnoreCase(Constants.runnerSecondBase)) {
                 return player;
             }
         }
@@ -417,7 +872,7 @@ public class GameController {
 
     private Player getCurrentThirdBaseOffence(List<Player> players) {
         for (Player player : players) {
-            if (player.getOffencePosition() != null && player.getOffencePosition().equals(Constants.runnerThirdBase)){
+            if (player.getOffencePosition() != null && player.getOffencePosition().equalsIgnoreCase(Constants.runnerThirdBase)) {
                 return player;
             }
         }
@@ -426,7 +881,7 @@ public class GameController {
 
     private Player getCurrentPitcher(List<Player> players) {
         for (Player player : players) {
-            if (player.getDefencePosition() != null && player.getDefencePosition().equals(Constants.pitcher)){
+            if (player.getDefencePosition() != null && player.getDefencePosition().equalsIgnoreCase(Constants.pitcher)) {
                 return player;
             }
         }
@@ -435,7 +890,7 @@ public class GameController {
 
     private Player getCurrentCatcher(List<Player> players) {
         for (Player player : players) {
-            if (player.getDefencePosition() != null && player.getDefencePosition().equals(Constants.catcher)){
+            if (player.getDefencePosition() != null && player.getDefencePosition().equalsIgnoreCase(Constants.catcher)) {
                 return player;
             }
         }
@@ -444,7 +899,7 @@ public class GameController {
 
     private Player getCurrentFirstBaseDefence(List<Player> players) {
         for (Player player : players) {
-            if (player.getDefencePosition() != null && player.getDefencePosition().equals(Constants.defenderFirstBase)){
+            if (player.getDefencePosition() != null && player.getDefencePosition().equalsIgnoreCase(Constants.defenderFirstBase)) {
                 return player;
             }
         }
@@ -453,7 +908,7 @@ public class GameController {
 
     private Player getCurrentSecondBaseDefence(List<Player> players) {
         for (Player player : players) {
-            if (player.getDefencePosition() != null && player.getDefencePosition().equals(Constants.defenderSecondBase)){
+            if (player.getDefencePosition() != null && player.getDefencePosition().equalsIgnoreCase(Constants.defenderSecondBase)) {
                 return player;
             }
         }
@@ -462,7 +917,7 @@ public class GameController {
 
     private Player getCurrentShortStop(List<Player> players) {
         for (Player player : players) {
-            if (player.getDefencePosition() != null && player.getDefencePosition().equals(Constants.shortStop)){
+            if (player.getDefencePosition() != null && player.getDefencePosition().equalsIgnoreCase(Constants.shortStop)) {
                 return player;
             }
         }
@@ -471,7 +926,7 @@ public class GameController {
 
     private Player getThirdBaseDefence(List<Player> players) {
         for (Player player : players) {
-            if (player.getDefencePosition() != null && player.getDefencePosition().equals(Constants.defenderThirdBase)){
+            if (player.getDefencePosition() != null && player.getDefencePosition().equalsIgnoreCase(Constants.defenderThirdBase)) {
                 return player;
             }
         }
@@ -480,7 +935,7 @@ public class GameController {
 
     private Player getRightField(List<Player> players) {
         for (Player player : players) {
-            if (player.getDefencePosition() != null && player.getDefencePosition().equals(Constants.rightField)){
+            if (player.getDefencePosition() != null && player.getDefencePosition().equalsIgnoreCase(Constants.rightField)) {
                 return player;
             }
         }
@@ -489,7 +944,7 @@ public class GameController {
 
     private Player getCenterField(List<Player> players) {
         for (Player player : players) {
-            if (player.getDefencePosition() != null && player.getDefencePosition().equals(Constants.centerField)){
+            if (player.getDefencePosition() != null && player.getDefencePosition().equalsIgnoreCase(Constants.centerField)) {
                 return player;
             }
         }
@@ -498,16 +953,10 @@ public class GameController {
 
     private Player getLeftField(List<Player> players) {
         for (Player player : players) {
-            if (player.getDefencePosition() != null && player.getDefencePosition().equals(Constants.leftField)){
+            if (player.getDefencePosition() != null && player.getDefencePosition().equalsIgnoreCase(Constants.leftField)) {
                 return player;
             }
         }
-        return null;
-    }
-
-    @PostMapping("/lineup")
-    public String showLineup(@RequestParam("gameId") int gameId,
-                            Model theModel) {
         return null;
     }
 
@@ -531,7 +980,7 @@ public class GameController {
         if (currentInning != null) {
             gameWrapper.setCurrentInning(currentInning);
         }
-        if ((game.getInnings() != null) && (game.getInnings().size() > 0)) {
+        if ((game.getInnings() != null) && (game.getInnings().isEmpty())) {
             gameWrapper.setInnings(inningService.getInningsList(game));
         }
         if (game.getWinPitcher() != 0) {

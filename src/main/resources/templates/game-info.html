@@ -16,7 +16,7 @@
 
 </form>
 
-<h3 th:text="|${#dates.format(gameWrapper.scheduledTime, 'dd/MM/yyyy HH:mm')} ${gameWrapper.visitorTeam.teamNameLong} at ${gameWrapper.homeTeam.teamNameLong}|"></h3>
+<h3 th:text="( ${gameWrapper.scheduledTime} == null ? '' : ${#dates.format(gameWrapper.scheduledTime, 'dd/MM/yyyy HH:mm')} ) + ' ' + |${gameWrapper.visitorTeam.teamNameLong} at ${gameWrapper.homeTeam.teamNameLong}|"></h3>
 <hr>
 
 <table border="1">

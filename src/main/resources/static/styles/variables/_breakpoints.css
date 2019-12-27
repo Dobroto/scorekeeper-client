@@ -1,0 +1,5 @@
+:root {
+    --breakpoint-small-screen: 360px;
+    --breakpoint-medium-screen: 760px;
+    --breakpoint-large-screen: 1024px;
+}

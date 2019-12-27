@@ -1,0 +1,56 @@
+@import '../styles.css';
+
+@font-face {
+    font-family: 'Roboto-Black';
+    src: url('../fonts/Roboto-Black.ttf');
+}
+
+.start-wrapper {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    height: 100%;
+    background-color: var(--color-secondary);
+}
+
+.start-wrapper div:first-of-type {
+    margin-top: 11rem;
+}
+
+.start-wrapper .custom-button {
+    width: 250px;
+    margin: 0 0 20px 0;
+    padding: 10px 30px;
+    font-family: 'Roboto-Black', sans-serif;
+    font-size: 18px;
+    text-transform: uppercase;
+    text-decoration: none;
+    text-align: center;
+    color: var(--color-primary);
+    border: none;
+    border-radius: 5px;
+    background-color: var(--color-accent);
+    cursor: pointer;
+    box-shadow: 0 0 4px #999;
+    outline: none;
+}
+
+.start-wrapper a {
+    color: var(--color-primary);
+}
+
+.start-wrapper .ripple {
+  background-position: center;
+  transition: background 0.8s;
+}
+
+.start-wrapper .ripple:hover {
+  background: var(--color-error) radial-gradient(circle, transparent 1%, var(--color-button-ripple) 1%) center/15000%;
+}
+
+.start-wrapper .ripple:active {
+  background-color: var(--color-error);
+  background-size: 100%;
+  transition: background 0s;
+}

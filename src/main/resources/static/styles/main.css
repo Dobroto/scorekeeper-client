@@ -1,0 +1,13 @@
+@import './variables/_fonts.css';
+@import './variables/_color-palette.css';
+@import './variables/_breakpoints.css';
+
+@font-face {
+    font-family: 'Roboto-Regular';
+    src: url('../fonts/Roboto-Regular.ttf');
+}
+
+body {
+    font-family: 'Roboto-Regular', sans-serif;
+    font-size: 14px;
+}

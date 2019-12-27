@@ -19,7 +19,7 @@
 
 <!--TODO: scheduled date-->
 
-<form action="#" th:action="@{/games/addNewGame}" method="POST" th:if="${game.homeTeam != 0} and ${game.visitorTeam != 0}">
+<form action="#" th:action="@{/games/createNewGame}" method="POST" th:if="${game.homeTeam != 0} and ${game.visitorTeam != 0}">
 
     <input type="hidden" name="game" th:value="${game}"/>
     <button type="submit">Done</button>

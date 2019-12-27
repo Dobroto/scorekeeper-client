@@ -114,9 +114,11 @@ public class TeamController {
 
         Team theTeam = teamService.findById(theId);
         List<Player> teamPlayers = playerService.findAllTeamPlayers(theId);
+        boolean isLineup = false;
 
         theModel.addAttribute("players", teamPlayers);
         theModel.addAttribute("team", theTeam);
+        theModel.addAttribute("isLineup", isLineup);
 
         return "team-roster";
     }

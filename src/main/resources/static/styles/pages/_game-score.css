@@ -4,10 +4,10 @@
     justify-content: center;
     align-items: center;
     padding: 4%;
+}
 
-    .score {
+.wrapper-game-score .score {
     display: flex;
     flex-direction: row;
     justify-content: space-between;
-    }
 }

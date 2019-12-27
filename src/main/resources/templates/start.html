@@ -1,31 +1,31 @@
 <!DOCTYPE HTML>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
+    <head>
+        <link rel="stylesheet" href="/styles/pages/_start.css">
+        <title>Scorekeeper</title>
+    </head>
 
-<head>
-    <title>Scorekeeper</title>
-</head>
+    <body>
+        <div class="start-wrapper">
 
-<body>
+            <div>
+                <form action="#" th:action="@{/games/list}" method="GET">
+                    <button class="custom-button ripple" type="submit">Game Manager</button>
+                </form>
+            </div>
+            <div>
+                <form action="#" th:action="@{/players/list}" method="POST">
+                    <input type="hidden" name="teamId" th:value="0"/>
+                    <input type="hidden" name="isTeamPlayer" th:value="${false}"/>
+                    <button class="custom-button ripple" type="submit">Player Manager</button>
+                </form>
+            </div>
+            <div>
+                <form action="#" th:action="@{/teams/list}" method="GET">
+                    <button class="custom-button ripple" type="submit">Team Manager</button>
+                </form>
+            </div>
 
-<a th:href="@{/games/list}">
-    Game Manager
-</a>
-
-<br>
-
-<form action="#" th:action="@{/players/list}" method="POST">
-
-    <input type="hidden" name="teamId" th:value="0"/>
-    <input type="hidden" name="isTeamPlayer" th:value="${false}"/>
-    <button type="submit">Player Manager</button>
-
-</form>
-
-<br>
-
-<a th:href="@{/teams/list}">
-    Team Manager
-</a>
-
-</body>
+        </div>
+    </body>
 </html>

@@ -1,0 +1,34 @@
+<!-- -*- nxml -*- -->
+<mcl>
+    <prompt site="dbsHana">running 2019.12/hana-dir-dml.mcl  now...</prompt>
+    <!-- Adding Remittance List Metadata -->
+    <script site="dbsHana" schema="directory" file="../../an/scripts/2019.12/masterdata_directory/hana_addRemittanceListMetadata.sql" />
+
+    <!-- adding permission to view customer relationships -->
+    <script site="dbsHana" schema="directory" file="../../an/scripts/2019.12/masterdata_directory/hana_add_permission.sql" />
+    <script site="dbsHana" schema="directory" file="../../an/scripts/2019.12/masterdata_directory/hana_addSettlementType.sql" force="true" />
+
+
+    <!-- Insert SAC Tenant Status enum -->
+    <script site="dbsHana" schema="directory" file="../../an/scripts/2019.09/masterdata_directory/hana_insert_sac_tenant_status.sql" force="true"/>
+
+    <!-- Insert SAC User Status enum -->
+    <script site="dbsHana" schema="directory" file="../../an/scripts/sac/hana_insert_sac_user_status.sql"/>
+
+    <!-- Add BPS screening related data for NS-6079 -->
+    <script site="dbsHana" schema="directory" file="../../an/scripts/2019.10/masterdata_directory/hana_add_bps_statuses.sql" force="true"/>
+
+    <!-- Insert new Permissions for developer Portal -->
+    <script site="dbsHana" schema="directory" file="../../an/scripts/developer_portal/developer_portal_permission.sql" force="true"/>
+
+    <!-- Adding ScheduledPayment List Metadata -->
+    <script site="dbsHana" schema="directory" file="../../an/scripts/2019.12/masterdata_directory/hana_addScheduledPaymentListMetadata.sql" />
+
+    <!-- Adding New Datacenters for KSA_UAE_AU -->
+
+    <script site="dbsHana" schema="directory" file="../../collab/hana/addBuyerMessagingServicePartnerForKSA_UAE_AU.sql">
+    <script site="dbsHana" schema="directory" file="../../collab/hana/addANSSPKSA_and_ANSSPUAE_and_ANSSPAU_Relationship.sql">
+
+    <!-- Adding virtual card activity and tasks -->
+    <script site="dbsHana" schema="directory" file="../../an/scripts/2019.11/masterdata_directory/INSERT_ACTIVITY_VCARD.sql" />
+</mcl>
