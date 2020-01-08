@@ -22,7 +22,27 @@
                     <div class="col-sm-9">
                         <div class="row justify-content-center h-100">
                             <div class="col-1 align-self-center text-center">
-                                <button>CF</button>
+                                <form action="#" th:action="@{/games/} + ${secondaryActionName}" method="POST">
+                                    <input type="hidden" name="gameId" th:value="${gameId}"/>
+                                    <input type="hidden" name="pitcherId" th:value="${pitcherId}"/>
+                                    <input type="hidden" name="batterId" th:value="${batterId}"/>
+                                    <input type="hidden" name="runnerId" th:value="${runnerId}"/>
+                                    <input type="hidden" name="firstBaseOffenceId" th:value="${firstBaseOffenceId}"/>
+                                    <input type="hidden" name="secondBaseOffenceId" th:value="${secondBaseOffenceId}"/>
+                                    <input type="hidden" name="thirdBaseOffenceId" th:value="${thirdBaseOffenceId}"/>
+                                    <input type="hidden" name="basemanPosition" th:value="cf"/>
+                                    <input type="hidden" name="catcherId" th:value="${catcherId}"/>
+                                    <input type="hidden" name="firstBaseDefenceId" th:value="${firstBaseDefenceId}"/>
+                                    <input type="hidden" name="secondBaseDefenceId" th:value="${secondBaseDefenceId}"/>
+                                    <input type="hidden" name="shortStopId" th:value="${shortStopId}"/>
+                                    <input type="hidden" name="thirdBaseDefenceId" th:value="${thirdBaseDefenceId}"/>
+                                    <input type="hidden" name="rightFieldId" th:value="${rightFieldId}"/>
+                                    <input type="hidden" name="centerFieldId" th:value="${centerFieldId}"/>
+                                    <input type="hidden" name="leftFieldId" th:value="${leftFieldId}"/>
+                                    <input type="hidden" name="baseNumber" th:value="${baseNumber}"/>
+                                    <input type="hidden" name="primaryActionName" th:value="${primaryActionName}"/>
+                                    <button>CF</button>
+                                </form>
                             </div>
                         </div>
                         <div class="row justify-content-between h-100">
@@ -65,10 +85,11 @@
         </div>
     </div>
 
-<!--    <form action="#" th:action="@{/games/showGameInfo}" method="POST">
-        <input type="hidden" name="gameId" th:value="${gameWrapper.id}"/>
-        <button>Exit</button>
-    </form>-->
+    <div>Touch the last position that handled the ball.</div>
+    <!--    <form action="#" th:action="@{/games/showGameInfo}" method="POST">
+            <input type="hidden" name="gameId" th:value="${gameWrapper.id}"/>
+            <button>Exit</button>
+        </form>-->
 
 </div>
 <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"

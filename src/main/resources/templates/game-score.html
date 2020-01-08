@@ -124,9 +124,20 @@
             <input type="hidden" name="gameId" th:value="${gameWrapper.id}"/>
             <input type="hidden" name="pitcherId" th:value="${pitcher.id}"/>
             <input type="hidden" name="batterId" th:value="${batter.id}"/>
-            <input type="hidden" name="firstBaseOffenceId" th:value="${firstBaseOffence != null} ? ${firstBaseOffence.id} : ${0}"/>
-            <input type="hidden" name="secondBaseOffenceId" th:value="${secondBaseOffence != null} ? ${secondBaseOffence.id} : ${0}"/>
-            <input type="hidden" name="thirdBaseOffenceId" th:value="${thirdBaseOffence != null} ? ${thirdBaseOffence.id} : ${0}"/>
+            <input type="hidden" name="firstBaseOffenceId"
+                   th:value="${firstBaseOffence != null} ? ${firstBaseOffence.id} : ${0}"/>
+            <input type="hidden" name="secondBaseOffenceId"
+                   th:value="${secondBaseOffence != null} ? ${secondBaseOffence.id} : ${0}"/>
+            <input type="hidden" name="thirdBaseOffenceId"
+                   th:value="${thirdBaseOffence != null} ? ${thirdBaseOffence.id} : ${0}"/>
+            <input type="hidden" name="catcherId" th:value="${catcher.id}"/>
+            <input type="hidden" name="firstBaseDefenceId" th:value="${firstBaseDefence.id}"/>
+            <input type="hidden" name="secondBaseDefenceId" th:value="${secondBaseDefence.id}"/>
+            <input type="hidden" name="shortStopId" th:value="${shortStop.id}"/>
+            <input type="hidden" name="thirdBaseDefenceId" th:value="${thirdBaseDefence.id}"/>
+            <input type="hidden" name="rightFieldId" th:value="${rightField.id}"/>
+            <input type="hidden" name="centerFieldId" th:value="${centerField.id}"/>
+            <input type="hidden" name="leftFieldId" th:value="${leftField.id}"/>
             <button>In Play</button>
         </form>
 

@@ -92,8 +92,8 @@ public class InningServiceRestClientImpl implements InningService {
     }
 
     @Override
-    public List<Inning> getInningsList(Game game) {
-        String getInningsListUrl = inningRestUrl + "/game/list/" + game.getId();
+    public List<Inning> getInningsList(int gameId) {
+        String getInningsListUrl = inningRestUrl + "/game/list/" + gameId;
 
         logger.info("in getInningsList(): Calling REST API " + getInningsListUrl);
 
@@ -111,8 +111,8 @@ public class InningServiceRestClientImpl implements InningService {
     }
 
     @Override
-    public Inning getCurrentInning(Game game) {
-        String getCurrentInningUrl = inningRestUrl + "/game/" + game.getId();
+    public Inning getCurrentInning(int gameId) {
+        String getCurrentInningUrl = inningRestUrl + "/game/" + gameId;
         logger.info("in getCurrentInning(): Calling REST API " + getCurrentInningUrl);
 
         // make REST call

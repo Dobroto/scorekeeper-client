@@ -14,7 +14,7 @@ public interface InningService {
 
     void deleteById(int id);
 
-    List<Inning> getInningsList(Game game);
+    List<Inning> getInningsList(int gameId);
 
-    Inning getCurrentInning(Game game);
+    Inning getCurrentInning(int gameId);
 }
