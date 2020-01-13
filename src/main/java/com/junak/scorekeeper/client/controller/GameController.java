@@ -687,6 +687,74 @@ public class GameController {
         return "redirect:/games/whatHappened";
     }
 
+    @PostMapping("/stolenBase")
+    public String stolenBase(@RequestParam("gameId") int gameId,
+                             @RequestParam("pitcherId") int pitcherId,
+                             @RequestParam("batterId") int batterId,
+                             @RequestParam("runnerId") int runnerId,
+                             @RequestParam("firstBaseOffenceId") int firstBaseOffenceId,
+                             @RequestParam("secondBaseOffenceId") int secondBaseOffenceId,
+                             @RequestParam("thirdBaseOffenceId") int thirdBaseOffenceId,
+                             @RequestParam("catcherId") int catcherId,
+                             @RequestParam("firstBaseDefenceId") int firstBaseDefenceId,
+                             @RequestParam("secondBaseDefenceId") int secondBaseDefenceId,
+                             @RequestParam("shortStopId") int shortStopId,
+                             @RequestParam("thirdBaseDefenceId") int thirdBaseDefenceId,
+                             @RequestParam("rightFieldId") int rightFieldId,
+                             @RequestParam("centerFieldId") int centerFieldId,
+                             @RequestParam("leftFieldId") int leftFieldId,
+                             @RequestParam("baseNumber") String baseNumber,
+                             @RequestParam("primaryActionName") String primaryActionName,
+                             RedirectAttributes redirectAttributes) {
+
+        String baseStolen = null;
+        if (baseNumber.equalsIgnoreCase("third base")) {
+            baseStolen = "hb";
+        } else if (baseNumber.equalsIgnoreCase("second base")) {
+            baseStolen = "3b";
+        } else if (baseNumber.equalsIgnoreCase("first base")) {
+            baseStolen = "2b";
+        }
+        
+        gameService.stolenBase(gameId, pitcherId, runnerId, baseStolen);
+
+        //this shows to whatHappened() which bases are processed.
+        if (baseNumber.equalsIgnoreCase("third base")) {
+            redirectAttributes.addAttribute("isThirdBaseProcessed", true);
+            redirectAttributes.addAttribute("isSecondBaseProcessed", false);
+            redirectAttributes.addAttribute("isFirstBaseProcessed", false);
+        }
+        if (baseNumber.equalsIgnoreCase("second base")) {
+            redirectAttributes.addAttribute("isThirdBaseProcessed", true);
+            redirectAttributes.addAttribute("isSecondBaseProcessed", true);
+            redirectAttributes.addAttribute("isFirstBaseProcessed", false);
+        }
+        if (baseNumber.equalsIgnoreCase("first base")) {
+            redirectAttributes.addAttribute("isThirdBaseProcessed", true);
+            redirectAttributes.addAttribute("isSecondBaseProcessed", true);
+            redirectAttributes.addAttribute("isFirstBaseProcessed", true);
+        }
+
+        redirectAttributes.addAttribute("gameId", gameId);
+        redirectAttributes.addAttribute("pitcherId", pitcherId);
+        redirectAttributes.addAttribute("batterId", batterId);
+        redirectAttributes.addAttribute("firstBaseOffenceId", firstBaseOffenceId);
+        redirectAttributes.addAttribute("secondBaseOffenceId", secondBaseOffenceId);
+        redirectAttributes.addAttribute("thirdBaseOffenceId", thirdBaseOffenceId);
+        redirectAttributes.addAttribute("catcherId", catcherId);
+        redirectAttributes.addAttribute("firstBaseDefenceId", firstBaseDefenceId);
+        redirectAttributes.addAttribute("secondBaseDefenceId", secondBaseDefenceId);
+        redirectAttributes.addAttribute("shortStopId", shortStopId);
+        redirectAttributes.addAttribute("thirdBaseDefenceId", thirdBaseDefenceId);
+        redirectAttributes.addAttribute("rightFieldId", rightFieldId);
+        redirectAttributes.addAttribute("centerFieldId", centerFieldId);
+        redirectAttributes.addAttribute("leftFieldId", leftFieldId);
+        redirectAttributes.addAttribute("primaryActionName", primaryActionName);
+        redirectAttributes.addAttribute("isNextInning", false);
+
+        return "redirect:/games/whatHappened";
+    }
+
     @GetMapping("/whatHappened")
     public String whatHappenedWithPlayer(@RequestParam("gameId") int gameId,
                                          @RequestParam("pitcherId") int pitcherId,
