@@ -19,7 +19,7 @@ public interface GameService {
 
     void ball(int gameId, int pitcherId, int batterId);
 
-    void strike(int pitcherId, int batterId);
+    void strike(int gameId, int pitcherId, int batterId);
 
     void strikeoutLooking(int gameId, int pitcherId, int batterId);
 

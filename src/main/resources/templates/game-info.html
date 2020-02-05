@@ -6,7 +6,6 @@
 </head>
 
 <body>
-
 <form action="#" th:action="@{/games/scoreGame}" method="POST">
 
     <input type="hidden" name="visitorTeamId" th:value="${gameWrapper.visitorTeam.id}"/>
@@ -14,6 +13,11 @@
     <input type="hidden" name="gameId" th:value="${gameWrapper.id}"/>
     <button type="submit">Score Game</button>
 
+</form>
+
+<form action="#" th:action="@{/liveScore/game}" method="POST">
+    <input type="hidden" name="gameId" th:value="${gameWrapper.id}"/>
+    <button type="submit">Livescore</button>
 </form>
 
 <h3 th:text="( ${gameWrapper.scheduledTime} == null ? '' : ${#dates.format(gameWrapper.scheduledTime, 'dd/MM/yyyy HH:mm')} ) + ' ' + |${gameWrapper.visitorTeam.teamNameLong} at ${gameWrapper.homeTeam.teamNameLong}|"></h3>

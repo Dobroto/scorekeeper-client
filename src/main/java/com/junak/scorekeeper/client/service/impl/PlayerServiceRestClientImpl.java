@@ -16,6 +16,7 @@ import java.util.logging.Logger;
 
 @Service
 public class PlayerServiceRestClientImpl implements PlayerService {
+
     private RestTemplate restTemplate;
     private String scorekeeperRestUrl;
     private String playerRestUrl;

@@ -1,0 +1,39 @@
+<!DOCTYPE HTML>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <script
+            src="https://code.jquery.com/jquery-3.4.1.min.js"
+            integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
+            crossorigin="anonymous"></script>
+    <title>LiveScore</title>
+</head>
+
+<body>
+<div th:attr="data-inning-id=${gameId}" id="fill"></div>
+
+<div th:each="play : ${plays}">
+    <table border="1">
+        <tbody>
+        <tr>
+            <td th:text="${play.action}"/>
+        </tr>
+        </tbody>
+    </table>
+</div>
+<script>
+    const gameId = $('#fill').attr('data-game-id');
+
+    setTimeout(function() {
+$('#refreshForm').submit();
+    }, 3000);
+
+</script>
+
+<form action="#" th:action="@{/liveScore/game}" method="POST" id="refreshForm">
+    <input type="hidden" name="gameId" th:value="${gameId}"/>
+</form>
+
+
+</body>
+</html>

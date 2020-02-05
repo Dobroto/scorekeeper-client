@@ -117,8 +117,8 @@ public class GameServiceRestClientImpl implements GameService {
     }
 
     @Override
-    public void strike(int pitcherId, int batterId) {
-        String strikeUrl = gameRestUrl + "/" + pitcherId + "/" + batterId + "/strike";
+    public void strike(int gameId, int pitcherId, int batterId) {
+        String strikeUrl = gameRestUrl + "/" + gameId + "/" + pitcherId + "/" + batterId + "/strike";
         logger.info("in strike(): Calling REST API " + strikeUrl);
 
         restTemplate.put(strikeUrl, null);

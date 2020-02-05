@@ -442,7 +442,7 @@ public class GameController {
 
             return "game-strikeout";
         } else {
-            gameService.strike(pitcherId, batterId);
+            gameService.strike(gameId, pitcherId, batterId);
 
             redirectAttributes.addAttribute("gameId", gameId);
             return "redirect:/games/scoreGame";
