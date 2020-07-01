@@ -1,8 +1,14 @@
 <!DOCTYPE HTML>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
     <head>
-        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
-              integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+<!--        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"-->
+<!--              integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">-->
+        <!-- FontAwesome -->
+        <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/fontawesome.min.css" rel="stylesheet" type="text/css" />
+        <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/regular.min.css" rel="stylesheet" type="text/css" />
+        <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/all.css" rel="stylesheet" type="text/css" />
+
+        <link rel="stylesheet" href="/styles/pages/_list-games.css">
         <title>Game Manager</title>
     </head>
 
@@ -11,29 +17,29 @@
             <h3>Game Manager</h3>
             <hr>
             <a th:href="@{/games/showFormForAddGame}">
-                Add
+                Add New Game <i class="far fa-plus-square"></i>
             </a>
 
             <div th:each="gameWrapper : ${gameWrappers}">
                 <table border="1">
                     <tbody>
-                    <tr>
-                        <td th:text="${gameWrapper.scheduledTime != null} ? ${'Scheduled: ' + gameWrapper.scheduledTime} : 'Scheduled:'"/>
+                    <tr class="schedule-row">
+                        <td colspan="5" th:text="${gameWrapper.scheduledTime != null} ? ${'Scheduled: ' + gameWrapper.scheduledTime} : 'Scheduled:'"/>
                     </tr>
                     <tr>
                         <td th:text="${gameWrapper?.visitorTeam?.teamNameLong}"/>
                         <td th:text="${gameWrapper?.finalResult?.visitorTeamScore}"/>
                         <td rowspan="2" th:text="${gameWrapper?.currentInning?.inningNumber}"/>
-                        <td>
+                        <td rowspan="2">
                             <form action="#" th:action="@{/games/showGameInfo}" method="POST">
                                 <input type="hidden" name="gameId" th:value="${gameWrapper.id}"/>
-                                <button type="submit">Enter game</button>
+                                <button class="custom-button ripple" type="submit">Enter game</button>
                             </form>
                         </td>
-                        <td>
+                        <td rowspan="2">
                             <form action="#" th:action="@{/games/deleteGame}" method="POST">
                                 <input type="hidden" name="gameId" th:value="${gameWrapper.id}"/>
-                                <button type="submit">Delete Game</button>
+                                <button class="custom-button ripple" type="submit">Delete Game</button>
                             </form>
                         </td>
                     </tr>
@@ -44,7 +50,9 @@
                     </tbody>
                 </table>
             </div>
-            <a th:href="@{/scorekeeper/homePage}">Back</a>
+            <a th:href="@{/scorekeeper/homePage}">
+                <i class="far fa-arrow-alt-circle-left"></i> Back
+            </a>
         </div>
 
         <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"

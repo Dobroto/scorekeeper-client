@@ -21,6 +21,12 @@
         </tbody>
     </table>
 </div>
+
+<form action="#" th:action="@{/games/showGameInfo}" method="POST">
+    <input type="hidden" name="gameId" th:value="${gameId}"/>
+    <button type="submit">Back</button>
+</form>
+
 <script>
     const gameId = $('#fill').attr('data-game-id');
 
@@ -33,7 +39,6 @@ $('#refreshForm').submit();
 <form action="#" th:action="@{/liveScore/game}" method="POST" id="refreshForm">
     <input type="hidden" name="gameId" th:value="${gameId}"/>
 </form>
-
 
 </body>
 </html>

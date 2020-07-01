@@ -2,61 +2,79 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 
 <head>
+    <!-- FontAwesome -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/fontawesome.min.css"
+          rel="stylesheet" type="text/css"/>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/regular.min.css"
+          rel="stylesheet" type="text/css"/>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/all.css"
+          rel="stylesheet" type="text/css"/>
+
+    <link rel="stylesheet" href="/styles/pages/_list-players.css">
     <title>Player Manager</title>
 </head>
 
 <body>
+    <div class="list-players-wrapper">
 
-<h3>Player Manager</h3>
-<hr>
+    <h3>Player Manager</h3>
+    <hr>
 
-<form action="#" th:action="@{/players/showFormForAddPlayer}" method="POST">
+    <form action="#" th:action="@{/players/showFormForAddPlayer}" method="POST">
 
-    <input type="hidden" name="teamId" th:value="${teamId}"/>
-    <button type="submit">Create new player</button>
+        <input type="hidden" name="teamId" th:value="${teamId}"/>
+        <button class="btn-add" type="submit">
+            Create new player <i class="fas fa-user-plus"></i>
+        </button>
 
-</form>
-<table border="1">
-    <tbody>
-    <tr th:each="tempPlayer : ${players}">
+    </form>
+    <table border="1">
+        <tbody>
+        <tr th:each="tempPlayer : ${players}">
 
-        <td th:text="${tempPlayer.firstName}"/>
-        <td th:text="${tempPlayer.lastName}"/>
+            <td th:text="${tempPlayer.firstName}"/>
+            <td th:text="${tempPlayer.lastName}"/>
 
-        <td>
+            <td>
 
-            <form action="#" th:action="@{/players/showFormForUpdatePlayer}" method="POST">
+                <form action="#" th:action="@{/players/showFormForUpdatePlayer}" method="POST">
 
-                <input type="hidden" name="playerId" th:value="${tempPlayer.id}"/>
-                <input type="hidden" name="teamId" th:value="${teamId}"/>
-                <input type="hidden" name="isTeamPlayer" th:value="${isTeamPlayer}"/>
-                <button type="submit">Update</button>
+                    <input type="hidden" name="playerId" th:value="${tempPlayer.id}"/>
+                    <input type="hidden" name="teamId" th:value="${teamId}"/>
+                    <input type="hidden" name="isTeamPlayer" th:value="${isTeamPlayer}"/>
+                    <button class="custom-button ripple" type="submit">
+                        Update <i class="far fa-edit"></i>
+                    </button>
 
-            </form>
-            <form action="#" th:action="@{/players/delete}" method="POST">
+                </form>
+                <form action="#" th:action="@{/players/delete}" method="POST">
 
-                <input type="hidden" name="playerId" th:value="${tempPlayer.id}"/>
-                <input type="hidden" name="teamId" th:value="${teamId}"/>
-                <input type="hidden" name="isTeamPlayer" th:value="${isTeamPlayer}"/>
-                <button type="submit"
-                        onclick="if (!(confirm('Are you sure you want to delete this player?'))) return false">
-                    Delete
-                </button>
+                    <input type="hidden" name="playerId" th:value="${tempPlayer.id}"/>
+                    <input type="hidden" name="teamId" th:value="${teamId}"/>
+                    <input type="hidden" name="isTeamPlayer" th:value="${isTeamPlayer}"/>
+                    <button class="custom-button ripple" type="submit"
+                            onclick="if (!(confirm('Are you sure you want to delete this player?'))) return false">
+                        Delete <i class="far fa-trash-alt"></i>
+                    </button>
 
-            </form>
-        </td>
-    </tr>
-    </tbody>
-</table>
+                </form>
+            </td>
+        </tr>
+        </tbody>
+    </table>
 
-<form action="#" th:action="@{/teams/showRoster}" method="POST" th:unless="${teamId == 0}">
+    <form action="#" th:action="@{/teams/showRoster}" method="POST" th:unless="${teamId == 0}">
 
-    <input type="hidden" name="teamId" th:value="${teamId}"/>
-    <button type="submit">Back</button>
+        <input type="hidden" name="teamId" th:value="${teamId}"/>
+        <button type="submit">
+            <i class="far fa-arrow-alt-circle-left"></i> Back
+        </button>
 
-</form>
-<a th:href="@{/scorekeeper/homePage}" th:unless="${teamId != 0}">Back</a>
-
+    </form>
+    <a th:href="@{/scorekeeper/homePage}" th:unless="${teamId != 0}">
+        <i class="far fa-arrow-alt-circle-left"></i> Back
+    </a>
+</div>
 </body>
 </html>
 

@@ -10,7 +10,7 @@
     src: url('../fonts/Roboto-Thin.ttf');
 }
 
-.list-games-wrapper {
+.list-players-wrapper {
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
@@ -20,29 +20,29 @@
     padding-top: 6rem;
 }
 
-.list-games-wrapper h3 {
+.list-players-wrapper h3 {
     font-family: 'RobotoCondensed-LightItalic', sans-serif;
     font-size: 1.5rem;
     text-decoration: none;
     color: var(--color-accent);
 }
 
-.list-games-wrapper a {
+.list-players-wrapper a {
     font-family: 'Roboto-Thin', sans-serif;
     font-size: 1.2rem;
     text-decoration: none;
     color: var(--color-links);
 }
 
-.list-games-wrapper table {
+.list-players-wrapper table {
   margin: 2rem;
 }
 
-.list-games-wrapper td {
+.list-players-wrapper td {
   padding: 5px;
 }
 
-.list-games-wrapper .custom-button {
+.list-players-wrapper .custom-button {
     margin: 3px;
     padding: 5px 10px;
     font-family: 'Roboto-Thin', sans-serif;
@@ -57,17 +57,30 @@
     outline: none;
 }
 
-.list-games-wrapper .ripple {
+.list-players-wrapper .ripple {
   background-position: center;
   transition: background 0.8s;
 }
 
-.list-games-wrapper .ripple:hover {
+.list-players-wrapper .ripple:hover {
   background: var(--color-error) radial-gradient(circle, transparent 1%, var(--color-button-ripple) 1%) center/15000%;
 }
 
-.list-games-wrapper .ripple:active {
+.list-players-wrapper .ripple:active {
   background-color: var(--color-error);
   background-size: 100%;
   transition: background 0s;
+}
+
+.list-players-wrapper btn-add {
+   margin: 3px;
+   padding: 5px 10px;
+   font-family: 'Roboto-Thin', sans-serif;
+   font-size: 1.2rem;
+   text-decoration: none;
+   text-align: center;
+   color: var(--color-links);
+   border: none;
+   cursor: pointer;
+   outline: none;
 }

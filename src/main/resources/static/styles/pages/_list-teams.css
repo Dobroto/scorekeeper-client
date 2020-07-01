@@ -10,7 +10,7 @@
     src: url('../fonts/Roboto-Thin.ttf');
 }
 
-.list-games-wrapper {
+.list-teams-wrapper {
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
@@ -20,53 +20,53 @@
     padding-top: 6rem;
 }
 
-.list-games-wrapper h3 {
+.list-teams-wrapper h3 {
     font-family: 'RobotoCondensed-LightItalic', sans-serif;
     font-size: 1.5rem;
     text-decoration: none;
     color: var(--color-accent);
 }
 
-.list-games-wrapper a {
+.list-teams-wrapper a {
     font-family: 'Roboto-Thin', sans-serif;
     font-size: 1.2rem;
     text-decoration: none;
     color: var(--color-links);
 }
 
-.list-games-wrapper table {
+.list-teams-wrapper table {
   margin: 2rem;
 }
 
-.list-games-wrapper td {
+.list-teams-wrapper td {
   padding: 5px;
 }
 
-.list-games-wrapper .custom-button {
-    margin: 3px;
-    padding: 5px 10px;
-    font-family: 'Roboto-Thin', sans-serif;
-    text-decoration: none;
-    text-align: center;
-    color: var(--color-primary);
-    border: none;
-    border-radius: 5px;
-    background-color: var(--color-accent);
-    cursor: pointer;
-    box-shadow: 0 0 4px #999;
-    outline: none;
+.list-teams-wrapper .custom-button {
+  margin: 3px;
+  padding: 5px 10px;
+  font-family: 'Roboto-Thin', sans-serif;
+  text-decoration: none;
+  text-align: center;
+  color: var(--color-primary);
+  border: none;
+  border-radius: 5px;
+  background-color: var(--color-accent);
+  cursor: pointer;
+  box-shadow: 0 0 4px #999;
+  outline: none;
 }
 
-.list-games-wrapper .ripple {
+.list-teams-wrapper .ripple {
   background-position: center;
   transition: background 0.8s;
 }
 
-.list-games-wrapper .ripple:hover {
+.list-teams-wrapper .ripple:hover {
   background: var(--color-error) radial-gradient(circle, transparent 1%, var(--color-button-ripple) 1%) center/15000%;
 }
 
-.list-games-wrapper .ripple:active {
+.list-teams-wrapper .ripple:active {
   background-color: var(--color-error);
   background-size: 100%;
   transition: background 0s;

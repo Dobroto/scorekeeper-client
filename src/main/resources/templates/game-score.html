@@ -140,8 +140,12 @@
             <input type="hidden" name="leftFieldId" th:value="${leftField.id}"/>
             <button>In Play</button>
         </form>
-
     </div>
+
+    <form action="#" th:action="@{/games/showGameInfo}" method="POST">
+        <input type="hidden" name="gameId" th:value="${gameWrapper.id}"/>
+        <button type="submit">Back</button>
+    </form>
 
 </div>
 <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
