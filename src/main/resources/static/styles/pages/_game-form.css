@@ -10,12 +10,8 @@
     src: url('../fonts/Roboto-Thin.ttf');
 }
 
-html,
-body {
-  min-height: 100%;
-}
 
-.list-players-wrapper {
+.game-form-wrapper {
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
@@ -25,32 +21,19 @@ body {
     padding: 6rem;
 }
 
-.list-players-wrapper h3 {
-    font-family: 'RobotoCondensed-LightItalic', sans-serif;
-    font-size: 1.5rem;
-    text-decoration: none;
-    color: var(--color-accent);
-}
-
-.list-players-wrapper a {
+.game-form-wrapper a {
     font-family: 'Roboto-Thin', sans-serif;
     font-size: 1.2rem;
     text-decoration: none;
     color: var(--color-links);
+    margin-top: 20px;
 }
 
-.list-players-wrapper table {
-  margin: 2rem;
-}
-
-.list-players-wrapper td {
-  padding: 5px;
-}
-
-.list-players-wrapper .custom-button {
-    margin: 3px;
+.game-form-wrapper .custom-button {
+    margin: 10px;
     padding: 5px 10px;
     font-family: 'Roboto-Thin', sans-serif;
+    font-size: 1.2rem;
     text-decoration: none;
     text-align: center;
     color: var(--color-primary);
@@ -62,29 +45,29 @@ body {
     outline: none;
 }
 
-.list-players-wrapper .ripple {
+.game-form-wrapper .ripple {
   background-position: center;
   transition: background 0.8s;
 }
 
-.list-players-wrapper .ripple:hover {
+.game-form-wrapper .ripple:hover {
   background: var(--color-error) radial-gradient(circle, transparent 1%, var(--color-button-ripple) 1%) center/15000%;
 }
 
-.list-players-wrapper .ripple:active {
+.game-form-wrapper .ripple:active {
   background-color: var(--color-error);
   background-size: 100%;
   transition: background 0s;
 }
 
-.list-players-wrapper .btn-link {
-   margin: 3px;
+.game-form-wrapper .btn-done {
+   margin: 3px 3px 20px 3px;
    padding: 5px 10px;
    font-family: 'Roboto-Thin', sans-serif;
-   font-size: 1.2rem;
+   font-size: 1.1rem;
    text-decoration: none;
    text-align: center;
-   color: var(--color-links);
+   color: var(--color-success);
    background: transparent;
    border: none;
    cursor: pointer;

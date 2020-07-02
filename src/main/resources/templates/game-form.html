@@ -2,31 +2,48 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 
 <head>
+    <!-- FontAwesome -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/fontawesome.min.css"
+          rel="stylesheet" type="text/css"/>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/regular.min.css"
+          rel="stylesheet" type="text/css"/>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/all.css"
+          rel="stylesheet" type="text/css"/>
+
+    <link rel="stylesheet" href="/styles/pages/_game-form.css">
     <title>New Game</title>
 </head>
 
 <body>
+<div class="game-form-wrapper">
 
-<form action="#" th:action="@{/games/showTeamList}" method="POST">
-    <input type="hidden" name="isVisitor" th:value="${true}"/>
-    <button type="submit" th:text="${visitorName != null} ? ${'Visitor: ' + visitorName} : 'Visitor'"></button>
-</form>
+    <form action="#" th:action="@{/games/showTeamList}" method="POST">
+        <input type="hidden" name="isVisitor" th:value="${true}"/>
+        <button class="custom-button ripple" type="submit"
+                th:text="${visitorName != null} ? ${'Visitor: ' + visitorName} : 'Visitor'"></button>
+    </form>
 
-<form action="#" th:action="@{/games/showTeamList}" method="POST">
-    <input type="hidden" name="isVisitor" th:value="${false}"/>
-    <button type="submit" th:text="${homeName != null} ? ${'Home: ' + homeName} : 'Home'"></button>
-</form>
+    <form action="#" th:action="@{/games/showTeamList}" method="POST">
+        <input type="hidden" name="isVisitor" th:value="${false}"/>
+        <button class="custom-button ripple" type="submit"
+                th:text="${homeName != null} ? ${'Home: ' + homeName} : 'Home'"></button>
+    </form>
 
-<!--TODO: scheduled date-->
+    <!--TODO: scheduled date-->
 
-<form action="#" th:action="@{/games/createNewGame}" method="POST" th:if="${game.homeTeam != 0} and ${game.visitorTeam != 0}">
+    <form action="#" th:action="@{/games/createNewGame}" method="POST"
+          th:if="${game.homeTeam != 0} and ${game.visitorTeam != 0}">
 
-    <input type="hidden" name="game" th:value="${game}"/>
-    <button type="submit">Done</button>
+        <input type="hidden" name="game" th:value="${game}"/>
+        <button class="btn-done" type="submit">
+            Done <i class="far fa-check-circle"></i>
+        </button>
 
-</form>
+    </form>
 
-<a th:href="@{/games/list}">Back</a>
-
+    <a th:href="@{/games/list}">
+        <i class="far fa-arrow-alt-circle-left"></i> Back
+    </a>
+</div>
 </body>
 </html>

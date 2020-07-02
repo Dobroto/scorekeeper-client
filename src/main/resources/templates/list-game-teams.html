@@ -2,31 +2,44 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 
 <head>
+    <!-- FontAwesome -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/fontawesome.min.css"
+          rel="stylesheet" type="text/css"/>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/regular.min.css"
+          rel="stylesheet" type="text/css"/>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/all.css"
+          rel="stylesheet" type="text/css"/>
+
+    <link rel="stylesheet" href="/styles/pages/_list-game-teams.css">
     <title>New Game</title>
 </head>
 
 <body>
+<div class="list-game-teams-wrapper">
+    <table border="1">
+        <tbody>
+        <tr th:each="tempTeam : ${teams}">
 
-<table border="1">
-    <tbody>
-    <tr th:each="tempTeam : ${teams}">
+            <td th:text="${tempTeam.teamNameLong}"/>
+            <td>
+                <form action="#" th:action="@{/games/team/choose}" method="POST">
+                    <input type="hidden" name="teamId" th:value="${tempTeam.id}"/>
+                    <input type="hidden" name="isVisitor" th:value="${isVisitor}"/>
+                    <button class="custom-button ripple" type="submit">
+                        Choose <i class="fas fa-check"></i>
+                    </button>
+                </form>
+            </td>
+        </tr>
+        </tbody>
+    </table>
 
-        <td th:text="${tempTeam.teamNameLong}"/>
-        <td>
-            <form action="#" th:action="@{/games/team/choose}" method="POST">
-                <input type="hidden" name="teamId" th:value="${tempTeam.id}"/>
-                <input type="hidden" name="isVisitor" th:value="${isVisitor}"/>
-                <button type="submit">Choose</button>
-            </form>
-        </td>
-    </tr>
-    </tbody>
-</table>
-
-<form action="#" th:action="@{/games/showFormForAddGame}" method="GET">
-    <input type="hidden" name="game" th:value="${game}"/>
-    <button type="submit">Back</button>
-</form>
-
+    <form action="#" th:action="@{/games/showFormForAddGame}" method="GET">
+        <input type="hidden" name="game" th:value="${game}"/>
+        <button class="btn-link" type="submit">
+            <i class="far fa-arrow-alt-circle-left"></i> Back
+        </button>
+    </form>
+</div>
 </body>
 </html>

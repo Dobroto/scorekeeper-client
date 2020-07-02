@@ -33,13 +33,17 @@
                         <td rowspan="2">
                             <form action="#" th:action="@{/games/showGameInfo}" method="POST">
                                 <input type="hidden" name="gameId" th:value="${gameWrapper.id}"/>
-                                <button class="custom-button ripple" type="submit">Enter game</button>
+                                <button class="custom-button ripple" type="submit">
+                                    Enter game <i class="fas fa-external-link-alt"></i>
+                                </button>
                             </form>
                         </td>
                         <td rowspan="2">
                             <form action="#" th:action="@{/games/deleteGame}" method="POST">
                                 <input type="hidden" name="gameId" th:value="${gameWrapper.id}"/>
-                                <button class="custom-button ripple" type="submit">Delete Game</button>
+                                <button class="custom-button ripple" type="submit">
+                                    Delete Game <i class="far fa-trash-alt"></i>
+                                </button>
                             </form>
                         </td>
                     </tr>
