@@ -2,43 +2,57 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 
 <head>
+    <!-- FontAwesome -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/fontawesome.min.css"
+          rel="stylesheet" type="text/css"/>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/regular.min.css"
+          rel="stylesheet" type="text/css"/>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/all.css"
+          rel="stylesheet" type="text/css"/>
+
+    <link rel="stylesheet" href="/styles/pages/_style-base.css">
+    <link rel="stylesheet" href="/styles/pages/_team-form.css">
     <title>Team Info</title>
 </head>
 
 <body>
+<div class="team-form-wrapper">
+    <form action="#" th:action="@{/teams/save}"
+          th:object="${team}" method="POST">
 
+        <!-- Add hidden form field to handle update -->
+        <input type="hidden" th:field="*{id}" />
 
-<form action="#" th:action="@{/teams/save}"
-      th:object="${team}" method="POST">
+        <input type="text" th:field="*{teamNameLong}"
+               placeholder="Team name">
 
-    <!-- Add hidden form field to handle update -->
-    <input type="hidden" th:field="*{id}" />
+        <input type="text" th:field="*{teamNameShort}"
+               placeholder="Short name">
 
-    <input type="text" th:field="*{teamNameLong}"
-           placeholder="Team name">
+        <button type="submit" class="custom-button">
+            Save <i class="far fa-save"></i>
+        </button>
 
-    <input type="text" th:field="*{teamNameShort}"
-           placeholder="Short name">
+    </form>
 
-    <button type="submit">Save</button>
+    <form action="#" th:action="@{/teams/showRoster}" method="POST" th:unless="${team.id == 0}">
 
-</form>
+        <input type="hidden" name="teamId" th:value="${team.id}"/>
+        <button type="submit">Roster</button>
 
-<form action="#" th:action="@{/teams/showRoster}" method="POST" th:unless="${team.id == 0}">
+    </form>
 
-    <input type="hidden" name="teamId" th:value="${team.id}"/>
-    <button type="submit">Roster</button>
+    <form action="#" th:action="@{/teams/showTeamStats}" method="POST" th:unless="${team.id == 0}">
 
-</form>
+        <input type="hidden" name="teamId" th:value="${team.id}"/>
+        <button type="submit">Team Stats</button>
 
-<form action="#" th:action="@{/teams/showTeamStats}" method="POST" th:unless="${team.id == 0}">
+    </form>
 
-    <input type="hidden" name="teamId" th:value="${team.id}"/>
-    <button type="submit">Team Stats</button>
+    <a th:href="@{/teams/list}">
+        <i class="far fa-arrow-alt-circle-left"></i> Back
+    </a>
 
-</form>
-
-<a th:href="@{/teams/list}">Back</a>
-
+</div>
 </body>
 </html>

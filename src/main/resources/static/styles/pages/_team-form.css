@@ -1,0 +1,21 @@
+@import '../styles.css';
+
+@font-face {
+    font-family: 'Roboto-Thin';
+    src: url('../fonts/Roboto-Thin.ttf');
+}
+
+.team-form-wrapper .custom-button {
+    margin: 3px;
+    padding: 5px 10px;
+    font-family: 'Roboto-Thin', sans-serif;
+    background-color: var(--color-success);
+}
+
+.team-form-wrapper .ripple:hover {
+  background: var(--color-error) radial-gradient(circle, transparent 1%, var(--color-button-ripple) 1%) center/15000%;
+}
+
+.team-form-wrapper .ripple:active {
+  background-color: var(--color-success);
+}

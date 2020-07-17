@@ -113,27 +113,6 @@
     <button>Home Run</button>
 </form>
 
-<form action="#" th:action="@{/games/hitDouble}" method="POST">
-    <input type="hidden" name="gameId" th:value="${gameId}"/>
-    <input type="hidden" name="pitcherId" th:value="${pitcherId}"/>
-    <input type="hidden" name="batterId" th:value="${batterId}"/>
-    <button>Hit Double</button>
-</form>
-
-<form action="#" th:action="@{/games/hitTriple}" method="POST">
-    <input type="hidden" name="gameId" th:value="${gameId}"/>
-    <input type="hidden" name="pitcherId" th:value="${pitcherId}"/>
-    <input type="hidden" name="batterId" th:value="${batterId}"/>
-    <button>Hit Triple</button>
-</form>
-
-<form action="#" th:action="@{/games/homeRun}" method="POST">
-    <input type="hidden" name="gameId" th:value="${gameId}"/>
-    <input type="hidden" name="pitcherId" th:value="${pitcherId}"/>
-    <input type="hidden" name="batterId" th:value="${batterId}"/>
-    <button>Homerun</button>
-</form>
-
 <form action="#" th:action="@{/games/inParkHomeRun}" method="POST">
     <input type="hidden" name="gameId" th:value="${gameId}"/>
     <input type="hidden" name="pitcherId" th:value="${pitcherId}"/>

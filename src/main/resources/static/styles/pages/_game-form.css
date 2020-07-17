@@ -10,7 +10,6 @@
     src: url('../fonts/Roboto-Thin.ttf');
 }
 
-
 .game-form-wrapper {
     display: flex;
     flex-direction: column;
@@ -34,30 +33,10 @@
     padding: 5px 10px;
     font-family: 'Roboto-Thin', sans-serif;
     font-size: 1.2rem;
-    text-decoration: none;
-    text-align: center;
-    color: var(--color-primary);
-    border: none;
-    border-radius: 5px;
-    background-color: var(--color-accent);
-    cursor: pointer;
-    box-shadow: 0 0 4px #999;
-    outline: none;
-}
-
-.game-form-wrapper .ripple {
-  background-position: center;
-  transition: background 0.8s;
 }
 
 .game-form-wrapper .ripple:hover {
   background: var(--color-error) radial-gradient(circle, transparent 1%, var(--color-button-ripple) 1%) center/15000%;
-}
-
-.game-form-wrapper .ripple:active {
-  background-color: var(--color-error);
-  background-size: 100%;
-  transition: background 0s;
 }
 
 .game-form-wrapper .btn-done {

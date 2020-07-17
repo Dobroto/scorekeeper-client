@@ -47,28 +47,8 @@
     margin: 3px;
     padding: 5px 10px;
     font-family: 'Roboto-Thin', sans-serif;
-    text-decoration: none;
-    text-align: center;
-    color: var(--color-primary);
-    border: none;
-    border-radius: 5px;
-    background-color: var(--color-accent);
-    cursor: pointer;
-    box-shadow: 0 0 4px #999;
-    outline: none;
-}
-
-.game-info-wrapper .ripple {
-  background-position: center;
-  transition: background 0.8s;
-}
-
-.game-info-wrapper .ripple:hover {
-  background: var(--color-error) radial-gradient(circle, transparent 1%, var(--color-button-ripple) 1%) center/15000%;
 }
 
 .game-info-wrapper .ripple:active {
   background-color: var(--color-accent);
-  background-size: 100%;
-  transition: background 0s;
 }
