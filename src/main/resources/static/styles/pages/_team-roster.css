@@ -1,0 +1,10 @@
+@font-face {
+    font-family: 'Roboto-Thin';
+    src: url('../fonts/Roboto-Thin.ttf');
+}
+
+.team-roster-wrapper .custom-button {
+    margin: 3px;
+    padding: 5px 10px;
+    font-family: 'Roboto-Thin', sans-serif;
+}

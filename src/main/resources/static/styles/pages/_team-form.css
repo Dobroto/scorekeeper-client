@@ -12,10 +12,20 @@
     background-color: var(--color-success);
 }
 
+.team-form-wrapper .accented {
+    background-color: var(--color-accent);
+    text-transform: uppercase;
+    margin: 10px;
+}
+
 .team-form-wrapper .ripple:hover {
   background: var(--color-error) radial-gradient(circle, transparent 1%, var(--color-button-ripple) 1%) center/15000%;
 }
 
 .team-form-wrapper .ripple:active {
   background-color: var(--color-success);
+}
+
+.team-form-wrapper .accented .ripple:active {
+    background-color: var(--color-accent);
 }

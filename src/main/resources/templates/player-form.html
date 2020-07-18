@@ -2,53 +2,73 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 
 <head>
+    <!-- FontAwesome -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/fontawesome.min.css"
+          rel="stylesheet" type="text/css"/>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/regular.min.css"
+          rel="stylesheet" type="text/css"/>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/all.css"
+          rel="stylesheet" type="text/css"/>
+
+    <link rel="stylesheet" href="/styles/pages/_style-base.css">
+    <link rel="stylesheet" href="/styles/pages/_player-form.css">
     <title>Player Info</title>
 </head>
 
 <body>
+<div class="player-form-wrapper center-content">
 
-<form action="#" th:action="@{/players/save}"
-      th:object="${player}" method="POST">
+    <form action="#" th:action="@{/players/save}"
+          th:object="${player}" method="POST">
 
-    <!-- Add hidden form field to handle update -->
-    <input type="hidden" th:field="*{id}"/>
+        <!-- Add hidden form field to handle update -->
+        <input type="hidden" th:field="*{id}"/>
 
-    <input type="text" th:field="*{firstName}"
-           placeholder="First name">
+        <input type="text" th:field="*{firstName}"
+               placeholder="First name">
 
-    <input type="text" th:field="*{lastName}"
-           placeholder="Last name">
-    <input type="hidden" name="isTeamPlayer" th:value="${false}"/>
-    <input type="hidden" name="teamId" th:value="${teamId}"/>
+        <input type="text" th:field="*{lastName}"
+               placeholder="Last name">
+        <input type="hidden" name="isTeamPlayer" th:value="${false}"/>
+        <input type="hidden" name="teamId" th:value="${teamId}"/>
 
-    <button type="submit">Save</button>
+        <button class="custom-button ripple" type="submit">
+            Save <i class="far fa-save"></i>
+        </button>
 
-</form>
+    </form>
 
-<form action="#" th:action="@{/players/showPlayerStats}" method="POST" th:unless="${player.id == 0}">
+    <form action="#" th:action="@{/players/showPlayerStats}" method="POST" th:unless="${player.id == 0}">
 
-    <input type="hidden" name="playerId" th:value="${player.id}"/>
-    <input type="hidden" name="teamId" th:value="${teamId}"/>
-    <input type="hidden" name="isTeamPlayer" th:value="${false}"/>
-    <button type="submit">Player Stats</button>
+        <input type="hidden" name="playerId" th:value="${player.id}"/>
+        <input type="hidden" name="teamId" th:value="${teamId}"/>
+        <input type="hidden" name="isTeamPlayer" th:value="${false}"/>
+        <button class="custom-button ripple player-stats" type="submit">
+            Player Stats <i class="fas fa-clipboard-list"></i>
+        </button>
 
-</form>
+    </form>
 
-<form action="#" th:action="@{/players/list}" method="POST" th:unless="${teamId == 0}">
+    <form action="#" th:action="@{/players/list}" method="POST" th:unless="${teamId == 0}">
 
-    <input type="hidden" name="isTeamPlayer" th:value="${true}"/>
-    <input type="hidden" name="teamId" th:value="${teamId}"/>
-    <button type="submit">Back</button>
+        <input type="hidden" name="isTeamPlayer" th:value="${true}"/>
+        <input type="hidden" name="teamId" th:value="${teamId}"/>
+        <button class="btn-link" type="submit">
+            <i class="far fa-arrow-alt-circle-left"></i> Back
+        </button>
 
-</form>
+    </form>
 
-<form action="#" th:action="@{/players/list}" method="POST" th:unless="${teamId != 0}">
+    <form action="#" th:action="@{/players/list}" method="POST" th:unless="${teamId != 0}">
 
-    <input type="hidden" name="isTeamPlayer" th:value="${false}"/>
-    <input type="hidden" name="teamId" th:value="${teamId}"/>
-    <button type="submit">Back</button>
+        <input type="hidden" name="isTeamPlayer" th:value="${false}"/>
+        <input type="hidden" name="teamId" th:value="${teamId}"/>
+        <button class="btn-link" type="submit">
+            <i class="far fa-arrow-alt-circle-left"></i> Back
+        </button>
 
-</form>
+    </form>
 
+</div>
 </body>
 </html>

@@ -1,0 +1,6 @@
+@import '../styles.css';
+
+.player-stats-wrapper h3 {
+    margin-bottom: 15px;
+    color: var(--color-accent);
+}

@@ -6,39 +6,54 @@
             src="https://code.jquery.com/jquery-3.4.1.min.js"
             integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
             crossorigin="anonymous"></script>
+
+    <!-- FontAwesome -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/fontawesome.min.css"
+          rel="stylesheet" type="text/css"/>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/regular.min.css"
+          rel="stylesheet" type="text/css"/>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/all.css"
+          rel="stylesheet" type="text/css"/>
+
+    <link rel="stylesheet" href="/styles/pages/_style-base.css">
+    <link rel="stylesheet" href="/styles/pages/_livescore.css">
     <title>LiveScore</title>
 </head>
 
 <body>
-<div th:attr="data-inning-id=${gameId}" id="fill"></div>
+<div class="livescore-wrapper center-content">
+    <div th:attr="data-inning-id=${gameId}" id="fill"></div>
 
-<div th:each="play : ${plays}">
-    <table border="1">
-        <tbody>
-        <tr>
-            <td th:text="${play.action}"/>
-        </tr>
-        </tbody>
-    </table>
-</div>
+    <div th:each="play : ${plays}">
+        <table border="1">
+            <tbody>
+            <tr>
+                <td th:text="${play.action}"/>
+            </tr>
+            </tbody>
+        </table>
+    </div>
 
-<form action="#" th:action="@{/games/showGameInfo}" method="POST">
-    <input type="hidden" name="gameId" th:value="${gameId}"/>
-    <button type="submit">Back</button>
-</form>
+    <form action="#" th:action="@{/games/showGameInfo}" method="POST">
+        <input type="hidden" name="gameId" th:value="${gameId}"/>
+        <button class="btn-link" type="submit">
+            <i class="far fa-arrow-alt-circle-left"></i> Back
+        </button>
+    </form>
 
-<script>
+    <script>
     const gameId = $('#fill').attr('data-game-id');
 
     setTimeout(function() {
 $('#refreshForm').submit();
-    }, 3000);
+    }, 6000);
 
 </script>
 
-<form action="#" th:action="@{/liveScore/game}" method="POST" id="refreshForm">
-    <input type="hidden" name="gameId" th:value="${gameId}"/>
-</form>
+    <form action="#" th:action="@{/liveScore/game}" method="POST" id="refreshForm">
+        <input type="hidden" name="gameId" th:value="${gameId}"/>
+    </form>
 
+</div>
 </body>
 </html>

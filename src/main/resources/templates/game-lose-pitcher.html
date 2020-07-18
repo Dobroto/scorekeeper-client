@@ -2,27 +2,42 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 
 <head>
+    <!-- FontAwesome -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/fontawesome.min.css"
+          rel="stylesheet" type="text/css"/>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/regular.min.css"
+          rel="stylesheet" type="text/css"/>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/all.css"
+          rel="stylesheet" type="text/css"/>
+
+    <link rel="stylesheet" href="/styles/pages/_style-base.css">
+    <link rel="stylesheet" href="/styles/pages/_game-lose-pitcher.css">
 </head>
 
 <body>
-<h3>Select the pitcher who gets the lose</h3>
+<div class="game-lose-pitcher-wrapper center-content">
+    <h3>Select the pitcher who gets the lose</h3>
 
-<form action="#" th:action="@{/games/pitcher/save}"
-      th:object="${game}" method="POST">
+    <form action="#" th:action="@{/games/pitcher/save}"
+          th:object="${game}" method="POST">
 
-    <select th:field="*{losePitcher}">
-        <option th:each="pitcher : ${pitchers}" th:value="${pitcher.id}"
-                th:text="${pitcher.firstName} + ' ' + ${pitcher.lastName}">
-        </option>
-    </select>
+        <select th:field="*{losePitcher}">
+            <option th:each="pitcher : ${pitchers}" th:value="${pitcher.id}"
+                    th:text="${pitcher.firstName} + ' ' + ${pitcher.lastName}">
+            </option>
+        </select>
 
-    <button type="submit">Save</button>
-</form>
+        <button class="custom-button ripple" type="submit">
+            Save <i class="far fa-save"></i>
+        </button>
+    </form>
 
-<form action="#" th:action="@{/games/showGameInfo}" method="POST">
-    <input type="hidden" name="gameId" th:value="${game.id}"/>
-    <button type="submit">Back</button>
-</form>
-
+    <form action="#" th:action="@{/games/showGameInfo}" method="POST">
+        <input type="hidden" name="gameId" th:value="${game.id}"/>
+        <button class="btn-link" type="submit">
+            <i class="far fa-arrow-alt-circle-left"></i> Back
+        </button>
+    </form>
+</div>
 </body>
 </html>

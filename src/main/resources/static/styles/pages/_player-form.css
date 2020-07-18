@@ -1,0 +1,34 @@
+@import '../styles.css';
+
+@font-face {
+    font-family: 'Roboto-Thin';
+    src: url('../fonts/Roboto-Thin.ttf');
+}
+
+.player-form-wrapper .custom-button {
+    padding: 5px 10px;
+    font-family: 'Roboto-Thin', sans-serif;
+    background-color: var(--color-success);
+}
+
+.player-form-wrapper .player-stats {
+    margin-top: 10px;
+    text-transform: uppercase;
+    background-color: var(--color-accent);
+}
+
+.player-form-wrapper .ripple:hover {
+    background: var(--color-error) radial-gradient(circle, transparent 1%, var(--color-button-ripple) 1%) center/15000%;
+}
+
+.player-form-wrapper .ripple:active {
+    background-color: var(--color-success);
+}
+
+.player-form-wrapper .player-stats .ripple:active {
+    background-color: var(--color-accent);
+}
+
+.player-form-wrapper .btn-link {
+    margin-top: 15px;
+}

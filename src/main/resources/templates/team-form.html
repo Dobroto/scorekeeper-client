@@ -38,14 +38,18 @@
     <form action="#" th:action="@{/teams/showRoster}" method="POST" th:unless="${team.id == 0}">
 
         <input type="hidden" name="teamId" th:value="${team.id}"/>
-        <button type="submit">Roster</button>
+        <button class="custom-button ripple accented" type="submit">
+            Roster <i class="fas fa-columns"></i>
+        </button>
 
     </form>
 
     <form action="#" th:action="@{/teams/showTeamStats}" method="POST" th:unless="${team.id == 0}">
 
         <input type="hidden" name="teamId" th:value="${team.id}"/>
-        <button type="submit">Team Stats</button>
+        <button class="custom-button ripple accented" type="submit">
+            Team Stats <i class="fas fa-clipboard-list"></i>
+        </button>
 
     </form>
 
