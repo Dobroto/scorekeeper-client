@@ -53,6 +53,7 @@
   border-radius: 15px;
   background-color: var(--color-accent);
   color: var(--color-primary);
+  cursor: pointer;
 }
 
 .game-score-wrapper .chip-long {
@@ -63,6 +64,7 @@
   border-radius: 15px;
   background-color: var(--color-accent);
   color: var(--color-primary);
+  text-overflow: ellipsis;
 }
 
 .center-field {
