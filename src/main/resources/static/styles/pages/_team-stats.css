@@ -1,5 +1,5 @@
 @import '../styles.css';
 
-.player-stats-wrapper h3 {
+.team-stats-wrapper h3 {
     color: var(--color-accent);
 }
