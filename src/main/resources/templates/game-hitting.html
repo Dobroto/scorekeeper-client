@@ -2,74 +2,88 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 
 <head>
+    <!-- FontAwesome -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/fontawesome.min.css"
+          rel="stylesheet" type="text/css"/>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/regular.min.css"
+          rel="stylesheet" type="text/css"/>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/all.css"
+          rel="stylesheet" type="text/css"/>
+
+    <link rel="stylesheet" href="/styles/pages/_style-base.css">
+    <link rel="stylesheet" href="/styles/pages/_game-hitting.css">
     <title th:text="${team.teamNameLong}"></title>
 </head>
 
 <body>
-<h3>Batting Statistics</h3>
+<div class="game-hitting-wrapper center-content">
+    <h3>Batting Statistics</h3>
 
-<table border="1">
-    <thead>
-    <tr>
-        <th>#</th>
-        <th>Player</th>
-        <th>PA</th>
-        <th>SH</th>
-        <th>BB</th>
-        <th>HBP</th>
-        <th>AB</th>
-        <th>R</th>
-        <th>H</th>
-        <th>2B</th>
-        <th>3B</th>
-        <th>HR</th>
-        <th>RBI</th>
-        <th>SO</th>
-        <th>SB</th>
-        <th>CS</th>
-        <th>SF</th>
-        <th>TB</th>
-        <th>AVG</th>
-        <th>OBP</th>
-        <th>SLG</th>
-        <th>OPS</th>
-    </tr>
-    </thead>
-    <tbody>
+    <table border="1">
+        <thead>
+        <tr>
+            <th>#</th>
+            <th>Player</th>
+            <th>PA</th>
+            <th>SH</th>
+            <th>BB</th>
+            <th>HBP</th>
+            <th>AB</th>
+            <th>R</th>
+            <th>H</th>
+            <th>2B</th>
+            <th>3B</th>
+            <th>HR</th>
+            <th>RBI</th>
+            <th>SO</th>
+            <th>SB</th>
+            <th>CS</th>
+            <th>SF</th>
+            <th>TB</th>
+            <th>AVG</th>
+            <th>OBP</th>
+            <th>SLG</th>
+            <th>OPS</th>
+        </tr>
+        </thead>
+        <tbody>
 
-    <tr th:each="tempHittingDetails : ${gameHittingDetailsMap}">
+        <tr th:each="tempHittingDetails : ${gameHittingDetailsMap}">
 
-        <td th:text="${tempHittingDetails.key.jerseyNumber}"/>
-        <td th:text="${tempHittingDetails.key.firstName} + ' ' + ${tempHittingDetails.key.lastName}"/>
-        <td th:text="${tempHittingDetails.value.plateAppearances}"/>
-        <td th:text="${tempHittingDetails.value.sacrificeHits}"/>
-        <td th:text="${tempHittingDetails.value.baseForBalls}"/>
-        <td th:text="${tempHittingDetails.value.hitByPitches}"/>
-        <td th:text="${tempHittingDetails.value.atBat}"/>
-        <td th:text="${tempHittingDetails.value.runs}"/>
-        <td th:text="${tempHittingDetails.value.hits}"/>
-        <td th:text="${tempHittingDetails.value.doubleHit}"/>
-        <td th:text="${tempHittingDetails.value.tripleHit}"/>
-        <td th:text="${tempHittingDetails.value.homeRun}"/>
-        <td th:text="${tempHittingDetails.value.runBattedIn}"/>
-        <td th:text="${tempHittingDetails.value.strikeOut}"/>
-        <td th:text="${tempHittingDetails.value.stolenBase}"/>
-        <td th:text="${tempHittingDetails.value.caughtStealing}"/>
-        <td th:text="${tempHittingDetails.value.sacrificeFlies}"/>
-        <td th:text="${tempHittingDetails.value.totalBases}"/>
-        <td th:text="${tempHittingDetails.value.battingAverage}"/>
-        <td th:text="${tempHittingDetails.value.onBasePercentage}"/>
-        <td th:text="${tempHittingDetails.value.sluggingPercentage}"/>
-        <td th:text="${tempHittingDetails.value.onBaseSlugging}"/>
+            <td th:text="${tempHittingDetails.key.jerseyNumber}"/>
+            <td th:text="${tempHittingDetails.key.firstName} + ' ' + ${tempHittingDetails.key.lastName}"/>
+            <td th:text="${tempHittingDetails.value.plateAppearances}"/>
+            <td th:text="${tempHittingDetails.value.sacrificeHits}"/>
+            <td th:text="${tempHittingDetails.value.baseForBalls}"/>
+            <td th:text="${tempHittingDetails.value.hitByPitches}"/>
+            <td th:text="${tempHittingDetails.value.atBat}"/>
+            <td th:text="${tempHittingDetails.value.runs}"/>
+            <td th:text="${tempHittingDetails.value.hits}"/>
+            <td th:text="${tempHittingDetails.value.doubleHit}"/>
+            <td th:text="${tempHittingDetails.value.tripleHit}"/>
+            <td th:text="${tempHittingDetails.value.homeRun}"/>
+            <td th:text="${tempHittingDetails.value.runBattedIn}"/>
+            <td th:text="${tempHittingDetails.value.strikeOut}"/>
+            <td th:text="${tempHittingDetails.value.stolenBase}"/>
+            <td th:text="${tempHittingDetails.value.caughtStealing}"/>
+            <td th:text="${tempHittingDetails.value.sacrificeFlies}"/>
+            <td th:text="${tempHittingDetails.value.totalBases}"/>
+            <td th:text="${tempHittingDetails.value.battingAverage}"/>
+            <td th:text="${tempHittingDetails.value.onBasePercentage}"/>
+            <td th:text="${tempHittingDetails.value.sluggingPercentage}"/>
+            <td th:text="${tempHittingDetails.value.onBaseSlugging}"/>
 
-    </tr>
-    </tbody>
-</table>
+        </tr>
+        </tbody>
+    </table>
 
-<form action="#" th:action="@{/games/showGameInfo}" method="POST">
-    <input type="hidden" name="gameId" th:value="${gameId}"/>
-    <button type="submit">Back</button>
-</form>
+    <form action="#" th:action="@{/games/showGameInfo}" method="POST">
+        <input type="hidden" name="gameId" th:value="${gameId}"/>
+        <button class="btn-link" type="submit">
+            <i class="far fa-arrow-alt-circle-left"></i> Back
+        </button>
+    </form>
 
+</div>
 </body>
 </html>

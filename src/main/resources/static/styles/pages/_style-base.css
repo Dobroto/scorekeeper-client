@@ -1,5 +1,25 @@
 @import '../styles.css';
 
+@font-face {
+    font-family: 'Roboto-Thin';
+    src: url('../fonts/Roboto-Thin.ttf');
+}
+
+@font-face {
+    font-family: 'RobotoCondensed-LightItalic';
+    src: url('../fonts/RobotoCondensed-LightItalic.ttf');
+}
+
+.center-content {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    height: 100%;
+    background-color: var(--color-secondary);
+    padding: 6rem;
+}
+
 .custom-button {
     text-decoration: none;
     text-align: center;
@@ -13,16 +33,52 @@
 }
 
 .ripple {
-  background-position: center;
-  transition: background 0.8s;
+    background-position: center;
+    transition: background 0.8s;
 }
 
 .ripple:hover {
-  background: var(--color-error) radial-gradient(circle, transparent 1%, var(--color-button-ripple) 1%) center/15000%;
+    background: var(--color-error) radial-gradient(circle, transparent 1%, var(--color-button-ripple) 1%) center/15000%;
 }
 
 .ripple:active {
-  background-color: var(--color-error);
-  background-size: 100%;
-  transition: background 0s;
+    background-color: var(--color-error);
+    background-size: 100%;
+    transition: background 0s;
+}
+
+a {
+    font-family: 'Roboto-Thin', sans-serif;
+    font-size: 1.2rem;
+    text-decoration: none;
+    color: var(--color-links);
+}
+
+.btn-link {
+   margin: 3px;
+   padding: 5px 10px;
+   font-family: 'Roboto-Thin', sans-serif;
+   font-size: 1.2rem;
+   text-decoration: none;
+   text-align: center;
+   color: var(--color-links);
+   background: transparent;
+   border: none;
+   cursor: pointer;
+   outline: none;
+}
+
+table {
+    margin: 2rem;
+    border-collapse: collapse;
+}
+
+td {
+    padding: 5px;
+}
+
+h3 {
+    font-family: 'RobotoCondensed-LightItalic', sans-serif;
+    font-size: 1.4rem;
+    text-decoration: none;
 }

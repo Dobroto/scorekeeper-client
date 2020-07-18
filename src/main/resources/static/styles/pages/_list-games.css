@@ -1,45 +1,12 @@
 @import '../styles.css';
 
 @font-face {
-    font-family: 'RobotoCondensed-LightItalic';
-    src: url('../fonts/RobotoCondensed-LightItalic.ttf');
-}
-
-@font-face {
     font-family: 'Roboto-Thin';
     src: url('../fonts/Roboto-Thin.ttf');
 }
 
-.list-games-wrapper {
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-start;
-    align-items: center;
-    height: 100%;
-    background-color: var(--color-secondary);
-    padding-top: 6rem;
-}
-
 .list-games-wrapper h3 {
-    font-family: 'RobotoCondensed-LightItalic', sans-serif;
-    font-size: 1.5rem;
-    text-decoration: none;
     color: var(--color-accent);
-}
-
-.list-games-wrapper a {
-    font-family: 'Roboto-Thin', sans-serif;
-    font-size: 1.2rem;
-    text-decoration: none;
-    color: var(--color-links);
-}
-
-.list-games-wrapper table {
-  margin: 2rem;
-}
-
-.list-games-wrapper td {
-  padding: 5px;
 }
 
 .list-games-wrapper .custom-button {

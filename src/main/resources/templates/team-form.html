@@ -16,7 +16,7 @@
 </head>
 
 <body>
-<div class="team-form-wrapper">
+<div class="team-form-wrapper center-content">
     <form action="#" th:action="@{/teams/save}"
           th:object="${team}" method="POST">
 
@@ -29,7 +29,7 @@
         <input type="text" th:field="*{teamNameShort}"
                placeholder="Short name">
 
-        <button type="submit" class="custom-button">
+        <button type="submit" class="custom-button ripple">
             Save <i class="far fa-save"></i>
         </button>
 

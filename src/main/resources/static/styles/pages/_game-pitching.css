@@ -1,0 +1,6 @@
+@import '../styles.css';
+
+.game-pitching-wrapper h3 {
+    margin-top: 15px;
+    color: var(--color-accent);
+}

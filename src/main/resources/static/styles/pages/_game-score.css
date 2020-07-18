@@ -1,5 +1,3 @@
-@import '../styles.css';
-
 .wrapper-game-score {
     display: flex;
     flex-direction: column;

@@ -1,31 +1,8 @@
 @import '../styles.css';
 
 @font-face {
-    font-family: 'RobotoCondensed-LightItalic';
-    src: url('../fonts/RobotoCondensed-LightItalic.ttf');
-}
-
-@font-face {
     font-family: 'Roboto-Thin';
     src: url('../fonts/Roboto-Thin.ttf');
-}
-
-.list-game-teams-wrapper {
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-start;
-    align-items: center;
-    height: 100%;
-    background-color: var(--color-secondary);
-    padding: 6rem;
-}
-
-.list-game-teams-wrapper table {
-  margin: 2rem;
-}
-
-.list-game-teams-wrapper td {
-  padding: 5px;
 }
 
 .list-game-teams-wrapper .custom-button {
@@ -36,23 +13,9 @@
 }
 
 .list-game-teams-wrapper .ripple:hover {
-  background: var(--color-error) radial-gradient(circle, transparent 1%, var(--color-button-ripple) 1%) center/15000%;
+    background: var(--color-error) radial-gradient(circle, transparent 1%, var(--color-button-ripple) 1%) center/15000%;
 }
 
 .list-game-teams-wrapper .ripple:active {
-  background-color: var(--color-success);
-}
-
-.list-game-teams-wrapper .btn-link {
-   margin: 3px;
-   padding: 5px 10px;
-   font-family: 'Roboto-Thin', sans-serif;
-   font-size: 1.2rem;
-   text-decoration: none;
-   text-align: center;
-   color: var(--color-links);
-   background: transparent;
-   border: none;
-   cursor: pointer;
-   outline: none;
+    background-color: var(--color-success);
 }

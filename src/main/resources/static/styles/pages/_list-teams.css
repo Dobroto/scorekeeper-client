@@ -1,45 +1,12 @@
 @import '../styles.css';
 
 @font-face {
-    font-family: 'RobotoCondensed-LightItalic';
-    src: url('../fonts/RobotoCondensed-LightItalic.ttf');
-}
-
-@font-face {
     font-family: 'Roboto-Thin';
     src: url('../fonts/Roboto-Thin.ttf');
 }
 
-.list-teams-wrapper {
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-start;
-    align-items: center;
-    height: 100%;
-    background-color: var(--color-secondary);
-    padding-top: 6rem;
-}
-
 .list-teams-wrapper h3 {
-    font-family: 'RobotoCondensed-LightItalic', sans-serif;
-    font-size: 1.5rem;
-    text-decoration: none;
     color: var(--color-accent);
-}
-
-.list-teams-wrapper a {
-    font-family: 'Roboto-Thin', sans-serif;
-    font-size: 1.2rem;
-    text-decoration: none;
-    color: var(--color-links);
-}
-
-.list-teams-wrapper table {
-  margin: 2rem;
-}
-
-.list-teams-wrapper td {
-  padding: 5px;
 }
 
 .list-teams-wrapper .custom-button {

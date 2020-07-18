@@ -1,46 +1,16 @@
 @import '../styles.css';
 
 @font-face {
-    font-family: 'RobotoCondensed-LightItalic';
-    src: url('../fonts/RobotoCondensed-LightItalic.ttf');
-}
-
-@font-face {
     font-family: 'Roboto-Thin';
     src: url('../fonts/Roboto-Thin.ttf');
 }
 
-.game-info-wrapper {
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-start;
-    align-items: center;
-    height: 100%;
-    background-color: var(--color-secondary);
-    padding: 6rem;
-}
-
 .game-info-wrapper h3 {
     margin-top: 15px;
-    font-family: 'RobotoCondensed-LightItalic', sans-serif;
-    font-size: 1.4rem;
-    text-decoration: none;
 }
 
 .game-info-wrapper a {
     margin-top: 15px;
-    font-family: 'Roboto-Thin', sans-serif;
-    font-size: 1.2rem;
-    text-decoration: none;
-    color: var(--color-links);
-}
-
-.game-info-wrapper table {
-  margin: 2rem;
-}
-
-.game-info-wrapper td {
-  padding: 5px;
 }
 
 .game-info-wrapper .custom-button {
