@@ -88,3 +88,10 @@
   left: 210px;
   top: 230px;
 }
+
+.second-base-defence,
+.second-base-offence {
+  position: absolute;
+  left: 360px;
+  top: 230px;
+}
