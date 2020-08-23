@@ -32,19 +32,19 @@
     <div class="field">
             <img src="/img/baseball-field-sketch.png" class="field-img">
 
-            <div class="center-field chip" title="CENTER FIELD" th:text="${centerField != null} ? ${centerField.jerseyNumber} : ''"></div>
-            <div class="left-field chip" title="LEFT FIELD" th:text="${leftField != null} ? ${leftField.jerseyNumber} : ''"></div>
-            <div class="right-field chip" title="RIGHT FIELD" th:text="${rightField != null} ? ${rightField.jerseyNumber} : ''"></div>
-            <div class="shortstop chip" title="SHORTSTOP" th:text="${shortStop != null} ? ${shortStop.jerseyNumber} : ''"></div>
-            <div class="second-base-defence chip" title="SECOND BASE Defence" th:text="${secondBaseDefence != null} ? ${secondBaseDefence.jerseyNumber} : ''"></div>
-            <div class="second-base-offence chip" title="SECOND BASE Offence" th:text="${secondBaseOffence != null} ? ${secondBaseOffence.jerseyNumber} : ''"></div>
-            <div class="third-base-defence chip" title="THIRD BASE Defence" th:text="${thirdBaseDefence != null} ? ${thirdBaseDefence.jerseyNumber} : ''"></div>
-            <div class="first-base-defence chip" title="FIRST BASE Defence" th:text="${firstBaseDefence != null} ? ${firstBaseDefence.jerseyNumber} : ''"></div>
-            <div class="third-base-offence chip" title="THIRD BASE Offence" th:text="${thirdBaseOffence != null} ? ${thirdBaseOffence.jerseyNumber} : ''"></div>
-            <div class="pitcher chip" title="PITCHER" th:text="${pitcher != null} ? ${pitcher.jerseyNumber} : ''"></div>
-            <div class="first-base-offence chip" title="FIRST BASE Offence" th:text="${firstBaseOffence != null} ? ${firstBaseOffence.jerseyNumber} : ''"></div>
+            <div class="center-field chip-defence" title="CENTER FIELD" th:text="${centerField != null} ? ${centerField.jerseyNumber} : ''"></div>
+            <div class="left-field chip-defence" title="LEFT FIELD" th:text="${leftField != null} ? ${leftField.jerseyNumber} : ''"></div>
+            <div class="right-field chip-defence" title="RIGHT FIELD" th:text="${rightField != null} ? ${rightField.jerseyNumber} : ''"></div>
+            <div class="shortstop chip-defence" title="SHORTSTOP" th:text="${shortStop != null} ? ${shortStop.jerseyNumber} : ''"></div>
+            <div class="second-base-defence chip-defence" title="SECOND BASE Defence" th:text="${secondBaseDefence != null} ? ${secondBaseDefence.jerseyNumber} : ''"></div>
+            <div class="second-base-offence chip-offence" title="SECOND BASE Offence" th:text="${secondBaseOffence != null} ? ${secondBaseOffence.jerseyNumber} : ''"></div>
+            <div class="third-base-defence chip-defence" title="THIRD BASE Defence" th:text="${thirdBaseDefence != null} ? ${thirdBaseDefence.jerseyNumber} : ''"></div>
+            <div class="first-base-defence chip-defence" title="FIRST BASE Defence" th:text="${firstBaseDefence != null} ? ${firstBaseDefence.jerseyNumber} : ''"></div>
+            <div class="third-base-offence chip-offence" title="THIRD BASE Offence" th:text="${thirdBaseOffence != null} ? ${thirdBaseOffence.jerseyNumber} : ''"></div>
+            <div class="pitcher chip-defence" title="PITCHER" th:text="${pitcher != null} ? ${pitcher.jerseyNumber} : ''"></div>
+            <div class="first-base-offence chip-offence" title="FIRST BASE Offence" th:text="${firstBaseOffence != null} ? ${firstBaseOffence.jerseyNumber} : ''"></div>
             <div class="batter chip-long" title="BATTER" th:text="${batter != null} ? ${batter.jerseyNumber + ' ' + batter.lastName} : ''"></div>
-            <div class="catcher chip" title="CATCHER" th:text="${catcher != null} ? ${catcher.jerseyNumber} : ''"></div>
+            <div class="catcher chip-defence" title="CATCHER" th:text="${catcher != null} ? ${catcher.jerseyNumber} : ''"></div>
     </div>
 
     <form action="#" th:action="@{/games/showGameInfo}" method="POST">

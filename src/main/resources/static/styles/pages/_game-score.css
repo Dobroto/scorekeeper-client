@@ -45,7 +45,7 @@
   margin: 4px;
 }
 
-.game-score-wrapper .chip {
+.game-score-wrapper .chip-defence {
   width: 30px;
   height: 30px;
   line-height: 30px;
@@ -56,14 +56,25 @@
   cursor: pointer;
 }
 
-.game-score-wrapper .chip-long {
-  width: 80px;
+.game-score-wrapper .chip-offence {
+  width: 30px;
   height: 30px;
   line-height: 30px;
   text-align: center;
   border-radius: 15px;
   background-color: var(--color-accent);
-  color: var(--color-primary);
+  color: var(--color-secondary);
+  cursor: pointer;
+}
+
+.game-score-wrapper .chip-long {
+  width: 130px;
+  height: 30px;
+  line-height: 30px;
+  text-align: center;
+  border-radius: 15px;
+  background-color: var(--color-accent);
+  color: var(--color-secondary);
   text-overflow: ellipsis;
 }
 
@@ -91,9 +102,65 @@
   top: 230px;
 }
 
-.second-base-defence,
-.second-base-offence {
+.second-base-defence {
   position: absolute;
   left: 360px;
   top: 230px;
 }
+
+.second-base-offence {
+  position: absolute;
+  left: 288px;
+  top: 190px;
+}
+
+.third-base-defence {
+  position: absolute;
+  left: 145px;
+  top: 310px;
+}
+
+.third-base-offence {
+  position: absolute;
+  left: 175px;
+  top: 310px;
+}
+
+.first-base-defence {
+  position: absolute;
+  left: 428px;
+  top: 310px;
+}
+
+.first-base-offence {
+  position: absolute;
+  left: 398px;
+  top: 310px;
+}
+
+.pitcher {
+  position: absolute;
+  left: 286px;
+  top: 310px;
+}
+
+.catcher {
+  position: absolute;
+  left: 286px;
+  top: 462px;
+}
+
+.batter {
+  position: absolute;
+  left: 286px;
+  top: 432px;
+}
+
+
+
+
+
+
+
+
+
