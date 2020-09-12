@@ -5,261 +5,270 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
-          integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <!-- FontAwesome -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/fontawesome.min.css"
+          rel="stylesheet" type="text/css"/>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/regular.min.css"
+          rel="stylesheet" type="text/css"/>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/all.css"
+          rel="stylesheet" type="text/css"/>
 
-    <link rel="stylesheet" href="/css/game-score.style.css">
+    <link rel="stylesheet" href="/styles/pages/_style-base.css">
+    <link rel="stylesheet" href="/styles/pages/_game-in-play.css">
 
-    <title>Safe</title>
+    <title>In Play</title>
 </head>
 
 <body>
+<div class="game-in-play-wrapper center-content">
+    <h1>Safe</h1>
 
-<h1>Safe</h1>
+    <form action="#" th:action="@{/games/walk}" method="POST">
+        <input type="hidden" name="gameId" th:value="${gameId}"/>
+        <input type="hidden" name="pitcherId" th:value="${pitcherId}"/>
+        <input type="hidden" name="batterId" th:value="${batterId}"/>
+        <button class="custom-button ripple">Base On Balls(Walk)</button>
+    </form>
 
-<form action="#" th:action="@{/games/walk}" method="POST">
-    <input type="hidden" name="gameId" th:value="${gameId}"/>
-    <input type="hidden" name="pitcherId" th:value="${pitcherId}"/>
-    <input type="hidden" name="batterId" th:value="${batterId}"/>
-    <button>Base On Balls(Walk)</button>
-</form>
+    <form action="#" th:action="@{/games/intentionalWalk}" method="POST">
+        <input type="hidden" name="gameId" th:value="${gameId}"/>
+        <input type="hidden" name="pitcherId" th:value="${pitcherId}"/>
+        <input type="hidden" name="batterId" th:value="${batterId}"/>
+        <button class="custom-button ripple">Intentional Walk</button>
+    </form>
 
-<form action="#" th:action="@{/games/intentionalWalk}" method="POST">
-    <input type="hidden" name="gameId" th:value="${gameId}"/>
-    <input type="hidden" name="pitcherId" th:value="${pitcherId}"/>
-    <input type="hidden" name="batterId" th:value="${batterId}"/>
-    <button>Intentional Walk</button>
-</form>
+    <form action="#" th:action="@{/games/hitSingle}" method="POST">
+        <input type="hidden" name="gameId" th:value="${gameId}"/>
+        <input type="hidden" name="pitcherId" th:value="${pitcherId}"/>
+        <input type="hidden" name="batterId" th:value="${batterId}"/>
+        <input type="hidden" name="firstBaseOffenceId" th:value="${firstBaseOffenceId}"/>
+        <input type="hidden" name="secondBaseOffenceId" th:value="${secondBaseOffenceId}"/>
+        <input type="hidden" name="thirdBaseOffenceId" th:value="${thirdBaseOffenceId}"/>
+        <input type="hidden" name="catcherId" th:value="${catcherId}"/>
+        <input type="hidden" name="firstBaseDefenceId" th:value="${firstBaseDefenceId}"/>
+        <input type="hidden" name="secondBaseDefenceId" th:value="${secondBaseDefenceId}"/>
+        <input type="hidden" name="shortStopId" th:value="${shortStopId}"/>
+        <input type="hidden" name="thirdBaseDefenceId" th:value="${thirdBaseDefenceId}"/>
+        <input type="hidden" name="rightFieldId" th:value="${rightFieldId}"/>
+        <input type="hidden" name="centerFieldId" th:value="${centerFieldId}"/>
+        <input type="hidden" name="leftFieldId" th:value="${leftFieldId}"/>
+        <input type="hidden" name="isWhatHappenedProcessed" th:value="false"/>
+        <input type="hidden" name="isNextInning" th:value="${isNextInning}"/>
+        <button class="custom-button ripple">Hit Single</button>
+    </form>
 
-<form action="#" th:action="@{/games/hitSingle}" method="POST">
-    <input type="hidden" name="gameId" th:value="${gameId}"/>
-    <input type="hidden" name="pitcherId" th:value="${pitcherId}"/>
-    <input type="hidden" name="batterId" th:value="${batterId}"/>
-    <input type="hidden" name="firstBaseOffenceId" th:value="${firstBaseOffenceId}"/>
-    <input type="hidden" name="secondBaseOffenceId" th:value="${secondBaseOffenceId}"/>
-    <input type="hidden" name="thirdBaseOffenceId" th:value="${thirdBaseOffenceId}"/>
-    <input type="hidden" name="catcherId" th:value="${catcherId}"/>
-    <input type="hidden" name="firstBaseDefenceId" th:value="${firstBaseDefenceId}"/>
-    <input type="hidden" name="secondBaseDefenceId" th:value="${secondBaseDefenceId}"/>
-    <input type="hidden" name="shortStopId" th:value="${shortStopId}"/>
-    <input type="hidden" name="thirdBaseDefenceId" th:value="${thirdBaseDefenceId}"/>
-    <input type="hidden" name="rightFieldId" th:value="${rightFieldId}"/>
-    <input type="hidden" name="centerFieldId" th:value="${centerFieldId}"/>
-    <input type="hidden" name="leftFieldId" th:value="${leftFieldId}"/>
-    <input type="hidden" name="isWhatHappenedProcessed" th:value="false"/>
-    <input type="hidden" name="isNextInning" th:value="${isNextInning}"/>
-    <button>Hit Single</button>
-</form>
-
-<form action="#" th:action="@{/games/hitDouble}" method="POST">
-    <input type="hidden" name="gameId" th:value="${gameId}"/>
-    <input type="hidden" name="pitcherId" th:value="${pitcherId}"/>
-    <input type="hidden" name="batterId" th:value="${batterId}"/>
-    <input type="hidden" name="firstBaseOffenceId" th:value="${firstBaseOffenceId}"/>
-    <input type="hidden" name="secondBaseOffenceId" th:value="${secondBaseOffenceId}"/>
-    <input type="hidden" name="thirdBaseOffenceId" th:value="${thirdBaseOffenceId}"/>
-    <input type="hidden" name="catcherId" th:value="${catcherId}"/>
-    <input type="hidden" name="firstBaseDefenceId" th:value="${firstBaseDefenceId}"/>
-    <input type="hidden" name="secondBaseDefenceId" th:value="${secondBaseDefenceId}"/>
-    <input type="hidden" name="shortStopId" th:value="${shortStopId}"/>
-    <input type="hidden" name="thirdBaseDefenceId" th:value="${thirdBaseDefenceId}"/>
-    <input type="hidden" name="rightFieldId" th:value="${rightFieldId}"/>
-    <input type="hidden" name="centerFieldId" th:value="${centerFieldId}"/>
-    <input type="hidden" name="leftFieldId" th:value="${leftFieldId}"/>
-    <input type="hidden" name="isWhatHappenedProcessed" th:value="false"/>
-    <input type="hidden" name="isNextInning" th:value="${isNextInning}"/>
-    <button>Hit Double</button>
-</form>
-
-
-<form action="#" th:action="@{/games/hitTriple}" method="POST">
-    <input type="hidden" name="gameId" th:value="${gameId}"/>
-    <input type="hidden" name="pitcherId" th:value="${pitcherId}"/>
-    <input type="hidden" name="batterId" th:value="${batterId}"/>
-    <input type="hidden" name="firstBaseOffenceId" th:value="${firstBaseOffenceId}"/>
-    <input type="hidden" name="secondBaseOffenceId" th:value="${secondBaseOffenceId}"/>
-    <input type="hidden" name="thirdBaseOffenceId" th:value="${thirdBaseOffenceId}"/>
-    <input type="hidden" name="catcherId" th:value="${catcherId}"/>
-    <input type="hidden" name="firstBaseDefenceId" th:value="${firstBaseDefenceId}"/>
-    <input type="hidden" name="secondBaseDefenceId" th:value="${secondBaseDefenceId}"/>
-    <input type="hidden" name="shortStopId" th:value="${shortStopId}"/>
-    <input type="hidden" name="thirdBaseDefenceId" th:value="${thirdBaseDefenceId}"/>
-    <input type="hidden" name="rightFieldId" th:value="${rightFieldId}"/>
-    <input type="hidden" name="centerFieldId" th:value="${centerFieldId}"/>
-    <input type="hidden" name="leftFieldId" th:value="${leftFieldId}"/>
-    <input type="hidden" name="isWhatHappenedProcessed" th:value="false"/>
-    <input type="hidden" name="isNextInning" th:value="${isNextInning}"/>
-    <button>Hit Triple</button>
-</form>
+    <form action="#" th:action="@{/games/hitDouble}" method="POST">
+        <input type="hidden" name="gameId" th:value="${gameId}"/>
+        <input type="hidden" name="pitcherId" th:value="${pitcherId}"/>
+        <input type="hidden" name="batterId" th:value="${batterId}"/>
+        <input type="hidden" name="firstBaseOffenceId" th:value="${firstBaseOffenceId}"/>
+        <input type="hidden" name="secondBaseOffenceId" th:value="${secondBaseOffenceId}"/>
+        <input type="hidden" name="thirdBaseOffenceId" th:value="${thirdBaseOffenceId}"/>
+        <input type="hidden" name="catcherId" th:value="${catcherId}"/>
+        <input type="hidden" name="firstBaseDefenceId" th:value="${firstBaseDefenceId}"/>
+        <input type="hidden" name="secondBaseDefenceId" th:value="${secondBaseDefenceId}"/>
+        <input type="hidden" name="shortStopId" th:value="${shortStopId}"/>
+        <input type="hidden" name="thirdBaseDefenceId" th:value="${thirdBaseDefenceId}"/>
+        <input type="hidden" name="rightFieldId" th:value="${rightFieldId}"/>
+        <input type="hidden" name="centerFieldId" th:value="${centerFieldId}"/>
+        <input type="hidden" name="leftFieldId" th:value="${leftFieldId}"/>
+        <input type="hidden" name="isWhatHappenedProcessed" th:value="false"/>
+        <input type="hidden" name="isNextInning" th:value="${isNextInning}"/>
+        <button class="custom-button ripple">Hit Double</button>
+    </form>
 
 
-<form action="#" th:action="@{/games/homeRun}" method="POST">
-    <input type="hidden" name="gameId" th:value="${gameId}"/>
-    <input type="hidden" name="pitcherId" th:value="${pitcherId}"/>
-    <input type="hidden" name="batterId" th:value="${batterId}"/>
-    <input type="hidden" name="firstBaseOffenceId" th:value="${firstBaseOffenceId}"/>
-    <input type="hidden" name="secondBaseOffenceId" th:value="${secondBaseOffenceId}"/>
-    <input type="hidden" name="thirdBaseOffenceId" th:value="${thirdBaseOffenceId}"/>
-    <input type="hidden" name="catcherId" th:value="${catcherId}"/>
-    <input type="hidden" name="firstBaseDefenceId" th:value="${firstBaseDefenceId}"/>
-    <input type="hidden" name="secondBaseDefenceId" th:value="${secondBaseDefenceId}"/>
-    <input type="hidden" name="shortStopId" th:value="${shortStopId}"/>
-    <input type="hidden" name="thirdBaseDefenceId" th:value="${thirdBaseDefenceId}"/>
-    <input type="hidden" name="rightFieldId" th:value="${rightFieldId}"/>
-    <input type="hidden" name="centerFieldId" th:value="${centerFieldId}"/>
-    <input type="hidden" name="leftFieldId" th:value="${leftFieldId}"/>
-    <input type="hidden" name="isWhatHappenedProcessed" th:value="false"/>
-    <input type="hidden" name="isNextInning" th:value="${isNextInning}"/>
-    <button>Home Run</button>
-</form>
+    <form action="#" th:action="@{/games/hitTriple}" method="POST">
+        <input type="hidden" name="gameId" th:value="${gameId}"/>
+        <input type="hidden" name="pitcherId" th:value="${pitcherId}"/>
+        <input type="hidden" name="batterId" th:value="${batterId}"/>
+        <input type="hidden" name="firstBaseOffenceId" th:value="${firstBaseOffenceId}"/>
+        <input type="hidden" name="secondBaseOffenceId" th:value="${secondBaseOffenceId}"/>
+        <input type="hidden" name="thirdBaseOffenceId" th:value="${thirdBaseOffenceId}"/>
+        <input type="hidden" name="catcherId" th:value="${catcherId}"/>
+        <input type="hidden" name="firstBaseDefenceId" th:value="${firstBaseDefenceId}"/>
+        <input type="hidden" name="secondBaseDefenceId" th:value="${secondBaseDefenceId}"/>
+        <input type="hidden" name="shortStopId" th:value="${shortStopId}"/>
+        <input type="hidden" name="thirdBaseDefenceId" th:value="${thirdBaseDefenceId}"/>
+        <input type="hidden" name="rightFieldId" th:value="${rightFieldId}"/>
+        <input type="hidden" name="centerFieldId" th:value="${centerFieldId}"/>
+        <input type="hidden" name="leftFieldId" th:value="${leftFieldId}"/>
+        <input type="hidden" name="isWhatHappenedProcessed" th:value="false"/>
+        <input type="hidden" name="isNextInning" th:value="${isNextInning}"/>
+        <button class="custom-button ripple">Hit Triple</button>
+    </form>
 
-<form action="#" th:action="@{/games/inParkHomeRun}" method="POST">
-    <input type="hidden" name="gameId" th:value="${gameId}"/>
-    <input type="hidden" name="pitcherId" th:value="${pitcherId}"/>
-    <input type="hidden" name="batterId" th:value="${batterId}"/>
-    <button>In Park Homerun</button>
-</form>
 
-<form action="#" th:action="@{/games/buntSafe}" method="POST">
-    <input type="hidden" name="gameId" th:value="${gameId}"/>
-    <input type="hidden" name="pitcherId" th:value="${pitcherId}"/>
-    <input type="hidden" name="batterId" th:value="${batterId}"/>
-    <button>Bunt</button>
-</form>
+    <form action="#" th:action="@{/games/homeRun}" method="POST">
+        <input type="hidden" name="gameId" th:value="${gameId}"/>
+        <input type="hidden" name="pitcherId" th:value="${pitcherId}"/>
+        <input type="hidden" name="batterId" th:value="${batterId}"/>
+        <input type="hidden" name="firstBaseOffenceId" th:value="${firstBaseOffenceId}"/>
+        <input type="hidden" name="secondBaseOffenceId" th:value="${secondBaseOffenceId}"/>
+        <input type="hidden" name="thirdBaseOffenceId" th:value="${thirdBaseOffenceId}"/>
+        <input type="hidden" name="catcherId" th:value="${catcherId}"/>
+        <input type="hidden" name="firstBaseDefenceId" th:value="${firstBaseDefenceId}"/>
+        <input type="hidden" name="secondBaseDefenceId" th:value="${secondBaseDefenceId}"/>
+        <input type="hidden" name="shortStopId" th:value="${shortStopId}"/>
+        <input type="hidden" name="thirdBaseDefenceId" th:value="${thirdBaseDefenceId}"/>
+        <input type="hidden" name="rightFieldId" th:value="${rightFieldId}"/>
+        <input type="hidden" name="centerFieldId" th:value="${centerFieldId}"/>
+        <input type="hidden" name="leftFieldId" th:value="${leftFieldId}"/>
+        <input type="hidden" name="isWhatHappenedProcessed" th:value="false"/>
+        <input type="hidden" name="isNextInning" th:value="${isNextInning}"/>
+        <button class="custom-button ripple">Home Run</button>
+    </form>
 
-<form action="#" th:action="@{/games/error}" method="POST">
-    <input type="hidden" name="gameId" th:value="${gameId}"/>
-    <input type="hidden" name="pitcherId" th:value="${pitcherId}"/>
-    <input type="hidden" name="batterId" th:value="${batterId}"/>
-    <button>Error</button>
-</form>
+    <form action="#" th:action="@{/games/inParkHomeRun}" method="POST">
+        <input type="hidden" name="gameId" th:value="${gameId}"/>
+        <input type="hidden" name="pitcherId" th:value="${pitcherId}"/>
+        <input type="hidden" name="batterId" th:value="${batterId}"/>
+        <button class="custom-button ripple">In Park Homerun</button>
+    </form>
 
-<form action="#" th:action="@{/games/hitByPitch}" method="POST">
-    <input type="hidden" name="gameId" th:value="${gameId}"/>
-    <input type="hidden" name="pitcherId" th:value="${pitcherId}"/>
-    <input type="hidden" name="batterId" th:value="${batterId}"/>
-    <button>Hit By Pitch</button>
-</form>
+    <form action="#" th:action="@{/games/buntSafe}" method="POST">
+        <input type="hidden" name="gameId" th:value="${gameId}"/>
+        <input type="hidden" name="pitcherId" th:value="${pitcherId}"/>
+        <input type="hidden" name="batterId" th:value="${batterId}"/>
+        <button class="custom-button ripple">Bunt</button>
+    </form>
 
-<form action="#" th:action="@{/games/safe/dropped3rdStrike}" method="POST">
-    <input type="hidden" name="gameId" th:value="${gameId}"/>
-    <input type="hidden" name="pitcherId" th:value="${pitcherId}"/>
-    <input type="hidden" name="batterId" th:value="${batterId}"/>
-    <button>Dropped 3rd Strike</button>
-</form>
+    <form action="#" th:action="@{/games/error}" method="POST">
+        <input type="hidden" name="gameId" th:value="${gameId}"/>
+        <input type="hidden" name="pitcherId" th:value="${pitcherId}"/>
+        <input type="hidden" name="batterId" th:value="${batterId}"/>
+        <button class="custom-button ripple">Error</button>
+    </form>
 
-<form action="#" th:action="@{/games/wildPitch3rdStrike}" method="POST">
-    <input type="hidden" name="gameId" th:value="${gameId}"/>
-    <input type="hidden" name="pitcherId" th:value="${pitcherId}"/>
-    <input type="hidden" name="batterId" th:value="${batterId}"/>
-    <button>Wild Pitch 3rd Strike</button>
-</form>
+    <form action="#" th:action="@{/games/hitByPitch}" method="POST">
+        <input type="hidden" name="gameId" th:value="${gameId}"/>
+        <input type="hidden" name="pitcherId" th:value="${pitcherId}"/>
+        <input type="hidden" name="batterId" th:value="${batterId}"/>
+        <button class="custom-button ripple">Hit By Pitch</button>
+    </form>
 
-<form action="#" th:action="@{/games/fieldersChoice}" method="POST">
-    <input type="hidden" name="gameId" th:value="${gameId}"/>
-    <input type="hidden" name="pitcherId" th:value="${pitcherId}"/>
-    <input type="hidden" name="batterId" th:value="${batterId}"/>
-    <button>FieldersChoice</button>
-</form>
+    <form action="#" th:action="@{/games/safe/dropped3rdStrike}" method="POST">
+        <input type="hidden" name="gameId" th:value="${gameId}"/>
+        <input type="hidden" name="pitcherId" th:value="${pitcherId}"/>
+        <input type="hidden" name="batterId" th:value="${batterId}"/>
+        <button class="custom-button ripple">Dropped 3rd Strike</button>
+    </form>
 
-<h1>Out</h1>
+    <form action="#" th:action="@{/games/wildPitch3rdStrike}" method="POST">
+        <input type="hidden" name="gameId" th:value="${gameId}"/>
+        <input type="hidden" name="pitcherId" th:value="${pitcherId}"/>
+        <input type="hidden" name="batterId" th:value="${batterId}"/>
+        <button class="custom-button ripple">Wild Pitch 3rd Strike</button>
+    </form>
 
-<form action="#" th:action="@{/games/strikeoutLooking}" method="POST">
-    <input type="hidden" name="gameId" th:value="${gameId}"/>
-    <input type="hidden" name="pitcherId" th:value="${pitcherId}"/>
-    <input type="hidden" name="batterId" th:value="${batterId}"/>
-    <button>Strikeout Looking</button>
-</form>
+    <form action="#" th:action="@{/games/fieldersChoice}" method="POST">
+        <input type="hidden" name="gameId" th:value="${gameId}"/>
+        <input type="hidden" name="pitcherId" th:value="${pitcherId}"/>
+        <input type="hidden" name="batterId" th:value="${batterId}"/>
+        <button class="custom-button ripple">FieldersChoice</button>
+    </form>
 
-<form action="#" th:action="@{/games/strikeoutSwinging}" method="POST">
-    <input type="hidden" name="gameId" th:value="${gameId}"/>
-    <input type="hidden" name="pitcherId" th:value="${pitcherId}"/>
-    <input type="hidden" name="batterId" th:value="${batterId}"/>
-    <button>Strikeout Swinging</button>
-</form>
+    <h1>Out</h1>
 
-<form action="#" th:action="@{/games/groundOut}" method="POST">
-    <input type="hidden" name="gameId" th:value="${gameId}"/>
-    <input type="hidden" name="pitcherId" th:value="${pitcherId}"/>
-    <input type="hidden" name="batterId" th:value="${batterId}"/>
-    <button>Ground Out</button>
-</form>
+    <form action="#" th:action="@{/games/strikeoutLooking}" method="POST">
+        <input type="hidden" name="gameId" th:value="${gameId}"/>
+        <input type="hidden" name="pitcherId" th:value="${pitcherId}"/>
+        <input type="hidden" name="batterId" th:value="${batterId}"/>
+        <button class="custom-button ripple">Strikeout Looking</button>
+    </form>
 
-<form action="#" th:action="@{/games/lineDrive}" method="POST">
-    <input type="hidden" name="gameId" th:value="${gameId}"/>
-    <input type="hidden" name="pitcherId" th:value="${pitcherId}"/>
-    <input type="hidden" name="batterId" th:value="${batterId}"/>
-    <button>Line Drive</button>
-</form>
+    <form action="#" th:action="@{/games/strikeoutSwinging}" method="POST">
+        <input type="hidden" name="gameId" th:value="${gameId}"/>
+        <input type="hidden" name="pitcherId" th:value="${pitcherId}"/>
+        <input type="hidden" name="batterId" th:value="${batterId}"/>
+        <button class="custom-button ripple">Strikeout Swinging</button>
+    </form>
 
-<form action="#" th:action="@{/games/flyOut}" method="POST">
-    <input type="hidden" name="gameId" th:value="${gameId}"/>
-    <input type="hidden" name="pitcherId" th:value="${pitcherId}"/>
-    <input type="hidden" name="batterId" th:value="${batterId}"/>
-    <button>Fly Out</button>
-</form>
+    <form action="#" th:action="@{/games/groundOut}" method="POST">
+        <input type="hidden" name="gameId" th:value="${gameId}"/>
+        <input type="hidden" name="pitcherId" th:value="${pitcherId}"/>
+        <input type="hidden" name="batterId" th:value="${batterId}"/>
+        <button class="custom-button ripple">Ground Out</button>
+    </form>
 
-<form action="#" th:action="@{/games/buntOut}" method="POST">
-    <input type="hidden" name="gameId" th:value="${gameId}"/>
-    <input type="hidden" name="pitcherId" th:value="${pitcherId}"/>
-    <input type="hidden" name="batterId" th:value="${batterId}"/>
-    <button>Bunt</button>
-</form>
+    <form action="#" th:action="@{/games/lineDrive}" method="POST">
+        <input type="hidden" name="gameId" th:value="${gameId}"/>
+        <input type="hidden" name="pitcherId" th:value="${pitcherId}"/>
+        <input type="hidden" name="batterId" th:value="${batterId}"/>
+        <button class="custom-button ripple">Line Drive</button>
+    </form>
 
-<form action="#" th:action="@{/games/sacrificeFly}" method="POST">
-    <input type="hidden" name="gameId" th:value="${gameId}"/>
-    <input type="hidden" name="pitcherId" th:value="${pitcherId}"/>
-    <input type="hidden" name="batterId" th:value="${batterId}"/>
-    <button>Sacrifice Fly</button>
-</form>
+    <form action="#" th:action="@{/games/flyOut}" method="POST">
+        <input type="hidden" name="gameId" th:value="${gameId}"/>
+        <input type="hidden" name="pitcherId" th:value="${pitcherId}"/>
+        <input type="hidden" name="batterId" th:value="${batterId}"/>
+        <button class="custom-button ripple">Fly Out</button>
+    </form>
 
-<form action="#" th:action="@{/games/sacrificeBunt}" method="POST">
-    <input type="hidden" name="gameId" th:value="${gameId}"/>
-    <input type="hidden" name="pitcherId" th:value="${pitcherId}"/>
-    <input type="hidden" name="batterId" th:value="${batterId}"/>
-    <button>Sacrifice Bunt</button>
-</form>
+    <form action="#" th:action="@{/games/buntOut}" method="POST">
+        <input type="hidden" name="gameId" th:value="${gameId}"/>
+        <input type="hidden" name="pitcherId" th:value="${pitcherId}"/>
+        <input type="hidden" name="batterId" th:value="${batterId}"/>
+        <button class="custom-button ripple">Bunt</button>
+    </form>
 
-<form action="#" th:action="@{/games/infieldFly}" method="POST">
-    <input type="hidden" name="gameId" th:value="${gameId}"/>
-    <input type="hidden" name="pitcherId" th:value="${pitcherId}"/>
-    <input type="hidden" name="batterId" th:value="${batterId}"/>
-    <button>Infield Fly</button>
-</form>
+    <form action="#" th:action="@{/games/sacrificeFly}" method="POST">
+        <input type="hidden" name="gameId" th:value="${gameId}"/>
+        <input type="hidden" name="pitcherId" th:value="${pitcherId}"/>
+        <input type="hidden" name="batterId" th:value="${batterId}"/>
+        <button class="custom-button ripple">Sacrifice Fly</button>
+    </form>
 
-<form action="#" th:action="@{/games/hitByBall}" method="POST">
-    <input type="hidden" name="gameId" th:value="${gameId}"/>
-    <input type="hidden" name="pitcherId" th:value="${pitcherId}"/>
-    <input type="hidden" name="batterId" th:value="${batterId}"/>
-    <button>Hit By Ball</button>
-</form>
+    <form action="#" th:action="@{/games/sacrificeBunt}" method="POST">
+        <input type="hidden" name="gameId" th:value="${gameId}"/>
+        <input type="hidden" name="pitcherId" th:value="${pitcherId}"/>
+        <input type="hidden" name="batterId" th:value="${batterId}"/>
+        <button class="custom-button ripple">Sacrifice Bunt</button>
+    </form>
 
-<form action="#" th:action="@{/games/out/dropped3rdStrike}" method="POST">
-    <input type="hidden" name="gameId" th:value="${gameId}"/>
-    <input type="hidden" name="pitcherId" th:value="${pitcherId}"/>
-    <input type="hidden" name="batterId" th:value="${batterId}"/>
-    <button>Dropped 3rd Strike</button>
-</form>
+    <form action="#" th:action="@{/games/infieldFly}" method="POST">
+        <input type="hidden" name="gameId" th:value="${gameId}"/>
+        <input type="hidden" name="pitcherId" th:value="${pitcherId}"/>
+        <input type="hidden" name="batterId" th:value="${batterId}"/>
+        <button class="custom-button ripple">Infield Fly</button>
+    </form>
 
-<form action="#" th:action="@{/games/runnerInterference}" method="POST">
-    <input type="hidden" name="gameId" th:value="${gameId}"/>
-    <input type="hidden" name="pitcherId" th:value="${pitcherId}"/>
-    <input type="hidden" name="batterId" th:value="${batterId}"/>
-    <button>Runner Interference</button>
-</form>
+    <form action="#" th:action="@{/games/hitByBall}" method="POST">
+        <input type="hidden" name="gameId" th:value="${gameId}"/>
+        <input type="hidden" name="pitcherId" th:value="${pitcherId}"/>
+        <input type="hidden" name="batterId" th:value="${batterId}"/>
+        <button class="custom-button ripple">Hit By Ball</button>
+    </form>
 
-<form action="#" th:action="@{/games/offensiveInterference}" method="POST">
-    <input type="hidden" name="gameId" th:value="${gameId}"/>
-    <input type="hidden" name="pitcherId" th:value="${pitcherId}"/>
-    <input type="hidden" name="batterId" th:value="${batterId}"/>
-    <button>Offensive Interference</button>
-</form>
+    <form action="#" th:action="@{/games/out/dropped3rdStrike}" method="POST">
+        <input type="hidden" name="gameId" th:value="${gameId}"/>
+        <input type="hidden" name="pitcherId" th:value="${pitcherId}"/>
+        <input type="hidden" name="batterId" th:value="${batterId}"/>
+        <button class="custom-button ripple">Dropped 3rd Strike</button>
+    </form>
 
-<form action="#" th:action="@{/games/scoreGame}" method="GET">
-    <input type="hidden" name="gameId" th:value="${gameId}"/>
-    <button>Back</button>
-</form>
+    <form action="#" th:action="@{/games/runnerInterference}" method="POST">
+        <input type="hidden" name="gameId" th:value="${gameId}"/>
+        <input type="hidden" name="pitcherId" th:value="${pitcherId}"/>
+        <input type="hidden" name="batterId" th:value="${batterId}"/>
+        <button class="custom-button ripple">Runner Interference</button>
+    </form>
 
+    <form action="#" th:action="@{/games/offensiveInterference}" method="POST">
+        <input type="hidden" name="gameId" th:value="${gameId}"/>
+        <input type="hidden" name="pitcherId" th:value="${pitcherId}"/>
+        <input type="hidden" name="batterId" th:value="${batterId}"/>
+        <button class="custom-button ripple">Offensive Interference</button>
+    </form>
+
+    <form action="#" th:action="@{/games/scoreGame}" method="GET">
+        <input type="hidden" name="gameId" th:value="${gameId}"/>
+        <button class="btn-link">
+            <i class="far fa-arrow-alt-circle-left"></i> Back
+        </button>
+    </form>
+
+</div>
 <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
         integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
         crossorigin="anonymous"></script>

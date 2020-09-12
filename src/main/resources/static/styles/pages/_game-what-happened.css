@@ -1,0 +1,24 @@
+@import '../styles.css';
+
+@font-face {
+    font-family: 'Roboto-Thin';
+    src: url('../fonts/Roboto-Thin.ttf');
+}
+
+.game-what-happened-wrapper h3 {
+    margin-top: 15px;
+}
+
+.game-what-happened-wrapper a {
+    margin-top: 15px;
+}
+
+.game-what-happened-wrapper .custom-button {
+    margin: 3px;
+    padding: 5px 10px;
+    font-family: 'Roboto-Thin', sans-serif;
+}
+
+.game-what-happened-wrapper .ripple:active {
+  background-color: var(--color-accent);
+}

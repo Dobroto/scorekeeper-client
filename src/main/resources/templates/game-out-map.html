@@ -14,11 +14,11 @@
           rel="stylesheet" type="text/css"/>
 
     <link rel="stylesheet" href="/styles/pages/_style-base.css">
-    <link rel="stylesheet" href="/styles/pages/_game-score.css">
+    <link rel="stylesheet" href="/styles/pages/_game-out-map.css">
 </head>
 
 <body>
-<div class="wrapper-game-score center-content">
+<div class="game-out-map-wrapper center-content">
 
     <div class="field">
         <img src="/img/baseball-field-sketch.png" class="field-img">
@@ -42,7 +42,7 @@
                 <input type="hidden" name="leftFieldId" th:value="${leftFieldId}"/>
                 <input type="hidden" name="baseNumber" th:value="${baseNumber}"/>
                 <input type="hidden" name="primaryActionName" th:value="${primaryActionName}"/>
-                <button>CF</button>
+                <button class="custom-button">CF</button>
             </form>
         </div>
         <div class="left-field chip-defence">
@@ -65,7 +65,7 @@
                 <input type="hidden" name="leftFieldId" th:value="${leftFieldId}"/>
                 <input type="hidden" name="baseNumber" th:value="${baseNumber}"/>
                 <input type="hidden" name="primaryActionName" th:value="${primaryActionName}"/>
-                <button>LF</button>
+                <button class="custom-button">LF</button>
             </form>
         </div>
         <div class="right-field chip-defence">
@@ -88,7 +88,7 @@
                 <input type="hidden" name="leftFieldId" th:value="${leftFieldId}"/>
                 <input type="hidden" name="baseNumber" th:value="${baseNumber}"/>
                 <input type="hidden" name="primaryActionName" th:value="${primaryActionName}"/>
-                <button>RF</button>
+                <button class="custom-button">RF</button>
             </form>
         </div>
         <div class="shortstop chip-defence">
@@ -111,7 +111,7 @@
                 <input type="hidden" name="leftFieldId" th:value="${leftFieldId}"/>
                 <input type="hidden" name="baseNumber" th:value="${baseNumber}"/>
                 <input type="hidden" name="primaryActionName" th:value="${primaryActionName}"/>
-                <button>SS</button>
+                <button class="custom-button">SS</button>
             </form>
         </div>
         <div class="second-base-defence chip-defence">
@@ -134,7 +134,7 @@
                 <input type="hidden" name="leftFieldId" th:value="${leftFieldId}"/>
                 <input type="hidden" name="baseNumber" th:value="${baseNumber}"/>
                 <input type="hidden" name="primaryActionName" th:value="${primaryActionName}"/>
-                <button>2B</button>
+                <button class="custom-button">2B</button>
             </form>
         </div>
         <div class="third-base-defence chip-defence">
@@ -157,7 +157,7 @@
                 <input type="hidden" name="leftFieldId" th:value="${leftFieldId}"/>
                 <input type="hidden" name="baseNumber" th:value="${baseNumber}"/>
                 <input type="hidden" name="primaryActionName" th:value="${primaryActionName}"/>
-                <button>3B</button>
+                <button class="custom-button">3B</button>
             </form>
         </div>
         <div class="first-base-defence chip-defence">
@@ -180,7 +180,7 @@
                 <input type="hidden" name="leftFieldId" th:value="${leftFieldId}"/>
                 <input type="hidden" name="baseNumber" th:value="${baseNumber}"/>
                 <input type="hidden" name="primaryActionName" th:value="${primaryActionName}"/>
-                <button>1B</button>
+                <button class="custom-button">1B</button>
             </form>
         </div>
         <div class="pitcher chip-defence">
@@ -203,7 +203,7 @@
                 <input type="hidden" name="leftFieldId" th:value="${leftFieldId}"/>
                 <input type="hidden" name="baseNumber" th:value="${baseNumber}"/>
                 <input type="hidden" name="primaryActionName" th:value="${primaryActionName}"/>
-                <button>P</button>
+                <button class="custom-button">P</button>
             </form>
         </div>
         <div class="catcher chip-defence">
@@ -226,79 +226,27 @@
                 <input type="hidden" name="leftFieldId" th:value="${leftFieldId}"/>
                 <input type="hidden" name="baseNumber" th:value="${baseNumber}"/>
                 <input type="hidden" name="primaryActionName" th:value="${primaryActionName}"/>
-                <button>C</button>
+                <button class="custom-button">C</button>
             </form>
         </div>
 
 
- <!--   <div class="field">
-        <div class="card bg-dark text-white">
-            <img src="/img/baseball-field-sketch.png" class="img-fluid">
-            <div class="card-img-overlay">
-                <div class="row justify-content-center">
-                    <div class="col-sm-9">
-                        <div class="row justify-content-center h-100">
-                            <div class="col-1 align-self-center text-center">
+        <div class="center-content">Touch the last position that handled the ball.</div>
+        <!--    <form action="#" th:action="@{/games/showGameInfo}" method="POST">
+                <input type="hidden" name="gameId" th:value="${gameWrapper.id}"/>
+                <button>Exit</button>
+            </form>-->
 
-                            </div>
-                        </div>
-                        <div class="row justify-content-between h-100">
-                            <div class="col-1 align-self-center text-center">
+    </div>
 
-                            </div>
-                            <div class="col-1 align-self-center text-center">
-
-                            </div>
-                        </div>
-                        <div class="row justify-content-around">
-                            <div class="col-2 align-self-center text-center">
-
-                            </div>
-                            <div class="col-2 align-self-center text-center">
-
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div>
-
-                            </div>
-                            <div>
-
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div>
-
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div>
-
-
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>-->
-
-    <div>Touch the last position that handled the ball.</div>
-    <!--    <form action="#" th:action="@{/games/showGameInfo}" method="POST">
-            <input type="hidden" name="gameId" th:value="${gameWrapper.id}"/>
-            <button>Exit</button>
-        </form>-->
-
-</div>
-
-<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
-        integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
-        crossorigin="anonymous"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
-        integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
-        crossorigin="anonymous"></script>
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
-        integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
-        crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+            integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+            crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+            integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+            crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+            integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+            crossorigin="anonymous"></script>
 </body>
 </html>

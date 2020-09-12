@@ -21,30 +21,43 @@
 <body>
 <div class="game-score-wrapper center-content">
     <div class="score">
-            <div class="score-cell" th:text="|AWAY ${gameWrapper.finalResult.visitorTeamScore}|"></div>
-            <div class="score-cell" th:text="|HOME ${gameWrapper.finalResult.homeTeamScore}|"></div>
-            <div class="score-cell" th:text="|INNING ${gameWrapper.currentInning.inningNumber}|"></div>
-            <div class="score-cell" th:text="|OUT ${gameWrapper.currentInning.currentOuts}|"></div>
-            <div class="score-cell" th:text="|B ${batter != null ? batter.ballCount : '0'}|"></div>
-            <div class="score-cell" th:text="|S ${batter != null ? batter.strikeCount : '0'}|"></div>
+        <div class="score-cell" th:text="|AWAY ${gameWrapper.finalResult.visitorTeamScore}|"></div>
+        <div class="score-cell" th:text="|HOME ${gameWrapper.finalResult.homeTeamScore}|"></div>
+        <div class="score-cell" th:text="|INNING ${gameWrapper.currentInning.inningNumber}|"></div>
+        <div class="score-cell" th:text="|OUT ${gameWrapper.currentInning.currentOuts}|"></div>
+        <div class="score-cell" th:text="|B ${batter != null ? batter.ballCount : '0'}|"></div>
+        <div class="score-cell" th:text="|S ${batter != null ? batter.strikeCount : '0'}|"></div>
     </div>
 
     <div class="field">
-            <img src="/img/baseball-field-sketch.png" class="field-img">
+        <img src="/img/baseball-field-sketch.png" class="field-img">
 
-            <div class="center-field chip-defence" title="CENTER FIELD" th:text="${centerField != null} ? ${centerField.jerseyNumber} : ''"></div>
-            <div class="left-field chip-defence" title="LEFT FIELD" th:text="${leftField != null} ? ${leftField.jerseyNumber} : ''"></div>
-            <div class="right-field chip-defence" title="RIGHT FIELD" th:text="${rightField != null} ? ${rightField.jerseyNumber} : ''"></div>
-            <div class="shortstop chip-defence" title="SHORTSTOP" th:text="${shortStop != null} ? ${shortStop.jerseyNumber} : ''"></div>
-            <div class="second-base-defence chip-defence" title="SECOND BASE Defence" th:text="${secondBaseDefence != null} ? ${secondBaseDefence.jerseyNumber} : ''"></div>
-            <div class="second-base-offence chip-offence" title="SECOND BASE Offence" th:text="${secondBaseOffence != null} ? ${secondBaseOffence.jerseyNumber} : ''"></div>
-            <div class="third-base-defence chip-defence" title="THIRD BASE Defence" th:text="${thirdBaseDefence != null} ? ${thirdBaseDefence.jerseyNumber} : ''"></div>
-            <div class="first-base-defence chip-defence" title="FIRST BASE Defence" th:text="${firstBaseDefence != null} ? ${firstBaseDefence.jerseyNumber} : ''"></div>
-            <div class="third-base-offence chip-offence" title="THIRD BASE Offence" th:text="${thirdBaseOffence != null} ? ${thirdBaseOffence.jerseyNumber} : ''"></div>
-            <div class="pitcher chip-defence" title="PITCHER" th:text="${pitcher != null} ? ${pitcher.jerseyNumber} : ''"></div>
-            <div class="first-base-offence chip-offence" title="FIRST BASE Offence" th:text="${firstBaseOffence != null} ? ${firstBaseOffence.jerseyNumber} : ''"></div>
-            <div class="batter chip-long" title="BATTER" th:text="${batter != null} ? ${batter.jerseyNumber + ' ' + batter.lastName} : ''"></div>
-            <div class="catcher chip-defence" title="CATCHER" th:text="${catcher != null} ? ${catcher.jerseyNumber} : ''"></div>
+        <div class="center-field chip-defence" title="CENTER FIELD"
+             th:text="${centerField != null} ? ${centerField.jerseyNumber} : ''"></div>
+        <div class="left-field chip-defence" title="LEFT FIELD"
+             th:text="${leftField != null} ? ${leftField.jerseyNumber} : ''"></div>
+        <div class="right-field chip-defence" title="RIGHT FIELD"
+             th:text="${rightField != null} ? ${rightField.jerseyNumber} : ''"></div>
+        <div class="shortstop chip-defence" title="SHORTSTOP"
+             th:text="${shortStop != null} ? ${shortStop.jerseyNumber} : ''"></div>
+        <div class="second-base-defence chip-defence" title="SECOND BASE Defence"
+             th:text="${secondBaseDefence != null} ? ${secondBaseDefence.jerseyNumber} : ''"></div>
+        <div class="second-base-offence chip-offence" title="SECOND BASE Offence"
+             th:text="${secondBaseOffence != null} ? ${secondBaseOffence.jerseyNumber} : ''"></div>
+        <div class="third-base-defence chip-defence" title="THIRD BASE Defence"
+             th:text="${thirdBaseDefence != null} ? ${thirdBaseDefence.jerseyNumber} : ''"></div>
+        <div class="first-base-defence chip-defence" title="FIRST BASE Defence"
+             th:text="${firstBaseDefence != null} ? ${firstBaseDefence.jerseyNumber} : ''"></div>
+        <div class="third-base-offence chip-offence" title="THIRD BASE Offence"
+             th:text="${thirdBaseOffence != null} ? ${thirdBaseOffence.jerseyNumber} : ''"></div>
+        <div class="pitcher chip-defence" title="PITCHER"
+             th:text="${pitcher != null} ? ${pitcher.jerseyNumber} : ''"></div>
+        <div class="first-base-offence chip-offence" title="FIRST BASE Offence"
+             th:text="${firstBaseOffence != null} ? ${firstBaseOffence.jerseyNumber} : ''"></div>
+        <div class="batter chip-long" title="BATTER"
+             th:text="${batter != null} ? ${batter.jerseyNumber + ' ' + batter.lastName} : ''"></div>
+        <div class="catcher chip-defence" title="CATCHER"
+             th:text="${catcher != null} ? ${catcher.jerseyNumber} : ''"></div>
     </div>
 
     <form action="#" th:action="@{/games/showGameInfo}" method="POST">
@@ -140,14 +153,14 @@
         </button>
     </form>
 
-<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
-        integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
-        crossorigin="anonymous"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
-        integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
-        crossorigin="anonymous"></script>
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
-        integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
-        crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+            integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+            crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+            integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+            crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+            integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+            crossorigin="anonymous"></script>
 </body>
 </html>

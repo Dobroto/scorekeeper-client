@@ -1,0 +1,24 @@
+@import '../styles.css';
+
+@font-face {
+    font-family: 'Roboto-Thin';
+    src: url('../fonts/Roboto-Thin.ttf');
+}
+
+.game-in-play-wrapper h3 {
+    margin-top: 15px;
+}
+
+.game-in-play-wrapper a {
+    margin-top: 15px;
+}
+
+.game-in-play-wrapper .custom-button {
+    margin: 3px;
+    padding: 5px 10px;
+    font-family: 'Roboto-Thin', sans-serif;
+}
+
+.game-in-play-wrapper .ripple:active {
+  background-color: var(--color-accent);
+}
